@@ -60,7 +60,7 @@ bool ModbusClient::WriteCoils(const std::vector<bool> &Data,
 
     for (uint16_t i = 0; i < ByteLenght; i++)
     {
-        uint16_t Mask = Memory.GetMem1(Byte + i);
+        uint16_t Mask = memory.GetMem1(Byte + i);
         uint8_t SendMask = (Mask >> 8) & 0xFF;
 
         for (uint16_t j = 0; j < 8 && Count < Lenght; j++)
@@ -127,9 +127,9 @@ void ModbusClient::InitMemory()
         if (Lenght)
         {
             DataInit = ModbusFrameToUint16(GetRecvBuff());
-            Memory.MemsInit(DataInit,0);
+            memory.MemsInit(DataInit,0);
         }
-        Memory.Display();
+        memory.Display();
     }
     
 }
@@ -141,6 +141,6 @@ void ModbusClient::MemoryInitWrite(std::vector<uint8_t> &Data, const uint16_t &A
     for (int i{}; i < Data.size(); i += 2)
     {
         MemoryInit = (static_cast<uint16_t>(Data.at(i + 1)) | (static_cast<uint16_t>(Data.at(i)) >> 8));
-        Memory.MemsAtInit(MemoryInit, Adress);
+        memory.MemsAtInit(MemoryInit, Adress);
     }
 }

@@ -15,7 +15,7 @@ class ModbusClient : public TcpClient
 private:
     ModbusParser ModbusPArser;
     ModbusHandler ModbusHNDlr;
-    Memory Memory;
+    Memory memory;
 public:
     ModbusClient();
     ~ModbusClient() = default;
