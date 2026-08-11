@@ -1,2 +1,5 @@
 add_subdirectory(Server)
 add_subdirectory(Main)
+add_subdirectory(NetworkingProtocols)
+add_subdirectory(Utils)
+add_subdirectory(Plc)

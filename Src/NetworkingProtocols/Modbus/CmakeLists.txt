@@ -1,0 +1,3 @@
+add_subdirectory(ModbusClient)
+add_subdirectory(ModbusParser)
+add_subdirectory(ModbusHandler)
