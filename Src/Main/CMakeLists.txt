@@ -1,16 +1,12 @@
-
-qt_standard_project_setup()
-
-
 qt_add_executable(neviem
-    main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
-    
+    main.cpp  
 )
-target_link_libraries(neviem PRIVATE Qt${QT_VERSION_MAJOR}::Widgets
-                                                            TCPCLIENT)
+
+target_link_libraries(neviem 
+    PRIVATE 
+        MainWindow
+        TCPCLIENT
+)
 
 set_target_properties(neviem PROPERTIES
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
