@@ -1,6 +1,4 @@
-#include <QApplication>
-#include "mainwindow.hpp"
-#include "TcpClient.hpp"
+#include "Aplication.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -8,7 +6,6 @@ int main(int argc, char *argv[])
 
     MainWindow w;
     w.show();
-    TcpClient SiemensPLC();
     
 
 
