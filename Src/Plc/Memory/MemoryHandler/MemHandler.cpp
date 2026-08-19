@@ -19,3 +19,4 @@ void Bool::Invert()
 {
     Adress ^= ~(1 << Bit);
 }
+

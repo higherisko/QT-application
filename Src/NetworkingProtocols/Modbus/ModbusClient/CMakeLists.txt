@@ -1,6 +1,6 @@
-add_library(MODBUSClient
+add_library(ModbusClient
             ModbusClient.h
             ModbusClient.cpp
             )
-target_include_directories(MODBUSClient PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(MODBUSClient PUBLIC TCPCLIENT CONVERTER MODBUSPARSER MODBUSHANDLER MEMORYREGISTERS)
+target_include_directories(ModbusClient PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(ModbusClient PUBLIC TcpClient CONVERTER MODBUSPARSER MODBUSHANDLER MemoryRegisters)
