@@ -2,16 +2,16 @@
 
 #include "Converter.h"
 
+
 class Bool
 {
 private:
     std::string Tag;
     uint16_t Adress;
     uint16_t Bit;
-
 public:
     Bool(std::string name, uint16_t Adres, uint16_t Bit) : Tag{name}, Adress{Adres}, Bit{Bit} {}
-    ~Bool() = default;
+    ~Bool() {}
     void Invert();
     bool Status() { return (Adress >> Bit) & 1; };
 };

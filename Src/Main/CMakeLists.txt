@@ -5,7 +5,7 @@ qt_add_executable(neviem
 target_link_libraries(neviem 
     PRIVATE 
         MainWindow
-        TCPCLIENT
+        TcpClient
 )
 
 set_target_properties(neviem PROPERTIES
