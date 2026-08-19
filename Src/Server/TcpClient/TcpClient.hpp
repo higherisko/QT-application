@@ -12,7 +12,7 @@ private:
     bool Conected;
 
 public:
-    explicit TcpClient(QObject *parent = nullptr);
+    explicit TcpClient(QObject *parent = nullptr){}
     void Disconnect();
     bool Connect(const char *IpAdrres, const int Port);
     bool Send(std::vector<uint8_t> &Buffer);

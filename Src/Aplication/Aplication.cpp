@@ -2,5 +2,8 @@
 
 Aplication::Aplication()
 {
-    QObject::connect()
+    Motor.ByteSet(0);
+    Motor.ValueSet(true);
+    QObject::connect(w.getConnectButton(),&QPushButton::clicked,&Motor,&SiemensBool::write);
+    w.show();
 }

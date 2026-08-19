@@ -1,7 +1,7 @@
 #pragma once
 #include "ModbusClient.h"
-
-class SiemensBool
+#include <QObject>
+class SiemensBool:public QObject
 {
     private:
        bool Value;

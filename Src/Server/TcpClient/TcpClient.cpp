@@ -49,4 +49,5 @@ int TcpClient::Recieve()
     {
         RecvBuff.at(i) = Data.at(i); 
     }
+    return 0;
 }

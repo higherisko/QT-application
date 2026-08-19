@@ -1,13 +1,16 @@
 #include "mainwindow.hpp"
 #include <QApplication>
 #include <QObject>
-#include "ModbusClient.h"
+#include "SiemensTags.hpp"
 
-class Aplication
+class Aplication:public QObject
 
 {
     Q_OBJECT
 private:
+    MainWindow w;
+    SiemensBool Motor;
+    
 public:
     Aplication();
 };
