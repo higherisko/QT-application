@@ -27,5 +27,9 @@ CreditLabel::CreditLabel(QString user, QString desc, QWidget *parent) : QWidget(
     mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
-    name = new QLabel();
+    name = new QLabel(user, this);
+    mainLayout->addWidget(name, 1);
+
+    description = new QLabel(desc, this);
+    mainLayout->addWidget(name, 5);
 }

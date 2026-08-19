@@ -32,3 +32,7 @@ void MainWindow::setupActions() {
     creditsAction = menuBar()->addAction(tr("Credits"));
     QObject::connect(creditsAction, &QAction::triggered, credits, &QWidget::show);
 }
+
+QPushButton *MainWindow::getConnectButton() {
+    return connectButton;
+}
