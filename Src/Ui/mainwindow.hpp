@@ -4,13 +4,19 @@
 
 #include <QObject>
 #include <QWidget>
+#include <QStackedWidget>
 #include <QMainWindow>
 
 #include <QMenu>
 #include <QMenuBar>
 #include <QAction>
+#include <QIcon>
 
+#include <QVBoxLayout>
 #include <QLabel>
+#include <QPushButton>
+
+#include "widgets/credits.hpp"
 
 class MainWindow: public QMainWindow {
     Q_OBJECT
@@ -18,11 +24,17 @@ class MainWindow: public QMainWindow {
 public:
     explicit MainWindow(QWidget *parent = nullptr);
 
+    QPushButton *getConnectButton();
+
 private:
-    QLabel *credits;
+    QVBoxLayout *mainLayout;
+    QPushButton *connectButton;
+
     QMenu *fileMenu;
     QAction *quitAction;
     QAction *creditsAction;
+
+    Credits *credits;
 
     void setupWidgets();
     void setupMenus();
