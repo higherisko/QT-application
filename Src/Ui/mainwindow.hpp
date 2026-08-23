@@ -17,6 +17,8 @@
 #include <QPushButton>
 
 #include "widgets/credits.hpp"
+#include "widgets/settings.hpp"
+#include "widgets/ipportselector.hpp"
 
 class MainWindow: public QMainWindow {
     Q_OBJECT
@@ -34,7 +36,11 @@ private:
     QAction *quitAction;
     QAction *creditsAction;
 
+    QMenu *settingsMenu;
+    QAction *settingsAction;
+
     Credits *credits;
+    Settings *settings;
 
     void setupWidgets();
     void setupMenus();

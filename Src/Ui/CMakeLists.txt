@@ -5,8 +5,14 @@ add_library(MainWindow
         mainwindow.cpp
 
         # Custom Widgets
+        widgets/settings.hpp
+        widgets/settings.cpp
+
         widgets/credits.hpp
         widgets/credits.cpp
+
+        widgets/ipportselector.hpp
+        widgets/ipportselector.cpp
 )
 
 target_include_directories(MainWindow
