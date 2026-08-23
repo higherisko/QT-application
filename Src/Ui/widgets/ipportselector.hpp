@@ -5,6 +5,8 @@
 #include <QLineEdit>
 #include <QLabel>
 #include <QHBoxLayout>
+#include <QFontMetrics>
+#include <QSizePolicy>
 
 class IpPortSelector : public QWidget {
     Q_OBJECT

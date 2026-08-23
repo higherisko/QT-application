@@ -2,18 +2,23 @@
 
 IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent) {
     mainLayout = new QHBoxLayout;
+    mainLayout->setSizeConstraint(QLayout::SetFixedSize);
     setLayout(mainLayout);
-
-    QString placeholder[] = {"127", "0", "0", "1", "0000"};
 
     int i = 0;
     for (auto &line : lines) {
         line = new QLineEdit(this);
-        line->setPlaceholderText(placeholder[i]);
+        line->setPlaceholderText("0");
         line->setFrame(false);
+        line->setMaxLength(5);
+
+        QFontMetrics fm(line->font());
+        line->setFixedWidth(fm.horizontalAdvance("00000")+20);
+
         mainLayout->addWidget(line);
         
         if (i > 3) {
+            line->setPlaceholderText("00000");
             QObject::connect(line, &QLineEdit::textChanged, this, &IpPortSelector::updatePort);
             break;
         }
@@ -36,7 +41,7 @@ void IpPortSelector::updateIp() {
                 line->setText("");
                 return;
             }
-        result += line->text();
+        result += (line->text() == "") ? "0" : line->text();
         if (i >= 3)
             break;
         result += ".";

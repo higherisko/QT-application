@@ -15,35 +15,32 @@ void MainWindow::setupWidgets() {
 
     connectButton = new QPushButton("connect", centralWidget());
     mainLayout->addWidget(connectButton, 0, Qt::AlignCenter);
-
-    auto ipSelect = new IpPortSelector(this);
-    mainLayout->addWidget(ipSelect, 0, Qt::AlignCenter);
-
-    auto ip = new QLabel(this);
-    mainLayout->addWidget(ip, 0, Qt::AlignCenter);
-    QObject::connect(ipSelect, &IpPortSelector::ipChanged, ip, &QLabel::setText);
-
-    auto port = new QLabel(this);
-    mainLayout->addWidget(port, 0, Qt::AlignCenter);
-    QObject::connect(ipSelect, &IpPortSelector::portChanged, port, &QLabel::setText);
-
-
-    credits = new Credits;
+    
     settings = new Settings;
+    
+    ipPortSelector = new IpPortSelector(settings);
+    settings->addWidget(ipPortSelector);
+    
+    QObject::connect(ipPortSelector, &IpPortSelector::ipChanged, this, &MainWindow::ipChanged);
+    QObject::connect(ipPortSelector, &IpPortSelector::portChanged, this, &MainWindow::portChanged);
+    
+    credits = new Credits;
 }
 
 void MainWindow::setupMenus() {
-    fileMenu = new QMenu;
-    fileMenu->setTitle(tr("File"));
+    fileMenu = new QMenu("File", this);
     menuBar()->addMenu(fileMenu);
+
+    settingsMenu = new QMenu("Settings", this);
+    menuBar()->addMenu(settingsMenu);
 }
 
 void MainWindow::setupActions() {
     quitAction = fileMenu->addAction(QIcon::fromTheme(QIcon::ThemeIcon::ProcessStop), tr("Quit"), tr("Ctrl + Q"));
     QObject::connect(quitAction, &QAction::triggered, this, &QWidget::close);
 
-    settingsAction = fileMenu->addAction(tr("Settings"));
-    //QObject::connect(settingsAction, &QAction::triggered, settings, &QWidget::show);
+    settingsAction = settingsMenu->addAction(tr("Settings"));
+    QObject::connect(settingsAction, &QAction::triggered, settings, &Settings::show);
 
     creditsAction = menuBar()->addAction(tr("Credits"));
     QObject::connect(creditsAction, &QAction::triggered, credits, &QWidget::show);

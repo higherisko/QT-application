@@ -28,6 +28,10 @@ public:
 
     QPushButton *getConnectButton();
 
+signals:
+    void ipChanged(QString ip);
+    void portChanged(QString port);
+
 private:
     QVBoxLayout *mainLayout;
     QPushButton *connectButton;
@@ -40,7 +44,9 @@ private:
     QAction *settingsAction;
 
     Credits *credits;
+
     Settings *settings;
+    IpPortSelector *ipPortSelector;
 
     void setupWidgets();
     void setupMenus();
