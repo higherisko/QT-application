@@ -30,6 +30,9 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent) {
 
         i++;
     }
+
+    updateIp();
+    updatePort();
 }
 
 void IpPortSelector::updateIp() {
@@ -38,9 +41,10 @@ void IpPortSelector::updateIp() {
     for (auto &line : lines) {
         for (QChar chr : line->text())
             if (chr.isLetter()) {
-                line->setText("");
+                line->setStyleSheet("QLineEdit { border: 2px solid red; border-radius: 4px; }");
                 return;
             }
+        line->setStyleSheet("");
         result += (line->text() == "") ? "0" : line->text();
         if (i >= 3)
             break;
@@ -53,8 +57,9 @@ void IpPortSelector::updateIp() {
 void IpPortSelector::updatePort() {
     for (QChar chr : lines[4]->text())
         if (chr.isLetter()) {
-            lines[4]->setText("");
+            lines[4]->setStyleSheet("QLineEdit { border: 2px solid red; border-radius: 4px; }");
             return;
         }
+    lines[4]->setStyleSheet("");
     emit portChanged(lines[4]->text());
 }

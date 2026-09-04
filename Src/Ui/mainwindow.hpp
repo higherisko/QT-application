@@ -35,12 +35,14 @@ signals:
 private:
     QVBoxLayout *mainLayout;
     QPushButton *connectButton;
+    QLabel *ipLabel;
+    QLabel *portLabel;
 
     QMenu *fileMenu;
     QAction *quitAction;
     QAction *creditsAction;
 
-    QMenu *settingsMenu;
+    // QMenu *settingsMenu;
     QAction *settingsAction;
 
     Credits *credits;
