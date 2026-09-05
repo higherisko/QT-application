@@ -16,7 +16,29 @@ void MainWindow::setupWidgets() {
     connectButton = new QPushButton("connect", centralWidget());
     mainLayout->addWidget(connectButton, 0, Qt::AlignCenter);
 
+<<<<<<< HEAD
     credits = new Credits(this);
+=======
+    ipLabel = new QLabel(centralWidget());
+    mainLayout->addWidget(ipLabel, 0, Qt::AlignCenter);
+
+    portLabel = new QLabel(centralWidget());
+    mainLayout->addWidget(portLabel, 0, Qt::AlignCenter);
+    
+    settings = new Settings;
+    
+    ipPortSelector = new IpPortSelector(settings);
+    settings->addWidget(ipPortSelector);
+    
+    QObject::connect(ipPortSelector, &IpPortSelector::ipChanged, this, &MainWindow::ipChanged);
+    QObject::connect(ipPortSelector, &IpPortSelector::portChanged, this, &MainWindow::portChanged);
+    
+    QObject::connect(this, &MainWindow::ipChanged, ipLabel, &QLabel::setText);
+    QObject::connect(this, &MainWindow::portChanged, portLabel, &QLabel::setText);
+    
+
+    credits = new Credits;
+>>>>>>> 037877f (fixed a segmentation fault that tried assigning a non existent widget to a layout)
 }
 
 void MainWindow::setupMenus() {
