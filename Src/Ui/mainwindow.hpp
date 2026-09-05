@@ -17,6 +17,8 @@
 #include <QPushButton>
 
 #include "widgets/credits.hpp"
+#include "widgets/settings.hpp"
+#include "widgets/ipportselector.hpp"
 
 class MainWindow: public QMainWindow {
     Q_OBJECT
@@ -26,15 +28,27 @@ public:
 
     QPushButton *getConnectButton();
 
+signals:
+    void ipChanged(QString ip);
+    void portChanged(QString port);
+
 private:
     QVBoxLayout *mainLayout;
     QPushButton *connectButton;
+    QLabel *ipLabel;
+    QLabel *portLabel;
 
     QMenu *fileMenu;
     QAction *quitAction;
     QAction *creditsAction;
 
+    // QMenu *settingsMenu;
+    QAction *settingsAction;
+
     Credits *credits;
+
+    Settings *settings;
+    IpPortSelector *ipPortSelector;
 
     void setupWidgets();
     void setupMenus();
