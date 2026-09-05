@@ -6,6 +6,6 @@ void SiemensBool:: write()
 
     Data.push_back(Value);
     Client.Connect();
-    Client.WriteCoils(Data,Byte,1);
+    Client.WriteCoils(Data,Byte,1,1);
     Client.Disconnect();
-}
+};
