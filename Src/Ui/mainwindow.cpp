@@ -24,8 +24,8 @@ void MainWindow::setupWidgets() {
     
     settings = new Settings;
     
-    settings->addWidget(ipPortSelector);
     ipPortSelector = new IpPortSelector(settings);
+    settings->addWidget(ipPortSelector);
     
     QObject::connect(ipPortSelector, &IpPortSelector::ipChanged, this, &MainWindow::ipChanged);
     QObject::connect(ipPortSelector, &IpPortSelector::portChanged, this, &MainWindow::portChanged);
