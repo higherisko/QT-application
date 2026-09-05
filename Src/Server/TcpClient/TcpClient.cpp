@@ -1,24 +1,26 @@
 #include "TcpClient.hpp"
 
-bool TcpClient::Connect(const char *IpAdrres, const int Port)
+bool TcpClient::Connect()
 {
     connectToHost(IpAdrres,Port);
     if(state() == ConnectedState)
     {
-       Conected = true;
+       Connected = true;
        qDebug() << "Connected";
     }
     else
     {
-        Conected = false;
-        qDebug() << "Not Connected";
+        Connected = false;
+        qDebug() << "Not Connected";  
     }
-    return Conected;
+    emit QTConnected(Connected);
+    return Connected;
 }
 
 void TcpClient::Disconnect()
 {
-    Conected = false;
+    Connected = false;
+    emit QTConnected(Connected);
     disconnectFromHost();
 }
 
