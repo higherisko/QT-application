@@ -36,7 +36,7 @@ public:
     void SetDataInf(const ModbusFrame &Frame);
     void SetData(const ModbusFrame &Frame);
     std::vector<bool> BuildCiols(const std::vector<uint8_t> &Frame,int Lenght,uint16_t BitIndex);
-
+    bool ReturnCoil (const std::vector<uint8_t> &Frame,int Lenght,uint16_t BitIndex);
 
     std::string GetPlcName() const { return UnitInf.Unit; }
     uint16_t GetTransactionID() const { return UnitInf.TransactionID; }

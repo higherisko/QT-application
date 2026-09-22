@@ -6,6 +6,15 @@ void SiemensBool:: write()
 
     Data.push_back(Value);
     Client.Connect();
-    Client.WriteCoils(Data,Byte,1,1);
+    Client.WriteCoils(Data,Byte,Bit,1);
     Client.Disconnect();
 };
+
+bool SiemensBool:: read()
+{
+     Client.Connect();
+     Client.ReadCoils(Byte,Bit,1);
+     
+
+
+}

@@ -6,6 +6,10 @@ ModbusClient::ModbusClient() : TcpClient()
 
 std::vector<uint8_t> ModbusClient::ReadCoils(const int Byte, const uint16_t Bit, const int Lenght)
 {
+    if (Byte > 4)
+    {
+        throw std::runtime_error("Coils lenght bigger than 4");
+    }
     std::vector<uint8_t> SendMap = ModbusPArser.BuildMaps[1](Byte, Lenght), returnvalue;
     if (Send(SendMap))
     {
@@ -22,7 +26,17 @@ std::vector<uint8_t> ModbusClient::ReadCoils(const int Byte, const uint16_t Bit,
         throw std::runtime_error("Send Fail");
     }
     // ModbusPArser.BuildFrame(returnvalue);
-    ModbusHNDlr.BuildCiols(returnvalue, Lenght, Byte);
+    if (Lenght > 1)
+    {
+        std::vector<bool> Datatemp = ModbusHNDlr.BuildCiols(returnvalue, Lenght, Bit);
+        memory.BooleansInitAt(Lenght,Byte,Datatemp);
+    }
+    else
+    {
+        bool DataTemp = ModbusHNDlr.ReturnCoil(returnvalue, Lenght, Bit);
+        memory.BoolAtInit(Byte,Bit,DataTemp);
+
+    }
     return returnvalue;
 }
 

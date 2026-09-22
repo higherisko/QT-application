@@ -53,3 +53,8 @@ std::vector<bool> ModbusHandler::BuildCiols(const std::vector<uint8_t> &Frame, i
     BooleanData = ReturnValue;
     return ReturnValue;
 }
+
+bool ModbusHandler:: ReturnCoil (const std::vector<uint8_t> &Frame,int Lenght,uint16_t BitIndex)
+{
+    return (Frame.at(9) >> BitIndex) & 0x01;
+}

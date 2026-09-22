@@ -19,6 +19,7 @@ class SiemensBool:public QObject
        void NameSet(const std::string NameSet) {Name = NameSet;}
        std::string NameGet() {return Name;}
        void write();
+       bool read();
        SiemensBool () = default;
        ~SiemensBool () {Client.Disconnect();}
 
