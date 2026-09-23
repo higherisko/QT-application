@@ -1,27 +1,24 @@
 #pragma once
-#include "ModbusClient.h"
+
 #include <QObject>
-class SiemensBool:public QObject
+#include "MemoryRegisters.h"
+class Cylinder : public QObject
 {
-    private:
-       bool Value;
-       std::string Name;
-       uint16_t Byte;
-       uint16_t Bit;
-       ModbusClient Client;
-    public:
-       void ValueSet(const bool Data){Value = Data;}
-       bool ValueGet(){return Value;}
-       void ByteSet(uint16_t ByteSet){Byte = ByteSet;}
-       uint16_t ByteGet(){return Byte;}
-       void BitSet(const uint16_t BitSet) {Bit = BitSet;}
-       uint16_t ButGet() {return Bit;}
-       void NameSet(const std::string NameSet) {Name = NameSet;}
-       std::string NameGet() {return Name;}
-       void write();
-       bool read();
-       SiemensBool () = default;
-       ~SiemensBool () {Client.Disconnect();}
+   Q_OBJECT
+private:
+   QString Name;
+   uint16_t StartAdress;
+   const uint8_t Size = 3;
+   bool Move;
+   bool IsForward;
+   bool IsBackward;
 
+public:
+explicit Cylinder(QObject *parent = nullptr,uint16_t Startadress):StartAdress{Startadress}{}
 
+signals:
+   void Move(bool Value);
+public slots:
+   
+   
 };

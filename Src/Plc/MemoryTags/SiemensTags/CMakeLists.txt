@@ -4,4 +4,5 @@ add_library(SiemensTags
 
 target_include_directories(SiemensTags PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(SiemensTags PUBLIC ModbusClient)
+target_link_libraries(SiemensTags PRIVATE Qt6::Core)
+target_link_libraries(SiemensTags PUBLIC MemoryRegisters)

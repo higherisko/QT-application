@@ -8,6 +8,7 @@
 #include "ModbusParser.h"
 #include "ModbusHandler.h"
 #include "MemoryRegisters.h"
+#include "QtToCpp.hpp"
 
 
 class ModbusClient : public TcpClient
