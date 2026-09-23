@@ -1,3 +1,5 @@
+add_subdirectory(QtToCpp)
+
 add_library(CONVERTER
             Converter.h
             Converter.cpp)
