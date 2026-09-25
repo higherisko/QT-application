@@ -1,8 +1,8 @@
-add_library(SiemensTags
-            SiemensTags.hpp
-            SiemensTags.cpp)
+add_library(PlcTags
+            PlcTags.hpp
+            PlcTags.cpp)
 
-target_include_directories(SiemensTags PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(PlcTags PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(SiemensTags PRIVATE Qt6::Core)
-target_link_libraries(SiemensTags PUBLIC MemoryRegisters)
+
+target_link_libraries(PlcTags PUBLIC MemoryRegisters)

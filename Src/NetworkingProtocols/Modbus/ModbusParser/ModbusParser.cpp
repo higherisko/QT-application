@@ -1,6 +1,6 @@
 #include "ModbusParser.h"
 
-ModbusParser::ModbusParser() : MbapHead(0, 2)
+ModbusParser::ModbusParser(const uint16_t &DeviceID) : MbapHead(0, DeviceID)
 {
     BuildMaps[1] = [this](uint16_t Byte, uint16_t Lenght)
     {

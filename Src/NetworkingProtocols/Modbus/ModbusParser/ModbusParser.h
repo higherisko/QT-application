@@ -74,7 +74,7 @@ class ModbusParser
        PDU PduHead;
        ModbusFrame HandleFrame;
     public:
-       ModbusParser();
+       ModbusParser(const uint16_t &DeviceID = 1);
        ~ModbusParser() = default;
        std::unordered_map<std::uint16_t,std::function<std::vector<uint8_t>(uint16_t,uint16_t)>> BuildMaps;
        void SetQuantityValue(uint16_t Value) {PduHead.Quantity_Value = Value;}

@@ -3,5 +3,5 @@ add_library(Aplication
             Aplication.cpp)
 
 target_include_directories(Aplication PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(Aplication PUBLIC ModbusClient SiemensTags)
+target_link_libraries(Aplication PUBLIC ModbusClient PlcTags)
 target_link_libraries(Aplication PUBLIC MainWindow )

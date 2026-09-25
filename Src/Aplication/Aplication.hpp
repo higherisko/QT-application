@@ -1,7 +1,7 @@
 #include "mainwindow.hpp"
 #include <QApplication>
 #include <QObject>
-#include "SiemensTags.hpp"
+#include "PlcTags.hpp"
 
 class Aplication:public QObject
 
@@ -9,7 +9,7 @@ class Aplication:public QObject
     Q_OBJECT
 private:
     MainWindow w;
-    SiemensBool Motor;
+
     
 public:
     Aplication();
