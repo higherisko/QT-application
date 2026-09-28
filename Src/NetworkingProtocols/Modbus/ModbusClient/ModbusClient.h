@@ -6,7 +6,6 @@
 #include <string>
 #include "ModbusParser.h"
 #include "ModbusHandler.h"
-#include "QtToCpp.hpp"
 
 
 class ModbusClient 

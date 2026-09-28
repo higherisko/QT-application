@@ -15,8 +15,4 @@ std::ostream &operator<<(std::ostream &os,Date_And_Time &RHS)
     return os;
 }
 
-void Bool::Invert()
-{
-    Adress ^= ~(1 << Bit);
-}
 

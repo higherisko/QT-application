@@ -1,8 +1,14 @@
 #include "MemoryRegisters.h"
 
-void Memory::MemsInit(const std::vector<uint16_t> &Data, const uint16_t &Adress)
+Memory::Memory(const uint16_t RegistersSizeInit)
+    : RegistersSize{RegistersSizeInit}
 {
-    if (Adress == 0)
+    Registers.resize(RegistersSize);
+}
+
+int Memory::MemsInit(const std::vector<uint16_t> &Data, const uint16_t &Adress)
+{
+    if (Adress == BoolsSize + 1)
     {
         Registers.clear();
     }
@@ -13,7 +19,7 @@ void Memory::MemsInit(const std::vector<uint16_t> &Data, const uint16_t &Adress)
     std::cout << MemoryHandl.DateAndTime;
 }
 
-void Memory::MemsAtInit(const uint16_t &Data, const uint16_t &Adress)
+int Memory::MemsAtInit(const uint16_t &Data, const uint16_t &Adress)
 {
     if (Adress < Registers.size())
         Registers.at(Adress) = Data;
@@ -35,33 +41,4 @@ std::vector<uint16_t> Memory::GetMems(const uint16_t &StartAdress, const uint16_
         ReturnValue.assign(Registers.begin() + StartAdress, Registers.begin() + Size);
 
     return ReturnValue;
-}
-
-void Memory::BoolAtInit(const uint16_t &StartAdress, const uint16_t &BitStartAdress, const bool &Data)
-{
-    if (Booleans.size() == 0)
-    {
-        return;
-    }
-    else
-    {
-        uint16_t Adress = StartAdress * BitStartAdress;
-        Booleans.at(Adress) = Data;
-    }
-}
-
-void Memory::BooleansInitAt(const uint16_t Lenght,const uint16_t StartByte,std::vector<bool> &Data)
-{
-     if (Booleans.size() == 0)
-    {
-        return;
-    }
-
-    else
-    {
-        for(int i = 0;i < Lenght;i++)
-        {
-            Booleans.at(i + StartByte) = Data.at(i); 
-        }
-    }
 }

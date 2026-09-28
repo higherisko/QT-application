@@ -3,18 +3,7 @@
 #include "Converter.h"
 
 
-class Bool
-{
-private:
-    std::string Tag;
-    uint16_t Adress;
-    uint16_t Bit;
-public:
-    Bool(std::string name, uint16_t Adres, uint16_t Bit) : Tag{name}, Adress{Adres}, Bit{Bit} {}
-    ~Bool() {}
-    void Invert();
-    bool Status() { return (Adress >> Bit) & 1; };
-};
+
 
 class Date_And_Time;
 std::ostream &operator<<(std::ostream &os, Date_And_Time &RHS);
@@ -35,14 +24,10 @@ public:
     friend std::ostream &operator<<(std::ostream &os, Date_And_Time &RHS);
 };
 
-class Servo
-{
-public:
-};
+
 
 class MemHandler
 {
 public:
     Date_And_Time DateAndTime;
-    std::vector<Bool> Bools;
 };

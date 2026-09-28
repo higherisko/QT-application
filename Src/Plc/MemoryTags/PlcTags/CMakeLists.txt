@@ -5,4 +5,4 @@ add_library(PlcTags
 target_include_directories(PlcTags PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 
-target_link_libraries(PlcTags PUBLIC MemoryRegisters)
+target_link_libraries(PlcTags PUBLIC CONVERTER)

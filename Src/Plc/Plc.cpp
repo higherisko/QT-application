@@ -16,3 +16,8 @@ void Plc::ComnSetting(const std::string &IpAdressSet,const std::string &Transpor
     Comn.Protocol = ProtocolSet;
     Comn.TransportLayer = TransportLayerSet;
 }
+
+void Plc::CylinderSend(const std::string Name,const bool &Data)
+{
+    
+}

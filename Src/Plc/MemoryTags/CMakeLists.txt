@@ -1,1 +1,1 @@
-add_subdirectory(SiemensTags)
+add_subdirectory(PlcTags)
