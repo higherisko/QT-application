@@ -1,1 +1,2 @@
-add_subdirectory(PlcTags)
+add_subdirectory(PlcTags
+                 TagsAdapter)

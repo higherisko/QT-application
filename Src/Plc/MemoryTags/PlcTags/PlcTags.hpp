@@ -52,3 +52,11 @@ public:
 
    std::vector<uint8_t> WriteMove(const bool Value);
 };
+
+
+
+
+
+
+
+
