@@ -6,7 +6,7 @@
 class Memory
 {
 private:
-    uint16_t RegistersSize, BoolsSize;
+    uint16_t RegistersSize;
 
     std::vector<uint16_t> Registers;
     MemHandler MemoryHandl;
@@ -29,4 +29,6 @@ public:
         }
         std::cout << std::endl;
     };
+
+    void MemsSizeSet(const uint16_t SizeInit) {RegistersSize = SizeInit;}
 };

@@ -13,7 +13,7 @@ public:
     std::string TransportLayer;
     uint16_t Port;
     std::string Protocol;
-    Cylinder StoperBeforeWeight;
+    Memory Mems;
     
 };
 
@@ -31,6 +31,9 @@ public:
     void ComnSetting(const std::string &IpAdressSet, const std::string &TransportLayerSet, const uint16_t &PortSet, const std::string ProtocolSet);
     void CylinderSend(const std::string CylName,const bool &Data);
     //Tags
-    int AddCylinder(const std::string CyllName,const uint16_t CylByteAdress,const uint16_t CylBitAdress);
+    bool AddCylinder(const std::string CyllName,const uint16_t CylByteAdress,const uint16_t CylBitAdress);
+
+    //Memory Functions
+    int MemoryAlocation(const uint16_t Size) {Comn.Mems.MemsSizeSet(Size);}
     
 };   

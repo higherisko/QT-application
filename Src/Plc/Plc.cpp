@@ -21,3 +21,11 @@ void Plc::CylinderSend(const std::string Name,const bool &Data)
 {
     
 }
+
+bool Plc::AddCylinder(const std::string CyllName,const uint16_t CylByteAdress,const uint16_t CylBitAdress)
+{
+    if (Cylinders.try_emplace(CyllName,Cylinder(CylByteAdress,CylBitAdress)).second);
+       return true;
+    return false;
+
+} 
