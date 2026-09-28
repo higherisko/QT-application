@@ -42,3 +42,12 @@ std::vector<uint16_t> Memory::GetMems(const uint16_t &StartAdress, const uint16_
 
     return ReturnValue;
 }
+
+uint16_t Memory::GetMemBools(const uint16_t &Adress)
+{
+    uint16_t AdressTemp = Adress / 2;
+    if (AdressTemp < Registers.size())
+        return Registers.at(AdressTemp);
+    else
+        return -1;
+}

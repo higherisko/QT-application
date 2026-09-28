@@ -19,6 +19,7 @@ public:
 
     std::vector<uint16_t> GetMems(const uint16_t &StartAdress, const uint16_t &Lenght);
     uint16_t GetMem1(const uint16_t &Adress);
+    uint16_t GetMemBools(const uint16_t &Adress);
 
     void Display()
     {
