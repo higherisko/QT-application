@@ -14,6 +14,7 @@ class Adapter:QObject
         
     public slots:
         void AddPlc(QString Name );
+        void SetIp(QString Ip);
 
 
 };
