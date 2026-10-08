@@ -21,6 +21,7 @@ class Plc
 private:
     std::string Name;
     ComunicationInfo Comn;
+    Tags TaGS;
     
     
 public:
@@ -29,6 +30,6 @@ public:
     void NameChange(const std::string &NameSet);
     void ComnSetting(const std::string &IpAdressSet, const std::string &TransportLayerSet, const uint16_t &PortSet, const std::string ProtocolSet);
     void CylinderSend(const std::string CylName,const bool &Data);
-
+    int AddCylinder(Cylinder &Cyll);
     
 };   

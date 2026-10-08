@@ -22,3 +22,8 @@ void Plc::CylinderSend(const std::string Name,const bool &Data)
     
 }
 
+int Plc::AddCylinder(Cylinder &Cyll)
+{
+    
+}
+

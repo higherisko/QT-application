@@ -2,11 +2,14 @@
 
 #include "Converter.h"
 
+// This class is used for easier working with memory;
+// In this class you can define name of some objects for example (Cylinders,motors) and you can join memory with this tags
+
 class Booleans
 {
 public:
-   Booleans(const uint16_t AdressByteInit = -1,const uint16_t AdressBitInit = -1)
-   : AdressBit{AdressBitInit},AdressByte{AdressByteInit}{}
+   Booleans(const uint16_t AdressByteInit = -1, const uint16_t AdressBitInit = -1)
+       : AdressBit{AdressBitInit}, AdressByte{AdressByteInit} {}
    uint16_t AdressByte;
    uint16_t AdressBit;
    bool Value;
@@ -22,7 +25,7 @@ private:
 
 public:
    Cylinder(const uint16_t AdrresInit = -1, const uint16_t AdressBitInit = -1);
-
+   Cylinder(Cylinder &Cyll) { *this = Cyll; }
    void SetMoveAdress(const uint16_t AdressTemp, const uint16_t AdressBitTemp)
    {
       Move.AdressByte = AdressTemp;
@@ -52,11 +55,3 @@ public:
 
    std::vector<uint8_t> WriteMove(const bool Value);
 };
-
-
-
-
-
-
-
-

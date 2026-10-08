@@ -1,17 +1,42 @@
 #include "TagsAdapter.hpp"
 
 // Cylinder
-bool Tags::AddCylinder(const std::string &CyllName, const uint16_t &CylByteAdress, const uint16_t &CylBitAdress)
+uint16_t Tags::AddCylinder(Cylinder &Cyll, const std::string &Name)
 {
-    if (Cylinders.try_emplace(CyllName, Cylinder(CylByteAdress, CylBitAdress)).second)
+    auto Move = Cyll.GetAdressMove();
+    auto IsFWD = Cyll.GetAdressIsForward();
+    auto IsBWD = Cyll.GetAdressIsBackward();
+
+    if (Cylinders.try_emplace(Name, Cyll).second)
     {
-        if (Mems.IsUsedCheckBool(CylByteAdress, CylBitAdress) == 1)
+        if (Mems.IsUsedCheckBool(Move.at(0), Move.at(1)) == 1)
         {
-            Mems.UseUpgradeBool(CylByteAdress, CylBitAdress);
-            return true;
+            Mems.UseUpgradeBool(Move.at(0), Move.at(1));
+            if (!IsFWD.empty())
+            {
+                if ((Mems.IsUsedCheckBool(IsFWD.at(0), IsFWD.at(1)) == 1))
+                {
+                    Mems.UseUpgradeBool(IsFWD.at(0), IsFWD.at(1));
+                }
+                else
+                    return -2;
+            }
+            if (!IsBWD.empty())
+            {
+                if ((Mems.IsUsedCheckBool(IsBWD.at(0), IsBWD.at(1)) == 1))
+                {
+                    Mems.UseUpgradeBool(IsBWD.at(0), IsBWD.at(1));
+                }
+                else
+                    return -3;
+            }
         }
+        else
+            return -1;
     }
-    return false;
+    else 
+        return -4;
+    return 1;
 }
 
 int Tags::CylinderForward(const std::string &CyllName)
@@ -64,8 +89,7 @@ int Tags::SetCylindersSensors(const std::string &CyllName, const uint16_t &Senso
             {
                 Mems.UseEraseBool(SensorsByteAndBit.at(0), SensorsByteAndBit.at(1));
                 return -2;
-            }    
-        
+            }
         }
         else
             return 1;
