@@ -5,4 +5,4 @@ add_library(QtToCpp
 target_include_directories(QtToCpp PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(QtToCpp PUBLIC Qt6::Core)
 target_link_libraries(QtToCpp PUBLIC ModbusClient
-                                     PlcTags)
+                                     Plc)
