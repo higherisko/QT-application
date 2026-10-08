@@ -70,6 +70,7 @@ int Tags::SetCylindersSensors(const std::string &CyllName, const uint16_t &Senso
         else
             return 1;
     }
+    return 0;
 }
 
 // Memory

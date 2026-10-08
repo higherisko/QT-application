@@ -3,5 +3,5 @@
 Aplication::Aplication()
 {
 
-
+    w.show();
 }
