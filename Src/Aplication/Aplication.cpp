@@ -4,7 +4,7 @@ Aplication::Aplication()
 {
 
     w.show();
-    
+    ConnectSignals();
 
     
 }
