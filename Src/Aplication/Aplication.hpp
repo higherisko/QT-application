@@ -2,6 +2,8 @@
 #include <QApplication>
 #include <QObject>
 #include "PlcTags.hpp"
+#include "PlcManager.hpp"
+#include "QtToCpp.hpp"
 
 class Aplication:public QObject
 
@@ -9,8 +11,17 @@ class Aplication:public QObject
     Q_OBJECT
 private:
     MainWindow w;
+    PlcManager Plcs;
+    QtAdapter QtAdapt;
+
 
     
 public:
     Aplication();
+    void ConnectSignals();
+signals:
+
+public slots:
+
+
 };
