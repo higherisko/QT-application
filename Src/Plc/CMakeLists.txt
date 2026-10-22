@@ -16,4 +16,4 @@ target_link_libraries(Plc PUBLIC TagsAdapter
                                  )
 
 target_include_directories(PlcManager PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(PlcManager PUBLIC Plc)
+target_link_libraries(PlcManager PUBLIC Plc CONVERTER)

@@ -5,7 +5,7 @@
 #include "PlcManager.hpp"
 #include <unordered_map>
 #include <QDebug>
- 
+
 
 class QtAdapter:public QObject
 {
@@ -14,7 +14,7 @@ class QtAdapter:public QObject
     public:
         
     public slots:
-        void AddPlc(QString Name);
+        std::string QStringToStdString(QString Name);
   
 
 

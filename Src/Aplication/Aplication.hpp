@@ -20,8 +20,10 @@ public:
     Aplication();
     void ConnectSignals();
 signals:
-
+    void PlcAdded(QString Name);
 public slots:
-
+    void AddPlc(QString Name);
+    void IpChangeSlot(QString Value);
+    void PortChangeSlot(QString Value);
 
 };

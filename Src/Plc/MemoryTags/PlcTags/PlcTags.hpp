@@ -13,6 +13,7 @@ public:
    uint16_t AdressByte;
    uint16_t AdressBit;
    bool Value;
+   Booleans(const Booleans &Lhs):AdressByte{Lhs.AdressByte},AdressBit{Lhs.AdressBit},Value{Lhs.Value}{}
 };
 
 class Cylinder
@@ -25,7 +26,8 @@ private:
 
 public:
    Cylinder(const uint16_t AdrresInit = -1, const uint16_t AdressBitInit = -1);
-   Cylinder(Cylinder &Cyll) { *this = Cyll; }
+   Cylinder(const Cylinder &Cyll):IsBackward{Cyll.IsBackward},IsForward{Cyll.IsForward},Move{Cyll.Move}{}
+   
    void SetMoveAdress(const uint16_t AdressTemp, const uint16_t AdressBitTemp)
    {
       Move.AdressByte = AdressTemp;

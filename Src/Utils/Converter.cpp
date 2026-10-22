@@ -162,3 +162,16 @@ std::vector<uint8_t> Uint16_To_Uint8_Litle(std::vector<uint16_t> &Data)
     }
     return ReturnValue;
 }
+
+std::string ToLower(const std::string &Data)
+{
+    std::string ReturnVal = Data;
+    for(auto &s:ReturnVal)
+    {
+        if(isupper(s))
+        {
+            
+        }
+    }
+    return ReturnVal;
+}

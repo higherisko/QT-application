@@ -86,8 +86,8 @@ int Memory::UseEraseBool(const uint16_t &ByteAdress, const uint16_t &BitAdress)
             IsUsed.at(RegAdress) |= ~(1 << BitAdress);
             return 2;
         }
-        return 0;
     }
+    return 0;
 }
 int Memory::MemsInit(const std::vector<uint16_t> &Data)
 {

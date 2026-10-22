@@ -2,9 +2,9 @@
 
 
 
-void QtAdapter::AddPlc(QString Name)
+std::string QtAdapter::QStringToStdString(QString Name)
 {
-
-    qDebug("PlcAdded");
-
+    std::string ReturnValue;
+    ReturnValue = Name.toStdString();
+    return ReturnValue;
 }

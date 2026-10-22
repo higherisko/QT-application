@@ -28,8 +28,11 @@ public:
     Plc(const std::string &NameInit = "");
     //Comunication
     void NameChange(const std::string &NameSet);
-    void ComnSetting(const std::string &IpAdressSet, const std::string &TransportLayerSet, const uint16_t &PortSet, const std::string ProtocolSet);
+    //Settings for comunication 
+    void ComnSetting(const std::string &IpAdressSet = "", const std::string &TransportLayerSet = "", const uint16_t &PortSet = 0, const std::string ProtocolSet = "");
     void CylinderSend(const std::string CylName,const bool &Data);
     int AddCylinder(Cylinder &Cyll);
+    std::string GetIp(){return Comn.IpAdress;}
+    uint16_t GetPort(){return Comn.Port;}
     
 };   

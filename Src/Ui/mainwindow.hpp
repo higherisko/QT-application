@@ -29,11 +29,13 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
 
     QPushButton *getConnectButton();
+    void AddPlcBuild();
 
 signals:
     void ipChanged(QString ip);
     void portChanged(QString port);
     void AddPlcSignal(QString Name);    //This func is used for qt adapter for sending name for new plc
+    void PlcNameToIpSelectMenu(QString Name);
 private:
     QVBoxLayout *mainLayout;
     QGroupBox *AddPlcGroup;
@@ -41,9 +43,11 @@ private:
     QPushButton *AddPlcButton;       
     QLabel *ipLabel;
     QLabel *portLabel;
+    QLabel *PlcAddedLabel;
     QVBoxLayout MainLayot;
     QVBoxLayout *AddPLcLayot;
 
+    QLineEdit *AddPlcName;
     QMenu *fileMenu;
     QAction *quitAction;
     QAction *creditsAction;
@@ -61,4 +65,7 @@ private:
     void setupActions();
 public slots:
     void AddPlc();   //This slot react to button of AddPlc
+    void PlcAdded(QString Name);
+    void IpChangeSlot(QString Value);
+    void PortChangeSlot(QString Value);
 };

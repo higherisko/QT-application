@@ -18,13 +18,6 @@ void MainWindow::setupWidgets()
     connectButton = new QPushButton("connect", centralWidget());
     mainLayout->addWidget(connectButton, 0, Qt::AlignCenter);
 
-    AddPlcButton = new QPushButton("Add Plc", centralWidget());
-    AddPlcGroup = new QGroupBox("Buttons");
-    AddPLcLayot = new QVBoxLayout;
-    AddPLcLayot->addWidget(AddPlcButton);
-    AddPlcGroup->setLayout(AddPLcLayot);
-    mainLayout->addWidget(AddPlcGroup);
-
     ipLabel = new QLabel(centralWidget());
     mainLayout->addWidget(ipLabel, 0, Qt::AlignCenter);
 
@@ -36,15 +29,15 @@ void MainWindow::setupWidgets()
     ipPortSelector = new IpPortSelector(settings);
     settings->addWidget(ipPortSelector);
 
-    QObject::connect(ipPortSelector, &IpPortSelector::ipChanged, this, &MainWindow::ipChanged);
-    QObject::connect(ipPortSelector, &IpPortSelector::portChanged, this, &MainWindow::portChanged);
+    QObject::connect(ipPortSelector, &IpPortSelector::ipChanged, this, &MainWindow::IpChangeSlot);
+    QObject::connect(ipPortSelector, &IpPortSelector::portChanged, this, &MainWindow::PortChangeSlot);
 
-    QObject::connect(this, &MainWindow::ipChanged, ipLabel, &QLabel::setText);
-    QObject::connect(this, &MainWindow::portChanged, portLabel, &QLabel::setText);
-
-    QObject::connect(AddPlcButton, &QPushButton::clicked, this, &MainWindow::AddPlc);
+    QObject::connect(ipPortSelector, &IpPortSelector::ipChanged, ipLabel, &QLabel::setText);
+    QObject::connect(ipPortSelector, &IpPortSelector::portChanged, portLabel, &QLabel::setText);
 
     credits = new Credits;
+
+    AddPlcBuild();
 }
 
 void MainWindow::setupMenus()
@@ -68,6 +61,31 @@ void MainWindow::setupActions()
     QObject::connect(creditsAction, &QAction::triggered, credits, &QWidget::show);
 }
 
+void MainWindow::AddPlcBuild()
+{
+    QLabel *QlineName = new QLabel;
+    QlineName->setText("Set Name");
+    PlcAddedLabel = new QLabel;
+    PlcAddedLabel->setText("No Action.");
+
+    AddPlcButton = new QPushButton("Add Plc", centralWidget());
+    AddPlcButton->setMaximumSize(100,200);
+    AddPlcGroup = new QGroupBox("Buttons");
+    AddPlcGroup->setMaximumSize(300,300);
+    AddPLcLayot = new QVBoxLayout;
+    AddPlcName = new QLineEdit;
+
+    AddPLcLayot->addWidget(AddPlcButton,0,Qt::AlignCenter);
+    AddPLcLayot->addWidget(QlineName);
+    AddPLcLayot->addWidget(AddPlcName,0,Qt::AlignCenter);
+    AddPLcLayot->addWidget(PlcAddedLabel);
+    AddPlcGroup->setLayout(AddPLcLayot);
+    mainLayout->addWidget(AddPlcGroup,0,Qt::AlignTop);
+
+
+    QObject::connect(AddPlcButton, &QPushButton::clicked, this, &MainWindow::AddPlc);
+}
+
 QPushButton *MainWindow::getConnectButton()
 {
     return connectButton;
@@ -75,6 +93,23 @@ QPushButton *MainWindow::getConnectButton()
 
 void MainWindow::AddPlc()
 {
-    emit AddPlcSignal("Plc");
-   
+    
+    emit AddPlcSignal(AddPlcName->text());
+}
+
+void MainWindow::PlcAdded(QString Name)
+{
+    PlcAddedLabel->setText(Name);
+    connect(this,&MainWindow::PlcNameToIpSelectMenu,ipPortSelector,&IpPortSelector::PlcSelectSet);
+    emit PlcNameToIpSelectMenu(Name);
+}
+
+void MainWindow::IpChangeSlot(QString Value)
+{
+    emit ipChanged(Value);
+}
+
+void MainWindow::PortChangeSlot(QString Value)
+{
+    emit portChanged(Value);
 }

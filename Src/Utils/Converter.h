@@ -16,5 +16,6 @@
     uint32_t IntToMcProtocolAdress(const int32_t &Adress);
     uint8_t StringToMcProtocolMemoryArea(const std::string &ToConvert);
     std::vector<uint16_t>  ModbusFrameToUint16(const std::vector<uint8_t> &Data);
+    std::string ToLower(const std::string &Data);
 
     #endif
