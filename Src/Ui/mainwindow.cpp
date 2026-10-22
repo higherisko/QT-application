@@ -100,8 +100,9 @@ void MainWindow::AddPlc()
 void MainWindow::PlcAdded(QString Name)
 {
     PlcAddedLabel->setText(Name);
-    connect(this,&MainWindow::PlcNameToIpSelectMenu,ipPortSelector,&IpPortSelector::PlcSelectSet);
+    connect(this,&MainWindow::PlcNameToIpSelectMenu,ipPortSelector,&IpPortSelector::PlcSelectAddSlot);
     emit PlcNameToIpSelectMenu(Name);
+    disconnect();
 }
 
 void MainWindow::IpChangeSlot(QString Value)

@@ -8,7 +8,7 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
     TextsSet();
     SetIpGroup();
     PlcSelectSet();
-
+    mainLayout->addWidget(PlcSelect);
     int i = 0;
   
     for (auto &line : lines)
@@ -40,7 +40,7 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
 
         i++;
     }
-    mainLayout->addWidget(PlcSelect);
+    
     IpBox->setLayout(IpBoxLayout);
     PortBox->setLayout(PortBoxLayout);
     mainLayout->addWidget(IpBox);
@@ -99,10 +99,10 @@ void IpPortSelector::SetIpGroup()
 
 void IpPortSelector::PlcSelectSet()
 {
-    PlcSelect = new QMenu("Plc Select");
+    PlcSelect = new QComboBox;
 }
 
 void IpPortSelector::PlcSelectAddSlot(QString Name)
 {
-    
+    PlcSelect->addItem(Name);
 }

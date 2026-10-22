@@ -8,9 +8,10 @@
 #include <QFontMetrics>
 #include <QSizePolicy>
 #include <QGroupBox>
-#include <QMenu>
+#include <QComboBox>
 
-class IpPortSelector : public QWidget {
+class IpPortSelector : public QWidget
+{
     Q_OBJECT
 
 public:
@@ -18,10 +19,10 @@ public:
     void TextsSet();
     void SetIpGroup();
     void PlcSelectSet();
-    
+
 private:
     QHBoxLayout *mainLayout;
-    
+
     QLineEdit *lines[5];
     QLabel *dots[4];
     QLabel *Texts[5];
@@ -29,13 +30,13 @@ private:
     QHBoxLayout *IpBoxLayout;
     QGroupBox *PortBox;
     QHBoxLayout *PortBoxLayout;
-    QMenu *PlcSelect;
-    
+    QComboBox *PlcSelect;
+
 private slots:
     void updateIp();
     void updatePort();
+public slots:
     void PlcSelectAddSlot(QString Name);
-
 signals:
     void ipChanged(QString value);
     void portChanged(QString value);
