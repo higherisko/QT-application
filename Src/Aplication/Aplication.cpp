@@ -18,9 +18,9 @@ void Aplication::ConnectSignals()
 void Aplication::AddPlc(QString Name)
 {
     std::string Flag = Plcs.AddPlc(Name.toStdString());
-    connect(this, &Aplication::PlcAdded, &w, &MainWindow::PlcAdded);
+    QMetaObject::Connection PlcAddedConection = connect(this, &Aplication::PlcAdded, &w, &MainWindow::PlcAdded);
     emit PlcAdded(Flag.c_str());
-    disconnect();
+    disconnect(PlcAddedConection);
 }
 
 void Aplication::IpChangeSlot(QString Value)
