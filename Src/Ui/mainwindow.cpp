@@ -69,19 +69,18 @@ void MainWindow::AddPlcBuild()
     PlcAddedLabel->setText("No Action.");
 
     AddPlcButton = new QPushButton("Add Plc", centralWidget());
-    AddPlcButton->setMaximumSize(100,200);
+    AddPlcButton->setMaximumSize(100, 200);
     AddPlcGroup = new QGroupBox("Buttons");
-    AddPlcGroup->setMaximumSize(300,300);
+    AddPlcGroup->setMaximumSize(300, 300);
     AddPLcLayot = new QVBoxLayout;
     AddPlcName = new QLineEdit;
 
-    AddPLcLayot->addWidget(AddPlcButton,0,Qt::AlignCenter);
+    AddPLcLayot->addWidget(AddPlcButton, 0, Qt::AlignCenter);
     AddPLcLayot->addWidget(QlineName);
-    AddPLcLayot->addWidget(AddPlcName,0,Qt::AlignCenter);
+    AddPLcLayot->addWidget(AddPlcName, 0, Qt::AlignCenter);
     AddPLcLayot->addWidget(PlcAddedLabel);
     AddPlcGroup->setLayout(AddPLcLayot);
-    mainLayout->addWidget(AddPlcGroup,0,Qt::AlignTop);
-
+    mainLayout->addWidget(AddPlcGroup, 0, Qt::AlignTop);
 
     QObject::connect(AddPlcButton, &QPushButton::clicked, this, &MainWindow::AddPlc);
 }
@@ -93,15 +92,16 @@ QPushButton *MainWindow::getConnectButton()
 
 void MainWindow::AddPlc()
 {
-    
+
     emit AddPlcSignal(AddPlcName->text());
 }
 
 void MainWindow::PlcAdded(QString Name)
 {
     PlcAddedLabel->setText(Name);
-    QMetaObject::Connection PlcAddingConnect = connect(this,&MainWindow::PlcNameToIpSelectMenu,ipPortSelector,&IpPortSelector::PlcSelectAddSlot);
-    emit PlcNameToIpSelectMenu(Name);
+    QMetaObject::Connection PlcAddingConnect = connect(this, &MainWindow::PlcNameToIpSelectMenu, ipPortSelector, &IpPortSelector::PlcSelectAddSlot);
+    if (Name != "Plc already exist !!")
+        emit PlcNameToIpSelectMenu(Name);
     disconnect(PlcAddingConnect);
 }
 
