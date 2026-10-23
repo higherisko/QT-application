@@ -98,7 +98,10 @@ void MainWindow::AddPlc()
 
 void MainWindow::PlcAdded(QString Name)
 {
-    PlcAddedLabel->setText(Name);
+    if (Name != "Plc already exist !!")
+        PlcAddedLabel->setText("Plc " + Name + " was succesufully added.");
+    else
+        PlcAddedLabel->setText(Name);
     QMetaObject::Connection PlcAddingConnect = connect(this, &MainWindow::PlcNameToIpSelectMenu, ipPortSelector, &IpPortSelector::PlcSelectAddSlot);
     if (Name != "Plc already exist !!")
         emit PlcNameToIpSelectMenu(Name);

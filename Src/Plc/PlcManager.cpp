@@ -6,7 +6,7 @@ std::string PlcManager::AddPlc(const std::string Name)
         return "Plc already exist !!";
     else
         Plcs.try_emplace(Name);
-    return "Plc " + Name + " was succesfully added";
+    return Name;
 }
 
 std::string PlcManager::Find(const std::string Name)
