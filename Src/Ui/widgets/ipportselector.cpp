@@ -33,7 +33,7 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
             IpBoxLayout->addWidget(line);
         }
 
-        QObject::connect(line, &QLineEdit::textChanged, this, &IpPortSelector::updateIp);
+        // QObject::connect(line, &QLineEdit::textChanged, this, &IpPortSelector::updateIp);
 
         dots[i] = new QLabel((i < 3) ? "." : ":", this);
         IpBoxLayout->addWidget(dots[i]);
@@ -43,11 +43,13 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
     
     IpBox->setLayout(IpBoxLayout);
     PortBox->setLayout(PortBoxLayout);
+    IpBoxLayout->addWidget(ChangeIpButton);
     mainLayout->addWidget(IpBox);
     mainLayout->addWidget(PortBox);
     updateIp();
     updatePort();
     connect(PlcSelect,&QComboBox::currentIndexChanged,this,&IpPortSelector::PlcChangeDetect);
+    QObject::connect(ChangeIpButton, &QPushButton::clicked, this, &IpPortSelector::updateIp);
 }
 
 void IpPortSelector::updateIp()
@@ -91,11 +93,12 @@ void IpPortSelector::TextsSet()
 
 void IpPortSelector::SetIpGroup()
 {
-    IpBox = new QGroupBox("Ip");
-    IpBoxLayout = new QHBoxLayout;
+    ChangeIpButton = new QPushButton("Change IP",this);
+    IpBox = new QGroupBox("Ip",this);
+    IpBoxLayout = new QHBoxLayout(this);
     
-    PortBox = new QGroupBox("Port");
-    PortBoxLayout = new QHBoxLayout;
+    PortBox = new QGroupBox("Port",this);
+    PortBoxLayout = new QHBoxLayout(this);
 }
 
 void IpPortSelector::PlcSelectSet()

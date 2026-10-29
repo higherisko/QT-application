@@ -118,7 +118,3 @@ void MainWindow::PortChangeSlot(QString Value)
     emit portChanged(Value);
 }
 
-void MainWindow::PlcQComboBoxChangedBuild()
-{
-
-}

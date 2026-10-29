@@ -26,7 +26,7 @@ void Aplication::AddPlc(QString Name)
 
 void Aplication::IpChangeSlot(QString Value)
 {
-    Plcs.IpAdrresSetting(Value.toStdString(),"");
+    Plcs.IpAdrresSetting(Value.toStdString(),"Plc1");
 }
 
 void Aplication::PortChangeSlot(QString Value)

@@ -68,8 +68,8 @@ uint16_t PlcManager::IpAdrresSetting(const std::string Ip, const std::string Nam
         return -1;
     for(auto &plc:Plcs)
     {
-        if(plc.second.GetIp() == Ip)
-            return -2;
+        // if(plc.second.GetIp() == Ip)
+        //     return -2;
     }
     Plcs.at(Name).SetIP(Ip);
     return 1;
