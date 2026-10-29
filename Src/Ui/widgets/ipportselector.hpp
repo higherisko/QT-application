@@ -19,6 +19,7 @@ public:
     void TextsSet();
     void SetIpGroup();
     void PlcSelectSet();
+    QComboBox* GetPlcSelect(){return PlcSelect;}
 
 private:
     QHBoxLayout *mainLayout;
@@ -38,7 +39,10 @@ private slots:
 public slots:
     void PlcSelectAddSlot(QString Name);
     void PlcChangeDetect(int Index);
+    void PlcChangeIp(QString ip);
 signals:
     void ipChanged(QString value);
     void portChanged(QString value);
+    void PlcChangedSignal(QString value);
+    
 };

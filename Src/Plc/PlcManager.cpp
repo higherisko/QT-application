@@ -52,3 +52,12 @@ uint16_t PlcManager::ComnSetting(const std::string &Name,const std::string &IpAd
         return 1;
         
 }
+
+std::string PlcManager::GetPlcAdress(const std::string Name)
+{
+    std::string Flag = Find(Name);
+    if(Flag == "Plc not found.")
+        return "Plc not found.";
+    Flag = Plcs.at(Name).GetIp();
+    return Flag;
+}

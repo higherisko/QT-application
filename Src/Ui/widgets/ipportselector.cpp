@@ -110,5 +110,11 @@ void IpPortSelector::PlcSelectAddSlot(QString Name)
 
 void IpPortSelector::PlcChangeDetect(int Index)
 {
+    emit PlcChangedSignal(PlcSelect->currentText());
 
+}
+
+void IpPortSelector::PlcChangeIp(QString Name)
+{
+    
 }

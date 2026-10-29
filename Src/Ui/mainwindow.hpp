@@ -29,13 +29,16 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
 
     QPushButton *getConnectButton();
+    IpPortSelector *GetipPortSelector(){return ipPortSelector;}
     void AddPlcBuild();
+    void PlcQComboBoxChangedBuild();
 
 signals:
     void ipChanged(QString ip);
     void portChanged(QString port);
     void AddPlcSignal(QString Name);    //This func is used for qt adapter for sending name for new plc
     void PlcNameToIpSelectMenu(QString Name);
+    void PlcQcomboBoxChangedSignal(QString Name);
 private:
     QVBoxLayout *mainLayout;
     QGroupBox *AddPlcGroup;
