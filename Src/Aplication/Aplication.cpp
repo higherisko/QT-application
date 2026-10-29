@@ -42,7 +42,7 @@ void Aplication::GetPlcAdressSlot(QString Value)
     if(Flag == "Plc not found.")
         emit(SendPlcAdressSignal(""));
     else
-        emit(SendPlcAdressSignal(Value));
+        emit(SendPlcAdressSignal(Flag.c_str()));
     disconnect(Send);
     
     

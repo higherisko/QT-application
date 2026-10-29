@@ -116,18 +116,21 @@ void IpPortSelector::PlcChangeDetect(int Index)
 
 void IpPortSelector::PlcChangeIp(QString Name)
 {
-    auto It = Name.begin();
-    QString Temp;
-    int i{0};
-    while(It != Name.end())
-    {
-        while(*It != ".")
-            {
-                Temp += *It;
-                It++;
-            }
-        lines[i]->setText(Temp);
-        Temp.clear();
-        i++;
-    }
+    // auto It = Name.begin();
+    // QString Temp;
+    // int i{0};
+    // while(It != Name.end() && lines[i] != nullptr)
+    // {
+    //     while(*It != ".")
+    //         {
+    //             Temp.push_back(*It);
+    //             It++;
+    //         }
+    //     lines[i]->setText(Temp);
+    //     Temp.clear();
+    //     i++;
+    // }
+    QLabel *Debug = new QLabel;
+    Debug->setText(Name);
+    mainLayout->addWidget(Debug);
 }

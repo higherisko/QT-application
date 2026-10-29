@@ -34,5 +34,6 @@ public:
     int AddCylinder(Cylinder &Cyll);
     std::string GetIp(){return Comn.IpAdress;}
     uint16_t GetPort(){return Comn.Port;}
+    uint16_t SetIP(const std::string IP){Comn.IpAdress = IP;}
     
 };   
