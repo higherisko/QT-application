@@ -47,6 +47,7 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
     mainLayout->addWidget(PortBox);
     updateIp();
     updatePort();
+    connect(PlcSelect,&QComboBox::currentIndexChanged,this,&IpPortSelector::PlcChangeDetect);
 }
 
 void IpPortSelector::updateIp()
@@ -105,4 +106,9 @@ void IpPortSelector::PlcSelectSet()
 void IpPortSelector::PlcSelectAddSlot(QString Name)
 {
     PlcSelect->addItem(Name);
+}
+
+void IpPortSelector::PlcChangeDetect(int Index)
+{
+
 }

@@ -37,6 +37,7 @@ private slots:
     void updatePort();
 public slots:
     void PlcSelectAddSlot(QString Name);
+    void PlcChangeDetect(int Index);
 signals:
     void ipChanged(QString value);
     void portChanged(QString value);
