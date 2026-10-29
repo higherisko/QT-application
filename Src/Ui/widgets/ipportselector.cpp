@@ -34,8 +34,8 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
         }
 
         // QObject::connect(line, &QLineEdit::textChanged, this, &IpPortSelector::updateIp);
-
-        dots[i] = new QLabel((i < 3) ? "." : ":", this);
+        if (i<3)
+            dots[i] = new QLabel(".", this);
         IpBoxLayout->addWidget(dots[i]);
 
         i++;

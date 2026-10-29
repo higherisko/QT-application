@@ -28,7 +28,7 @@ private:
     QPushButton *ChangeIpButton;
     QPushButton *ChangePortButton;
     QLineEdit *lines[5];
-    QLabel *dots[4];
+    QLabel *dots[3];
     QLabel *Texts[5];
     QGroupBox *IpBox;
     QHBoxLayout *IpBoxLayout;
