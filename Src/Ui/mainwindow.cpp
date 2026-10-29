@@ -83,6 +83,7 @@ void MainWindow::AddPlcBuild()
     mainLayout->addWidget(AddPlcGroup, 0, Qt::AlignTop);
 
     QObject::connect(AddPlcButton, &QPushButton::clicked, this, &MainWindow::AddPlc);
+    QObject::connect(AddPlcName,&QLineEdit::returnPressed,this, &MainWindow::AddPlc);
 }
 
 QPushButton *MainWindow::getConnectButton()
