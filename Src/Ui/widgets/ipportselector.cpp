@@ -10,7 +10,7 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
     PlcSelectSet();
     mainLayout->addWidget(PlcSelect);
     int i = 0;
-  
+
     for (auto &line : lines)
     {
         line = new QLineEdit(this);
@@ -40,7 +40,7 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
 
         i++;
     }
-    
+
     IpBox->setLayout(IpBoxLayout);
     PortBox->setLayout(PortBoxLayout);
     IpBoxLayout->addWidget(ChangeIpButton);
@@ -48,7 +48,7 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
     mainLayout->addWidget(PortBox);
     updateIp();
     updatePort();
-    connect(PlcSelect,&QComboBox::currentIndexChanged,this,&IpPortSelector::PlcChangeDetect);
+    connect(PlcSelect, &QComboBox::currentIndexChanged, this, &IpPortSelector::PlcChangeDetect);
     QObject::connect(ChangeIpButton, &QPushButton::clicked, this, &IpPortSelector::updateIp);
 }
 
@@ -88,16 +88,15 @@ void IpPortSelector::updatePort()
 
 void IpPortSelector::TextsSet()
 {
-
 }
 
 void IpPortSelector::SetIpGroup()
 {
-    ChangeIpButton = new QPushButton("Change IP",this);
-    IpBox = new QGroupBox("Ip",this);
+    ChangeIpButton = new QPushButton("Change IP", this);
+    IpBox = new QGroupBox("Ip", this);
     IpBoxLayout = new QHBoxLayout(this);
-    
-    PortBox = new QGroupBox("Port",this);
+
+    PortBox = new QGroupBox("Port", this);
     PortBoxLayout = new QHBoxLayout(this);
 }
 
@@ -114,25 +113,26 @@ void IpPortSelector::PlcSelectAddSlot(QString Name)
 void IpPortSelector::PlcChangeDetect(int Index)
 {
     emit PlcChangedSignal(PlcSelect->currentText());
-
 }
 
 void IpPortSelector::PlcChangeIp(QString Name)
 {
-    // auto It = Name.begin();
-    // QString Temp;
-    // int i{0};
-    // while(It != Name.end() && lines[i] != nullptr)
-    // {
-    //     while(*It != ".")
-    //         {
-    //             Temp.push_back(*It);
-    //             It++;
-    //         }
-    //     lines[i]->setText(Temp);
-    //     Temp.clear();
-    //     i++;
-    // }
+    auto It = Name.begin();
+    QString Temp;
+    int i{0};
+    while (It != Name.end() && lines[i] != nullptr)
+    {
+        while (It != Name.end() && *It != ".")
+        {
+            Temp.push_back(*It);
+            It++;
+        }
+        lines[i]->setText(Temp);
+        Temp.clear();
+        i++;
+        if (It != Name.end())
+            It++;
+    }
     QLabel *Debug = new QLabel;
     Debug->setText(Name);
     mainLayout->addWidget(Debug);
