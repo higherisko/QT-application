@@ -22,7 +22,7 @@ std::string PlcManager::Find(const std::string Name)
 }
 
 uint16_t PlcManager::ComnSetting(const std::string &Name, const std::string &IpAdressSet, const std::string &TransportLayerSet,
-                                 const uint16_t &PortSet, const std::string ProtocolSet)
+                                 const std::string &PortSet, const std::string ProtocolSet)
 {
     std::string TransportLayer = TransportLayerSet, Protocol = ProtocolSet;
     if (Find(Name) != "Plc found.")
@@ -34,7 +34,7 @@ uint16_t PlcManager::ComnSetting(const std::string &Name, const std::string &IpA
     {
         return -2;
     }
-    if (PortSet < 0)
+    if (PortSet.empty())
     {
         return -3;
     }
@@ -72,5 +72,19 @@ uint16_t PlcManager::IpAdrresSetting(const std::string Ip, const std::string Nam
         //     return -2;
     }
     Plcs.at(Name).SetIP(Ip);
+    return 1;
+}
+
+uint16_t PlcManager::PortSetting(const std::string Port, const std::string Name)
+{
+    std::string Flag = Find(Name);
+    if (Flag == "Plc not found.")
+        return -1;
+    for(auto &plc:Plcs)
+    {
+        // if(plc.second.GetIp() == Ip)
+        //     return -2;
+    }
+    Plcs.at(Name).SetPort(Port);
     return 1;
 }
