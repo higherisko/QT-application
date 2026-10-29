@@ -40,10 +40,12 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
 
         i++;
     }
-
-    IpBox->setLayout(IpBoxLayout);
+    PortBoxLayout->addWidget(ChangePortButton);
+    IpBox->setLayout(IpVBoxLayout);
     PortBox->setLayout(PortBoxLayout);
-    IpBoxLayout->addWidget(ChangeIpButton);
+    IpVBoxLayout->addLayout(IpBoxLayout);
+    IpVBoxLayout->addWidget(ChangeIpButton);
+
     mainLayout->addWidget(IpBox);
     mainLayout->addWidget(PortBox);
     updateIp();
@@ -95,9 +97,11 @@ void IpPortSelector::SetIpGroup()
     ChangeIpButton = new QPushButton("Change IP", this);
     IpBox = new QGroupBox("Ip", this);
     IpBoxLayout = new QHBoxLayout(this);
+    IpVBoxLayout = new QVBoxLayout(this);
 
+    ChangePortButton = new QPushButton("Change Port",this);
     PortBox = new QGroupBox("Port", this);
-    PortBoxLayout = new QHBoxLayout(this);
+    PortBoxLayout = new QVBoxLayout(this);
 }
 
 void IpPortSelector::PlcSelectSet()

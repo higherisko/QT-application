@@ -2,6 +2,7 @@
 
 Plc::Plc(const std::string &NameInit):Name{NameInit}
 {
+    Comn.IpAdress = "0.0.0.0";
 }
 
 void Plc::NameChange(const std::string &NameSet)

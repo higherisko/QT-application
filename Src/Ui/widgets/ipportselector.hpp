@@ -26,14 +26,15 @@ private:
     QHBoxLayout *mainLayout;
 
     QPushButton *ChangeIpButton;
+    QPushButton *ChangePortButton;
     QLineEdit *lines[5];
     QLabel *dots[4];
     QLabel *Texts[5];
     QGroupBox *IpBox;
     QHBoxLayout *IpBoxLayout;
-    QVBoxLayout *IpVBoxLayot;
+    QVBoxLayout *IpVBoxLayout;
     QGroupBox *PortBox;
-    QHBoxLayout *PortBoxLayout;
+    QVBoxLayout *PortBoxLayout;
     QComboBox *PlcSelect;
 
 private slots:
