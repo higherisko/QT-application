@@ -32,6 +32,7 @@ public:
     QPushButton *getConnectButton();
     IpPortSelector *GetipPortSelector(){return ipPortSelector;}
     addPlc *GetaddPlc(){return addPlcWidget;}
+    void Debug(QString debug);
 
 signals:
     void ipChanged(QString ip);

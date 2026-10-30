@@ -31,7 +31,6 @@ public slots:
     void AddPlc(QString Name);
     void IpChangeSlot(QString Value);
     void PortChangeSlot(QString Value);
-    void GetPlcAdressSlot(QString Value);
 
     void TcpClientConnectSlot(bool Button);
     void GetPlcAdressSlot(QString Name);
