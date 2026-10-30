@@ -2,6 +2,7 @@
 
 #include <QTcpSocket>
 #include <QDebug>
+#include <QVector>
 
 class TcpClient : public QTcpSocket
 {
@@ -9,18 +10,15 @@ class TcpClient : public QTcpSocket
 private:
     QObject *Socket;
     std::vector<uint8_t> RecvBuff;
-    bool Connected;
-    char *IpAdrres;
-    uint16_t Port;
-
 public:
     explicit TcpClient(QObject *parent = nullptr) {}
     void Disconnect();
-    bool Connect();
-    bool Send(std::vector<uint8_t> &Buffer);
     int Recieve();
     std::vector<uint8_t> GetRecvBuff() { return RecvBuff; }
-    bool Get_Connected() { return Connected; }
 signals:
-    void QTConnected(bool connected_temp);
+    void QTConnected(const QString Connected);
+    void SendedSignal(const QString SendedFlag);
+public slots:
+    void Connect(QString Ip,QString Port);
+    void Send(QVector<qint8> &Buffer);
 };

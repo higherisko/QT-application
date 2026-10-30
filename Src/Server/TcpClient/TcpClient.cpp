@@ -1,46 +1,40 @@
 #include "TcpClient.hpp"
 
-bool TcpClient::Connect()
+void TcpClient::Connect(QString Ip,QString Port)
 {
-    connectToHost(IpAdrres,Port);
+    qint16 PortTemp = Port.toInt();
+    connectToHost(Ip,PortTemp);
     if(state() == ConnectedState)
     {
-       Connected = true;
-       qDebug() << "Connected";
+        emit QTConnected("Connected");
     }
-    else
+    else 
     {
-        Connected = false;
-        qDebug() << "Not Connected";  
+        emit QTConnected("Not Connected");
     }
-    emit QTConnected(Connected);
-    return Connected;
+
 }
 
 void TcpClient::Disconnect()
 {
-    Connected = false;
-    emit QTConnected(Connected);
+    emit QTConnected("Disconnected");
     disconnectFromHost();
 }
 
-bool TcpClient::Send(std::vector<uint8_t> &Buffer)
+void TcpClient::Send(QVector<qint8> &Buffer)
 {
-    uint16_t Flag;
-    bool ReturnValue;
+    qint16 Flag;
     Flag = QTcpSocket::write(reinterpret_cast<char*>(Buffer.data()),Buffer.size());
     if (Flag == -1)
     {
-        qDebug() << "Not Sended";
-        ReturnValue = false;
+        emit SendedSignal("Data Sended");
     }
     else
     { 
-        qDebug() << "Sended "<<Flag << " bytes";
-        ReturnValue = true;
+        emit SendedSignal("Data Not Sended");
 
     }
-    return ReturnValue;
+
     
 }
 
