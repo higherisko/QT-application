@@ -9,10 +9,12 @@ Aplication::Aplication()
 // Connects and settings
 void Aplication::ConnectSignals()
 {
-    connect(&w, &MainWindow::AddPlcSignal, this, &Aplication::AddPlc);
-    connect(&w, &MainWindow::ipChanged, this, &Aplication::IpChangeSlot);
-    connect(&w, &MainWindow::portChanged, this, &Aplication::PortChangeSlot);
-    connect(w.GetipPortSelector(), &IpPortSelector::PlcChangedSignal, this, &Aplication::GetPlcAdressSlot);
+    QObject::connect(&w, &MainWindow::AddPlcSignal, this, &Aplication::AddPlc);
+    QObject::connect(&w, &MainWindow::ipChanged, this, &Aplication::IpChangeSlot);
+    QObject::connect(&w, &MainWindow::portChanged, this, &Aplication::PortChangeSlot);
+    QObject::connect(w.GetipPortSelector(), &IpPortSelector::PlcChangedSignal, this, &Aplication::GetPlcAdressSlot);
+
+    QObject::connect(w.getConnectButton(),&QPushButton::clicked,this,&Aplication::TcpClientConnectSlot);
 }
 
 // Slots Declaration
@@ -45,3 +47,14 @@ void Aplication::GetPlcAdressSlot(QString Value)
     disconnect(Send);
 }
 
+void Aplication::TcpClientConnectSlot(bool Button)
+{
+    std::string IpString,PortString;
+    IpString = Plcs.GetPlcAdress(w.GetipPortSelector()->GetPlcSelect()->currentText().toStdString());
+    PortString = Plcs.GetPlcPort(w.GetipPortSelector()->GetPlcSelect()->currentText().toStdString());
+    QString IP = IpString.c_str();
+    QString Port = PortString.c_str();
+    QMetaObject::Connection Connectio = connect(this,Aplication::TcpClientConnectToSignal,&tcpClient,&TcpClient::Connect);
+    emit TcpClientConnectToSignal(IP,Port);
+    disconnect(Connectio);
+}

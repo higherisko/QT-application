@@ -38,12 +38,12 @@ void TcpClient::Send(QVector<qint8> &Buffer)
     
 }
 
-int TcpClient::Recieve()
+void TcpClient::Recieve()
 {
+    RecvBuff.clear();
     QByteArray Data = QTcpSocket::readAll();
     for (int i{};i < Data.size();i++)
     {
-        RecvBuff.at(i) = Data.at(i); 
+        RecvBuff.push_back(Data.at(i));
     }
-    return 0;
 }
