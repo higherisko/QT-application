@@ -24,7 +24,6 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
         if (i > 3)
         {
             line->setPlaceholderText("00000");
-            QObject::connect(line, &QLineEdit::textChanged, this, &IpPortSelector::updatePort);
             PortBoxLayout->addWidget(line);
             break;
         }
@@ -52,6 +51,7 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
     updatePort();
     connect(PlcSelect, &QComboBox::currentIndexChanged, this, &IpPortSelector::PlcChangeDetect);
     QObject::connect(ChangeIpButton, &QPushButton::clicked, this, &IpPortSelector::updateIp);
+    QObject::connect(ChangePortButton, &QPushButton::clicked, this, &IpPortSelector::updatePort);
 }
 
 void IpPortSelector::updateIp()
@@ -119,14 +119,14 @@ void IpPortSelector::PlcChangeDetect(int Index)
     emit PlcChangedSignal(PlcSelect->currentText());
 }
 
-void IpPortSelector::PlcChangeIp(QString Name)
+void IpPortSelector::PlcDisplayIpSlot(QString ip)
 {
-    auto It = Name.begin();
+    auto It = ip.begin();
     QString Temp;
     int i{0};
-    while (It != Name.end() && lines[i] != nullptr)
+    while (It != ip.end() && lines[i] != nullptr)
     {
-        while (It != Name.end() && *It != ".")
+        while (It != ip.end() && *It != ".")
         {
             Temp.push_back(*It);
             It++;
@@ -134,10 +134,11 @@ void IpPortSelector::PlcChangeIp(QString Name)
         lines[i]->setText(Temp);
         Temp.clear();
         i++;
-        if (It != Name.end())
+        if (It != ip.end())
             It++;
     }
-    QLabel *Debug = new QLabel;
-    Debug->setText(Name);
-    mainLayout->addWidget(Debug);
+}
+
+void IpPortSelector::PlcDisplayPortSlot(QString port) {
+    lines[4]->setText(port);
 }

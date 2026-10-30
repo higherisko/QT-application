@@ -31,17 +31,25 @@ void Aplication::IpChangeSlot(QString Value)
 
 void Aplication::PortChangeSlot(QString Value)
 {
+    Plcs.PortSetting(Value.toStdString(),w.GetipPortSelector()->GetPlcSelect()->currentText().toStdString());
 }
 
-void Aplication::GetPlcAdressSlot(QString Value)
+void Aplication::GetPlcAdressSlot(QString Name)
 {
-    std::string Flag = Plcs.GetPlcAdress(Value.toStdString());
-    QMetaObject::Connection Send;
-    Send = connect(this, &Aplication::SendPlcAdressSignal, w.GetipPortSelector(), &IpPortSelector::PlcChangeIp);
-    if (Flag == "Plc not found.")
+    std::string ipFlag = Plcs.GetPlcAdress(Name.toStdString());
+    std::string portFlag = Plcs.GetPlcPort(Name.toStdString());
+    QMetaObject::Connection SendIp;
+    QMetaObject::Connection SendPort;
+    SendIp = connect(this, &Aplication::SendPlcAdressSignal, w.GetipPortSelector(), &IpPortSelector::PlcDisplayIpSlot);
+    SendPort = connect(this, &Aplication::SendPlcPortSignal, w.GetipPortSelector(), &IpPortSelector::PlcDisplayPortSlot);
+    if (ipFlag == "Plc not found.") {
         emit(SendPlcAdressSignal(""));
-    else
-        emit(SendPlcAdressSignal(Flag.c_str()));
-    disconnect(Send);
+        emit(SendPlcPortSignal(""));
+    } else {
+        emit(SendPlcAdressSignal(ipFlag.c_str()));
+        emit(SendPlcPortSignal(portFlag.c_str()));
+    }
+    disconnect(SendIp);
+    disconnect(SendPort);
 }
 

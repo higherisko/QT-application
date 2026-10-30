@@ -22,10 +22,11 @@ public:
 signals:
     void PlcAdded(QString Name);
     void SendPlcAdressSignal(QString Name);
+    void SendPlcPortSignal(QString Name);
 
 public slots:
     void AddPlc(QString Name);
     void IpChangeSlot(QString Value);
     void PortChangeSlot(QString Value);
-    void GetPlcAdressSlot(QString Value);
+    void GetPlcAdressSlot(QString Name);
 };

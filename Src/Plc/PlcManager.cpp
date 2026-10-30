@@ -61,6 +61,15 @@ std::string PlcManager::GetPlcAdress(const std::string Name)
     return Flag;
 }
 
+std::string PlcManager::GetPlcPort(const std::string Name)
+{
+    std::string Flag = Find(Name);
+    if (Flag == "Plc not found.")
+        return "Plc not found.";
+    Flag = Plcs.at(Name).GetPort();
+    return Flag;
+}
+
 uint16_t PlcManager::IpAdrresSetting(const std::string Ip, const std::string Name)
 {
     std::string Flag = Find(Name);
