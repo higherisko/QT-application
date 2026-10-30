@@ -9,7 +9,7 @@ Aplication::Aplication()
 // Connects and settings
 void Aplication::ConnectSignals()
 {
-    connect(&w, &MainWindow::AddPlcSignal, this, &Aplication::AddPlc);
+    connect(w.GetaddPlc(), &addPlc::AddPlcSignal, this, &Aplication::AddPlc);
     connect(&w, &MainWindow::ipChanged, this, &Aplication::IpChangeSlot);
     connect(&w, &MainWindow::portChanged, this, &Aplication::PortChangeSlot);
     connect(w.GetipPortSelector(), &IpPortSelector::PlcChangedSignal, this, &Aplication::GetPlcAdressSlot);
@@ -19,7 +19,7 @@ void Aplication::ConnectSignals()
 void Aplication::AddPlc(QString Name)
 {
     std::string Flag = Plcs.AddPlc(Name.toStdString());
-    QMetaObject::Connection PlcAddedConection = connect(this, &Aplication::PlcAdded, &w, &MainWindow::PlcAdded);
+    QMetaObject::Connection PlcAddedConection = connect(this, &Aplication::PlcAdded, w.GetaddPlc(), &addPlc::PlcAdded);
     emit PlcAdded(Flag.c_str());
     disconnect(PlcAddedConection);
 }
