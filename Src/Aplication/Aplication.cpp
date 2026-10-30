@@ -9,7 +9,7 @@ Aplication::Aplication()
 // Connects and settings
 void Aplication::ConnectSignals()
 {
-    QObject::connect(&w, &MainWindow::AddPlcSignal, this, &Aplication::AddPlc);
+    QObject::connect(w.GetaddPlc(), &addPlc::AddPlcSignal, this, &Aplication::AddPlc);
     QObject::connect(&w, &MainWindow::ipChanged, this, &Aplication::IpChangeSlot);
     QObject::connect(&w, &MainWindow::portChanged, this, &Aplication::PortChangeSlot);
     QObject::connect(w.GetipPortSelector(), &IpPortSelector::PlcChangedSignal, this, &Aplication::GetPlcAdressSlot);
@@ -21,7 +21,7 @@ void Aplication::ConnectSignals()
 void Aplication::AddPlc(QString Name)
 {
     std::string Flag = Plcs.AddPlc(Name.toStdString());
-    QMetaObject::Connection PlcAddedConection = connect(this, &Aplication::PlcAdded, &w, &MainWindow::PlcAdded);
+    QMetaObject::Connection PlcAddedConection = connect(this, &Aplication::PlcAdded, w.GetaddPlc(), &addPlc::PlcAdded);
     emit PlcAdded(Flag.c_str());
     disconnect(PlcAddedConection);
 }
@@ -33,18 +33,26 @@ void Aplication::IpChangeSlot(QString Value)
 
 void Aplication::PortChangeSlot(QString Value)
 {
+    Plcs.PortSetting(Value.toStdString(),w.GetipPortSelector()->GetPlcSelect()->currentText().toStdString());
 }
 
-void Aplication::GetPlcAdressSlot(QString Value)
+void Aplication::GetPlcAdressSlot(QString Name)
 {
-    std::string Flag = Plcs.GetPlcAdress(Value.toStdString());
-    QMetaObject::Connection Send;
-    Send = connect(this, &Aplication::SendPlcAdressSignal, w.GetipPortSelector(), &IpPortSelector::PlcChangeIp);
-    if (Flag == "Plc not found.")
+    std::string ipFlag = Plcs.GetPlcAdress(Name.toStdString());
+    std::string portFlag = Plcs.GetPlcPort(Name.toStdString());
+    QMetaObject::Connection SendIp;
+    QMetaObject::Connection SendPort;
+    SendIp = connect(this, &Aplication::SendPlcAdressSignal, w.GetipPortSelector(), &IpPortSelector::PlcDisplayIpSlot);
+    SendPort = connect(this, &Aplication::SendPlcPortSignal, w.GetipPortSelector(), &IpPortSelector::PlcDisplayPortSlot);
+    if (ipFlag == "Plc not found.") {
         emit(SendPlcAdressSignal(""));
-    else
-        emit(SendPlcAdressSignal(Flag.c_str()));
-    disconnect(Send);
+        emit(SendPlcPortSignal(""));
+    } else {
+        emit(SendPlcAdressSignal(ipFlag.c_str()));
+        emit(SendPlcPortSignal(portFlag.c_str()));
+    }
+    disconnect(SendIp);
+    disconnect(SendPort);
 }
 
 void Aplication::TcpClientConnectSlot(bool Button)

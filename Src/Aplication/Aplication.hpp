@@ -24,6 +24,7 @@ public:
 signals:
     void PlcAdded(QString Name);
     void SendPlcAdressSignal(QString Name);
+    void SendPlcPortSignal(QString Name);
 
     void TcpClientConnectToSignal(QString Ip,QString Port);
 public slots:
@@ -33,4 +34,5 @@ public slots:
     void GetPlcAdressSlot(QString Value);
 
     void TcpClientConnectSlot(bool Button);
+    void GetPlcAdressSlot(QString Name);
 };

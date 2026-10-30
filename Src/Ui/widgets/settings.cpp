@@ -20,5 +20,5 @@ Settings::Settings(QWidget *parent) : QWidget(parent) {
 void Settings::addWidget(QWidget *widget) {
     cLayout->addWidget(widget, 0, Qt::AlignHCenter);
     adjustSize();
-    setFixedSize(size());
+    // setFixedSize(size());
 }

@@ -13,6 +13,9 @@ add_library(MainWindow
 
         widgets/ipportselector.hpp
         widgets/ipportselector.cpp
+
+        widgets/addplc.hpp
+        widgets/addplc.cpp
 )
 
 target_include_directories(MainWindow

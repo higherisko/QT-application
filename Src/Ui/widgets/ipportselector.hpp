@@ -43,7 +43,8 @@ private slots:
 public slots:
     void PlcSelectAddSlot(QString Name);
     void PlcChangeDetect(int Index);
-    void PlcChangeIp(QString ip);
+    void PlcDisplayIpSlot(QString ip);
+    void PlcDisplayPortSlot(QString port);
 signals:
     void ipChanged(QString value);
     void portChanged(QString value);

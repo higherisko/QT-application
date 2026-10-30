@@ -2,7 +2,7 @@
 
 #include <QWidget>
 #include <QScrollArea>
-#include <QVBoxLayout>
+#include <QGridLayout>
 
 class Settings : public QWidget {
     Q_OBJECT
