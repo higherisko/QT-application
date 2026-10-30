@@ -119,3 +119,8 @@ void MainWindow::PortChangeSlot(QString Value)
     emit portChanged(Value);
 }
 
+void MainWindow::Debug(QString debug)
+{
+    QLabel *Label = new QLabel(debug);
+    mainLayout->addWidget(Label);
+}

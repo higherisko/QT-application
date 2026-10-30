@@ -57,4 +57,5 @@ void Aplication::TcpClientConnectSlot(bool Button)
     QMetaObject::Connection Connectio = connect(this,Aplication::TcpClientConnectToSignal,&tcpClient,&TcpClient::Connect);
     emit TcpClientConnectToSignal(IP,Port);
     disconnect(Connectio);
+    w.Debug("Sended");
 }

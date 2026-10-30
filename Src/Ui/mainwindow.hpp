@@ -32,6 +32,7 @@ public:
     IpPortSelector *GetipPortSelector(){return ipPortSelector;}
     void AddPlcBuild();
     void PlcQComboBoxChangedBuild();
+    void Debug(QString debug);
 
 signals:
     void ipChanged(QString ip);
