@@ -124,6 +124,7 @@ void IpPortSelector::PlcSelectSet()
 void IpPortSelector::PlcSelectAddSlot(QString Name)
 {
     QPushButton *NewPlc = new QPushButton(Name);
+    NewPlc->addAction(Name);
     QHash<QString,QPushButton*>::Iterator It = PlcsButtonMap.find(Name);
     if (It == PlcsButtonMap.end())
     {
@@ -131,7 +132,7 @@ void IpPortSelector::PlcSelectAddSlot(QString Name)
     }
     PlcsButtonMap.insert_or_assign(Name,NewPlc);
     PlcsLayot->addWidget(NewPlc);
-    connect(PlcsButtonMap[Name],&QPushButton::clicked,this,&IpPortSelector::PlcChangedSignal);
+    connect(PlcsButtonMap[Name],&QPushButton::actions,this,&IpPortSelector::PlcChangedSignal);
 }
 
 void IpPortSelector::PlcChangeDetect(int Index)

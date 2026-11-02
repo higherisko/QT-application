@@ -29,7 +29,7 @@ public:
 
 private:
     QHBoxLayout *mainLayout;
-    QHash<QString,QPushButton*> PlcsMap;
+    QHash<QString,QPushButton*> PlcsButtonMap;
 
     QPushButton *ChangeIpButton;
     QPushButton *ChangePortButton;
