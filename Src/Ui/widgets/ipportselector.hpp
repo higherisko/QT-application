@@ -10,6 +10,10 @@
 #include <QGroupBox>
 #include <QComboBox>
 #include <QPushButton>
+#include <QScrollArea>
+#include <QIcon>
+
+
 
 class IpPortSelector : public QWidget
 {
@@ -36,6 +40,10 @@ private:
     QGroupBox *PortBox;
     QVBoxLayout *PortBoxLayout;
     QComboBox *PlcSelect;
+    QScrollArea *AllPlcs;
+    QWidget *PlcsContainer;
+    QVBoxLayout *PlcsLayot;
+
 
 private slots:
     void updateIp();

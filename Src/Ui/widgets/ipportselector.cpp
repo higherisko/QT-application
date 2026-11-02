@@ -2,13 +2,14 @@
 
 IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
 {
+    AllPlcs = new QScrollArea(this);
     mainLayout = new QHBoxLayout;
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
     setLayout(mainLayout);
     TextsSet();
     SetIpGroup();
     PlcSelectSet();
-    mainLayout->addWidget(PlcSelect);
+    mainLayout->addWidget(AllPlcs);
     int i = 0;
 
     for (auto &line : lines)
@@ -102,6 +103,17 @@ void IpPortSelector::SetIpGroup()
     ChangePortButton = new QPushButton("Change Port",this);
     PortBox = new QGroupBox("Port", this);
     PortBoxLayout = new QVBoxLayout(this);
+
+    PlcsContainer = new QWidget;
+    PlcsLayot = new QVBoxLayout;
+    PlcsContainer->setLayout(PlcsLayot);
+    PlcsContainer->resize(100,50);
+
+    AllPlcs->setWidget(PlcsContainer);
+    AllPlcs->setWidgetResizable(true);
+    AllPlcs->setMinimumSize(200,100);
+    QLabel *PlcsText = new QLabel("All Plcs");
+    PlcsLayot->addWidget(PlcsText,0,Qt::AlignTop|Qt::AlignCenter);
 }
 
 void IpPortSelector::PlcSelectSet()
@@ -111,7 +123,10 @@ void IpPortSelector::PlcSelectSet()
 
 void IpPortSelector::PlcSelectAddSlot(QString Name)
 {
-    PlcSelect->addItem(Name);
+    QPushButton *NewPlc = new QPushButton(Name);
+    PlcsLayot->addWidget(NewPlc);
+    connect(NewPlc,&QPushButton::clicked,this,&IpPortSelector::PlcChangeSignal);
+
 }
 
 void IpPortSelector::PlcChangeDetect(int Index)
