@@ -124,14 +124,19 @@ void IpPortSelector::PlcSelectSet()
 void IpPortSelector::PlcSelectAddSlot(QString Name)
 {
     QPushButton *NewPlc = new QPushButton(Name);
+    QHash<QString,QPushButton*>::Iterator It = PlcsButtonMap.find(Name);
+    if (It == PlcsButtonMap.end())
+    {
+        return;
+    }
+    PlcsButtonMap.insert_or_assign(Name,NewPlc);
     PlcsLayot->addWidget(NewPlc);
-    connect(NewPlc,&QPushButton::clicked,this,&IpPortSelector::PlcChangeSignal);
-
+    connect(PlcsButtonMap[Name],&QPushButton::clicked,this,&IpPortSelector::PlcChangedSignal);
 }
 
 void IpPortSelector::PlcChangeDetect(int Index)
 {
-    emit PlcChangedSignal(PlcSelect->currentText());
+    emit PlcChangedSignal("Plc");
 }
 
 void IpPortSelector::PlcDisplayIpSlot(QString ip)

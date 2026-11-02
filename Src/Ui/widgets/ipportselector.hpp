@@ -12,6 +12,7 @@
 #include <QPushButton>
 #include <QScrollArea>
 #include <QIcon>
+#include <QHash>
 
 
 
@@ -28,6 +29,7 @@ public:
 
 private:
     QHBoxLayout *mainLayout;
+    QHash<QString,QPushButton*> PlcsMap;
 
     QPushButton *ChangeIpButton;
     QPushButton *ChangePortButton;
