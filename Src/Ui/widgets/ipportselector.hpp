@@ -13,7 +13,8 @@
 #include <QScrollArea>
 #include <QIcon>
 #include <QHash>
-
+#include <QFile>
+#include <QApplication>
 
 
 class IpPortSelector : public QWidget
@@ -29,6 +30,10 @@ public:
 
 private:
     QHBoxLayout *mainLayout;
+
+    //Stirng for all styles from qss
+    QString Style;
+    //Buttons in QScrollArea AddPlcs when adding new plc
     QHash<QString,QPushButton*> PlcsButtonMap;
 
     QPushButton *ChangeIpButton;
@@ -42,6 +47,7 @@ private:
     QGroupBox *PortBox;
     QVBoxLayout *PortBoxLayout;
     QComboBox *PlcSelect;
+    //All needed settings for QScrollArea
     QScrollArea *AllPlcs;
     QWidget *PlcsContainer;
     QVBoxLayout *PlcsLayot;
@@ -58,6 +64,6 @@ public slots:
 signals:
     void ipChanged(QString value);
     void portChanged(QString value);
-    void PlcChangedSignal(QString value);
+    void PlcChangedSignal(QString Name);
     
 };

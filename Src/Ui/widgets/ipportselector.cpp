@@ -2,6 +2,17 @@
 
 IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
 {
+    //Loading of qss styles for using
+    QFile file("PlcsButton.qss");
+    if(file.open(QFile::ReadOnly|QFile::Text))
+    {
+        Style = file.readAll();
+        qApp->setStyleSheet(Style);
+        file.close();
+    }
+
+
+    //Setting all widgets
     AllPlcs = new QScrollArea(this);
     mainLayout = new QHBoxLayout;
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
@@ -104,6 +115,14 @@ void IpPortSelector::SetIpGroup()
     PortBox = new QGroupBox("Port", this);
     PortBoxLayout = new QVBoxLayout(this);
 
+
+}
+
+void IpPortSelector::PlcSelectSet()
+{
+    PlcSelect = new QComboBox;
+
+    
     PlcsContainer = new QWidget;
     PlcsLayot = new QVBoxLayout;
     PlcsContainer->setLayout(PlcsLayot);
@@ -116,28 +135,34 @@ void IpPortSelector::SetIpGroup()
     PlcsLayot->addWidget(PlcsText,0,Qt::AlignTop|Qt::AlignCenter);
 }
 
-void IpPortSelector::PlcSelectSet()
-{
-    PlcSelect = new QComboBox;
-}
-
 void IpPortSelector::PlcSelectAddSlot(QString Name)
 {
     QPushButton *NewPlc = new QPushButton(Name);
     NewPlc->addAction(Name);
     QHash<QString,QPushButton*>::Iterator It = PlcsButtonMap.find(Name);
-    if (It == PlcsButtonMap.end())
+    if (It != PlcsButtonMap.end() && !PlcsButtonMap.isEmpty())
     {
         return;
     }
     PlcsButtonMap.insert_or_assign(Name,NewPlc);
     PlcsLayot->addWidget(NewPlc);
-    connect(PlcsButtonMap[Name],&QPushButton::actions,this,&IpPortSelector::PlcChangedSignal);
+    // PlcsButtonMap[Name]->setStyleSheet("background-color: #516179;");
+    connect(PlcsButtonMap[Name],&QPushButton::clicked,this,&IpPortSelector::PlcChangeDetect);
 }
 
 void IpPortSelector::PlcChangeDetect(int Index)
 {
-    emit PlcChangedSignal("Plc");
+    QObject* Obj = sender();
+    QPushButton* Button = qobject_cast<QPushButton*>(Obj);
+    for(auto &button: PlcsButtonMap)
+    {
+        button->setProperty("active",false);
+        button->style()->unpolish(button);
+        button->style()->polish(button);
+        button->update();
+    }
+    Button->setProperty("active",true);
+    emit PlcChangedSignal("");
 }
 
 void IpPortSelector::PlcDisplayIpSlot(QString ip)

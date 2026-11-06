@@ -1,6 +1,7 @@
 #include "addplc.hpp"
 
-addPlc::addPlc(QWidget *parent) : QGroupBox("Add plc", parent) {
+addPlc::addPlc(QWidget *parent) : QGroupBox("Add plc", parent)
+{
     mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
     setMaximumHeight(150);
@@ -19,15 +20,19 @@ addPlc::addPlc(QWidget *parent) : QGroupBox("Add plc", parent) {
     QObject::connect(nameEdit, &QLineEdit::returnPressed, this, &addPlc::AddPlc);
 }
 
-void addPlc::AddPlc() {
+void addPlc::AddPlc()
+{
     emit AddPlcSignal(nameEdit->text());
 }
 
-void addPlc::PlcAdded(QString Name) {
+void addPlc::PlcAdded(QString Name)
+{
     if (Name != "Plc already exist !!")
+    {
         statusLabel->setText("Plc " + Name + " was succesufully added.");
+        //This signal is connected with PlcSelectAddSlot in IpPortSelector
+        emit PlcNameToIpSelectMenu(Name);
+    }
     else
         statusLabel->setText(Name);
-    if (Name != "Plc already exist !!")
-        emit PlcNameToIpSelectMenu(Name);
 }

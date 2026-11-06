@@ -8,7 +8,7 @@
 #include "PlcManager.hpp"
 #include "QtToCpp.hpp"
 #include "TcpClient.hpp"
-
+#include <nlohmann/json.hpp>
 class Aplication:public QObject
 
 {
