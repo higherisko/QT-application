@@ -2,6 +2,9 @@
 
 #include <QApplication>
 #include <QObject>
+#include <QFile>
+#include <QDir>
+#include <QMessageBox>
 
 #include "mainwindow.hpp"
 #include "PlcTags.hpp"

@@ -2,17 +2,8 @@
 
 IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
 {
-    //Loading of qss styles for using
-    QFile file("PlcsButton.qss");
-    if(file.open(QFile::ReadOnly|QFile::Text))
-    {
-        Style = file.readAll();
-        qApp->setStyleSheet(Style);
-        file.close();
-    }
 
-
-    //Setting all widgets
+    // Setting all widgets
     AllPlcs = new QScrollArea(this);
     mainLayout = new QHBoxLayout;
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
@@ -23,6 +14,13 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
     mainLayout->addWidget(AllPlcs);
     int i = 0;
 
+    QFile file("C:/Users/cpp2m/Documents/QT-application/Src/Ui/Styles/PlcsButton.qss");
+    if (file.open(QFile::ReadOnly | QFile::Text))
+    {
+        Style = file.readAll();
+        PlcsContainer->setStyleSheet(Style);
+        file.close();
+    }
     for (auto &line : lines)
     {
         line = new QLineEdit(this);
@@ -45,9 +43,11 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
         }
 
         // QObject::connect(line, &QLineEdit::textChanged, this, &IpPortSelector::updateIp);
-        if (i<3)
+        if (i < 3)
+        {
             dots[i] = new QLabel(".", this);
-        IpBoxLayout->addWidget(dots[i]);
+            IpBoxLayout->addWidget(dots[i]);
+        }
 
         i++;
     }
@@ -111,57 +111,57 @@ void IpPortSelector::SetIpGroup()
     IpBoxLayout = new QHBoxLayout(this);
     IpVBoxLayout = new QVBoxLayout(this);
 
-    ChangePortButton = new QPushButton("Change Port",this);
+    ChangePortButton = new QPushButton("Change Port", this);
     PortBox = new QGroupBox("Port", this);
     PortBoxLayout = new QVBoxLayout(this);
-
-
 }
 
 void IpPortSelector::PlcSelectSet()
 {
     PlcSelect = new QComboBox;
 
-    
-    PlcsContainer = new QWidget;
-    PlcsLayot = new QVBoxLayout;
+    PlcsContainer = new QWidget(this);
+    PlcsLayot = new QVBoxLayout(this);
     PlcsContainer->setLayout(PlcsLayot);
-    PlcsContainer->resize(100,50);
+    PlcsContainer->resize(100, 50);
 
     AllPlcs->setWidget(PlcsContainer);
     AllPlcs->setWidgetResizable(true);
-    AllPlcs->setMinimumSize(200,100);
+    AllPlcs->setMinimumSize(200, 100);
     QLabel *PlcsText = new QLabel("All Plcs");
-    PlcsLayot->addWidget(PlcsText,0,Qt::AlignTop|Qt::AlignCenter);
+    PlcsLayot->addWidget(PlcsText, 0, Qt::AlignTop | Qt::AlignCenter);
 }
 
 void IpPortSelector::PlcSelectAddSlot(QString Name)
 {
-    QPushButton *NewPlc = new QPushButton(Name);
-    NewPlc->addAction(Name);
-    QHash<QString,QPushButton*>::Iterator It = PlcsButtonMap.find(Name);
+    QHash<QString, QPushButton *>::Iterator It = PlcsButtonMap.find(Name);
     if (It != PlcsButtonMap.end() && !PlcsButtonMap.isEmpty())
     {
         return;
     }
-    PlcsButtonMap.insert_or_assign(Name,NewPlc);
+    QPushButton *NewPlc = new QPushButton(Name, PlcsContainer);
+    NewPlc->addAction(Name);
+    PlcsButtonMap.insert_or_assign(Name, NewPlc);
     PlcsLayot->addWidget(NewPlc);
     // PlcsButtonMap[Name]->setStyleSheet("background-color: #516179;");
-    connect(PlcsButtonMap[Name],&QPushButton::clicked,this,&IpPortSelector::PlcChangeDetect);
+    connect(PlcsButtonMap[Name], &QPushButton::clicked, this, &IpPortSelector::PlcChangeDetect);
 }
 
 void IpPortSelector::PlcChangeDetect(int Index)
 {
-    QObject* Obj = sender();
-    QPushButton* Button = qobject_cast<QPushButton*>(Obj);
-    for(auto &button: PlcsButtonMap)
+    QObject *Obj = sender();
+    QPushButton *Button = qobject_cast<QPushButton *>(Obj);
+    for (auto &button : PlcsButtonMap)
     {
-        button->setProperty("active",false);
+        button->setProperty("active", false);
         button->style()->unpolish(button);
         button->style()->polish(button);
         button->update();
     }
-    Button->setProperty("active",true);
+    Button->setProperty("active", true);
+    Button->style()->unpolish(Button);
+    Button->style()->polish(Button);
+    Button->update();
     emit PlcChangedSignal("");
 }
 
@@ -185,6 +185,7 @@ void IpPortSelector::PlcDisplayIpSlot(QString ip)
     }
 }
 
-void IpPortSelector::PlcDisplayPortSlot(QString port) {
+void IpPortSelector::PlcDisplayPortSlot(QString port)
+{
     lines[4]->setText(port);
 }

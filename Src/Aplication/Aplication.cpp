@@ -5,7 +5,9 @@ Aplication::Aplication()
 
     w.show();
     ConnectSignals();
+    // Loading of qss styles for using
 }
+
 // Connects and settings
 void Aplication::ConnectSignals()
 {
@@ -14,7 +16,7 @@ void Aplication::ConnectSignals()
     QObject::connect(&w, &MainWindow::portChanged, this, &Aplication::PortChangeSlot);
     QObject::connect(w.GetipPortSelector(), &IpPortSelector::PlcChangedSignal, this, &Aplication::GetPlcAdressSlot);
 
-    QObject::connect(w.getConnectButton(),&QPushButton::clicked,this,&Aplication::TcpClientConnectSlot);
+    QObject::connect(w.getConnectButton(), &QPushButton::clicked, this, &Aplication::TcpClientConnectSlot);
 }
 
 // Slots Declaration
@@ -28,12 +30,12 @@ void Aplication::AddPlc(QString Name)
 
 void Aplication::IpChangeSlot(QString Value)
 {
-    Plcs.IpAdrresSetting(Value.toStdString(),w.GetipPortSelector()->GetPlcSelect()->currentText().toStdString());
+    Plcs.IpAdrresSetting(Value.toStdString(), w.GetipPortSelector()->GetPlcSelect()->currentText().toStdString());
 }
 
 void Aplication::PortChangeSlot(QString Value)
 {
-    Plcs.PortSetting(Value.toStdString(),w.GetipPortSelector()->GetPlcSelect()->currentText().toStdString());
+    Plcs.PortSetting(Value.toStdString(), w.GetipPortSelector()->GetPlcSelect()->currentText().toStdString());
 }
 
 void Aplication::GetPlcAdressSlot(QString Name)
@@ -44,10 +46,13 @@ void Aplication::GetPlcAdressSlot(QString Name)
     QMetaObject::Connection SendPort;
     SendIp = connect(this, &Aplication::SendPlcAdressSignal, w.GetipPortSelector(), &IpPortSelector::PlcDisplayIpSlot);
     SendPort = connect(this, &Aplication::SendPlcPortSignal, w.GetipPortSelector(), &IpPortSelector::PlcDisplayPortSlot);
-    if (ipFlag == "Plc not found.") {
+    if (ipFlag == "Plc not found.")
+    {
         emit(SendPlcAdressSignal(""));
         emit(SendPlcPortSignal(""));
-    } else {
+    }
+    else
+    {
         emit(SendPlcAdressSignal(ipFlag.c_str()));
         emit(SendPlcPortSignal(portFlag.c_str()));
     }
@@ -57,13 +62,13 @@ void Aplication::GetPlcAdressSlot(QString Name)
 
 void Aplication::TcpClientConnectSlot(bool Button)
 {
-    std::string IpString,PortString;
+    std::string IpString, PortString;
     IpString = Plcs.GetPlcAdress(w.GetipPortSelector()->GetPlcSelect()->currentText().toStdString());
     PortString = Plcs.GetPlcPort(w.GetipPortSelector()->GetPlcSelect()->currentText().toStdString());
     QString IP = IpString.c_str();
     QString Port = PortString.c_str();
-    QMetaObject::Connection Connectio = connect(this,Aplication::TcpClientConnectToSignal,&tcpClient,&TcpClient::Connect);
-    emit TcpClientConnectToSignal(IP,Port);
+    QMetaObject::Connection Connectio = connect(this, Aplication::TcpClientConnectToSignal, &tcpClient, &TcpClient::Connect);
+    emit TcpClientConnectToSignal(IP, Port);
     disconnect(Connectio);
     w.Debug("Sended");
 }

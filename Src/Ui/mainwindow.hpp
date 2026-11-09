@@ -33,7 +33,7 @@ public:
     IpPortSelector *GetipPortSelector(){return ipPortSelector;}
     addPlc *GetaddPlc(){return addPlcWidget;}
     void Debug(QString debug);
-
+    QVBoxLayout* ReturnmainLayout(){return mainLayout;}
 signals:
     void ipChanged(QString ip);
     void portChanged(QString port);

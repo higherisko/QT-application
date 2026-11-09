@@ -1,8 +1,0 @@
-QPushButton
-{
-    "background-color: #516179;"
-}
-QPushButton[active="true"]
-{
-    "background-color: #3C6156;"
-}
