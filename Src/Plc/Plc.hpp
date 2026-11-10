@@ -3,6 +3,7 @@
 #include "TagsAdapter.hpp"
 #include <functional>
 #include "ModbusClient.h"
+#include "MCProtocol.h"
 
 
 class ComunicationInfo

@@ -5,14 +5,12 @@
 #include "McHandler.h"
 #include <functional>
 #include <unordered_map>
-#include "MemoryRegisters.h"
+
 
 class MCProtocol 
 {
 private:
         McProtocolParser McParser;
-        Memory DMemory;
-        Memory MMemory;
 public:
         MCProtocol();
         ~MCProtocol() = default;

@@ -13,6 +13,7 @@ target_include_directories(Plc PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(Plc PUBLIC TagsAdapter
                                  TcpClient
                                  ModbusClient
+                                 MCPROTOCOL
                                  )
 
 target_include_directories(PlcManager PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
