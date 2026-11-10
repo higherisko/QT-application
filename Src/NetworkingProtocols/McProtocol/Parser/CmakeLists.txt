@@ -1,0 +1,12 @@
+add_library(MCPROTOCOLPARSER
+            McProtocolParser.h
+            McProtocolParser.cpp)
+add_library(MCPROTOCOLFRAME
+            McProtocolFrame.h
+            McProtocolFrame.cpp)
+
+target_include_directories(MCPROTOCOLPARSER PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(MCPROTOCOLFRAME PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_link_libraries(MCPROTOCOLFRAME PUBLIC CONVERTER)
+target_link_libraries(MCPROTOCOLPARSER PUBLIC MCPROTOCOLFRAME)

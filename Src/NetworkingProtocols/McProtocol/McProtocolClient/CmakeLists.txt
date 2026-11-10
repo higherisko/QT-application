@@ -1,0 +1,6 @@
+add_library(MCPROTOCOL
+            MCProtocol.h
+            MCProtocol.cpp)
+
+target_include_directories(MCPROTOCOL PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(MCPROTOCOL PUBLIC TCPCLIENT MCPROTOCOLPARSER MCHANDLER)
