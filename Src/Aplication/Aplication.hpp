@@ -12,6 +12,7 @@
 #include "QtToCpp.hpp"
 #include "TcpClient.hpp"
 #include <nlohmann/json.hpp>
+#include <fstream>
 class Aplication:public QObject
 
 {
@@ -21,9 +22,11 @@ private:
     PlcManager Plcs;
     QtAdapter QtAdapt;
     TcpClient tcpClient;
+    nlohmann::json Config;
 public:
     Aplication();
     void ConnectSignals();
+    void AppConfig();
 signals:
     void PlcAdded(QString Name);
     void SendPlcAdressSignal(QString Name);

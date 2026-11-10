@@ -5,6 +5,7 @@ Aplication::Aplication()
 
     w.show();
     ConnectSignals();
+    AppConfig();
     // Loading of qss styles for using
 }
 
@@ -71,4 +72,18 @@ void Aplication::TcpClientConnectSlot(bool Button)
     emit TcpClientConnectToSignal(IP, Port);
     disconnect(Connectio);
     w.Debug("Sended");
+}
+
+void Aplication::AppConfig()
+{
+    std::ifstream Read("C:/Users/cpp2m/Documents/QT-application/Src/Config/Config.json");
+    std::string name;
+    if (!Read.is_open())
+    {
+        return;
+    }
+    Read >> Config;
+    name = Config["api"]["Name"];
+    w.Debug(name.c_str());
+    w.setWindowTitle(name.c_str());
 }
