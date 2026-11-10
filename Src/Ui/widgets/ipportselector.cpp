@@ -61,7 +61,7 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
     mainLayout->addWidget(PortBox);
     updateIp();
     updatePort();
-    connect(PlcSelect, &QComboBox::currentIndexChanged, this, &IpPortSelector::PlcChangeDetect);
+    // connect(PlcSelect, &QComboBox::currentIndexChanged, this, &IpPortSelector::PlcChangeDetect);
     QObject::connect(ChangeIpButton, &QPushButton::clicked, this, &IpPortSelector::updateIp);
     QObject::connect(ChangePortButton, &QPushButton::clicked, this, &IpPortSelector::updatePort);
 }
@@ -140,6 +140,7 @@ void IpPortSelector::PlcSelectAddSlot(QString Name)
         return;
     }
     QPushButton *NewPlc = new QPushButton(Name, PlcsContainer);
+    NewPlc->setObjectName(Name);
     NewPlc->addAction(Name);
     PlcsButtonMap.insert_or_assign(Name, NewPlc);
     PlcsLayot->addWidget(NewPlc);
@@ -151,6 +152,7 @@ void IpPortSelector::PlcChangeDetect(int Index)
 {
     QObject *Obj = sender();
     QPushButton *Button = qobject_cast<QPushButton *>(Obj);
+    CurrentPlc = Button->objectName();
     for (auto &button : PlcsButtonMap)
     {
         button->setProperty("active", false);
@@ -162,7 +164,7 @@ void IpPortSelector::PlcChangeDetect(int Index)
     Button->style()->unpolish(Button);
     Button->style()->polish(Button);
     Button->update();
-    emit PlcChangedSignal("");
+    emit PlcChangedSignal(CurrentPlc);
 }
 
 void IpPortSelector::PlcDisplayIpSlot(QString ip)

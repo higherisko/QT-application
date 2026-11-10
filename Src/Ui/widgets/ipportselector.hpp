@@ -27,6 +27,7 @@ public:
     void SetIpGroup();
     void PlcSelectSet();
     QComboBox* GetPlcSelect(){return PlcSelect;}
+    QString GetCurrentPlc(){return CurrentPlc;}
 
 private:
     QHBoxLayout *mainLayout;
@@ -35,6 +36,7 @@ private:
     QString Style;
     //Buttons in QScrollArea AddPlcs when adding new plc
     QHash<QString,QPushButton*> PlcsButtonMap;
+    QString CurrentPlc;
 
     QPushButton *ChangeIpButton;
     QPushButton *ChangePortButton;

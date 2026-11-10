@@ -37,12 +37,18 @@ void Aplication::AddPlc(QString Name)
 
 void Aplication::IpChangeSlot(QString Value)
 {
-    Plcs.IpAdrresSetting(Value.toStdString(), w.GetipPortSelector()->GetPlcSelect()->currentText().toStdString());
+    Plcs.IpAdrresSetting(Value.toStdString(), w.GetipPortSelector()->GetCurrentPlc().toStdString());
+    Config["Plcs"][w.GetipPortSelector()->GetCurrentPlc().toStdString()]["Ip"] = Value.toStdString();
+    std::ofstream Write(ConfigPath);
+    Write << Config.dump(4);
 }
 
 void Aplication::PortChangeSlot(QString Value)
 {
-    Plcs.PortSetting(Value.toStdString(), w.GetipPortSelector()->GetPlcSelect()->currentText().toStdString());
+    Plcs.PortSetting(Value.toStdString(), w.GetipPortSelector()->GetCurrentPlc().toStdString());
+    Config["Plcs"][w.GetipPortSelector()->GetCurrentPlc().toStdString()]["Port"] = Value.toStdString();
+    std::ofstream Write(ConfigPath);
+    Write << Config.dump(4);
 }
 
 void Aplication::GetPlcAdressSlot(QString Name)
@@ -100,7 +106,9 @@ void Aplication::PlcConfig(const nlohmann::json Plc)
         return;
     for (auto It = Config["Plcs"].begin(); It != Config["Plcs"].end(); ++It)
     {
-        std::string Flag = Plcs.AddPlc(It.key());
+        Plcs.AddPlc(It.key());
+        Plcs.IpAdrresSetting(It.value()["Ip"], It.key());
+        Plcs.PortSetting(It.value()["Port"], It.key());
         QMetaObject::Connection PlcAddedConection = connect(this, &Aplication::PlcAdded, w.GetaddPlc(), &addPlc::PlcAdded);
         std::string Key = It.key();
         emit PlcAdded(Key.c_str());
