@@ -27,13 +27,12 @@ void Aplication::AddPlc(QString Name)
     QMetaObject::Connection PlcAddedConection = connect(this, &Aplication::PlcAdded, w.GetaddPlc(), &addPlc::PlcAdded);
     emit PlcAdded(Flag.c_str());
     disconnect(PlcAddedConection);
-    if(Flag != "Plc already exist !!")
+    if (Flag != "Plc already exist !!")
     {
         std::ofstream Write(ConfigPath);
-        Config["Plcs"][Name.toStdString()] = {{"Ip","0.0.0.0"},{"Port","0"}};
+        Config["Plcs"][Name.toStdString()] = {{"Ip", "0.0.0.0"}, {"Port", "0"}};
         Write << Config.dump(4);
     }
-
 }
 
 void Aplication::IpChangeSlot(QString Value)
@@ -97,5 +96,14 @@ void Aplication::AppConfig()
 
 void Aplication::PlcConfig(const nlohmann::json Plc)
 {
-    
-}
+    if (!Config.contains("Plcs"))
+        return;
+    for (auto It = Config["Plcs"].begin(); It != Config["Plcs"].end(); ++It)
+    {
+        std::string Flag = Plcs.AddPlc(It.key());
+        QMetaObject::Connection PlcAddedConection = connect(this, &Aplication::PlcAdded, w.GetaddPlc(), &addPlc::PlcAdded);
+        std::string Key = It.key();
+        emit PlcAdded(Key.c_str());
+        disconnect(PlcAddedConection);
+    }
+};
