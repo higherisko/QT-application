@@ -22,11 +22,13 @@ private:
     PlcManager Plcs;
     QtAdapter QtAdapt;
     TcpClient tcpClient;
-    nlohmann::json Config;
+    nlohmann::ordered_json Config;
+    const std::string ConfigPath = "C:/Users/cpp2m/Documents/QT-application/Src/Config/Config.json";
 public:
     Aplication();
     void ConnectSignals();
     void AppConfig();
+    void PlcConfig(const nlohmann::json Plc);
 signals:
     void PlcAdded(QString Name);
     void SendPlcAdressSignal(QString Name);

@@ -1,6 +1,6 @@
 {
-    "api":
-    {
-        "Name" : "Aplication"
-    }
+    "api": {
+        "Name": "Aplication"
+    },
+    "Plcs": {}
 }

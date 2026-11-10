@@ -27,6 +27,13 @@ void Aplication::AddPlc(QString Name)
     QMetaObject::Connection PlcAddedConection = connect(this, &Aplication::PlcAdded, w.GetaddPlc(), &addPlc::PlcAdded);
     emit PlcAdded(Flag.c_str());
     disconnect(PlcAddedConection);
+    if(Flag != "Plc already exist !!")
+    {
+        std::ofstream Write(ConfigPath);
+        Config["Plcs"][Name.toStdString()] = {{"Ip","0.0.0.0"},{"Port","0"}};
+        Write << Config.dump(4);
+    }
+
 }
 
 void Aplication::IpChangeSlot(QString Value)
@@ -76,7 +83,7 @@ void Aplication::TcpClientConnectSlot(bool Button)
 
 void Aplication::AppConfig()
 {
-    std::ifstream Read("C:/Users/cpp2m/Documents/QT-application/Src/Config/Config.json");
+    std::ifstream Read(ConfigPath);
     std::string name;
     if (!Read.is_open())
     {
@@ -84,6 +91,11 @@ void Aplication::AppConfig()
     }
     Read >> Config;
     name = Config["api"]["Name"];
-    w.Debug(name.c_str());
     w.setWindowTitle(name.c_str());
+    PlcConfig(Config);
+}
+
+void Aplication::PlcConfig(const nlohmann::json Plc)
+{
+    
 }
