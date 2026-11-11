@@ -4,8 +4,11 @@ Aplication::Aplication()
 {
 
     w.show();
+    setConfigPath();
     ConnectSignals();
     AppConfig();
+
+    w.Debug(ConfigPath.c_str());
     // Loading of qss styles for using
 }
 
@@ -92,6 +95,7 @@ void Aplication::AppConfig()
     std::string name;
     if (!Read.is_open())
     {
+        w.Debug("Config Failed");
         return;
     }
     Read >> Config;
@@ -115,3 +119,14 @@ void Aplication::PlcConfig(const nlohmann::json Plc)
         disconnect(PlcAddedConection);
     }
 };
+
+void Aplication::setConfigPath()
+{
+    QDir Dir(QApplication::applicationDirPath());
+    QString Root = "QT-application";
+    while(Root != Dir.dirName())
+    {
+        Dir.cdUp();
+    }
+    ConfigPath = Dir.filePath("Src/Config/Config.json").toStdString();
+}

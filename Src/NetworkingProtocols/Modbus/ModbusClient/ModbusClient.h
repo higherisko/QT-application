@@ -17,10 +17,10 @@ private:
 public:
     ModbusClient();
     ~ModbusClient() = default;
-    std::vector<uint8_t> ReadCoils(int Byte,const uint16_t Bit,int Lenght);
-    std::vector<uint8_t> WriteCoils(const std::vector<bool> &Data,const uint16_t Byte,const uint16_t Bit,const uint16_t Lenght,const std::vector<uint16_t> &Memory);
-    std::vector<uint8_t> WriteRegisters(std::vector<uint8_t> &Data,const uint16_t Byte,const uint16_t Lenght);
-    std::vector<uint8_t> ReadInputRegisters(const uint16_t Byte,const uint16_t Lenght);
+    static std::vector<uint8_t> ReadCoils(int Byte,const uint16_t Bit,int Lenght);
+    static std::vector<uint8_t> WriteCoils(const std::vector<bool> &Data,const uint16_t Byte,const uint16_t Bit,const uint16_t Lenght,const std::vector<uint16_t> &Memory);
+    static std::vector<uint8_t> WriteRegisters(std::vector<uint8_t> &Data,const uint16_t Byte,const uint16_t Lenght);
+    static std::vector<uint8_t> ReadInputRegisters(const uint16_t Byte,const uint16_t Lenght);
     void DisplayFrame(){std::cout<<ModbusPArser.GetHandleFrame();}
     void DisplayBoolData(int Index){std::cout<<ModbusHNDlr.GetBoolData(Index)<<std::endl;}
     void DisplayCoils(){ModbusHNDlr.DisplayBoolData();}

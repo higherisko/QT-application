@@ -37,5 +37,8 @@ public:
     std::string GetPort(){return Comn.Port;}
     uint16_t SetIP(const std::string IP){Comn.IpAdress = IP;return 1;}
     uint16_t SetPort(const std::string Port){Comn.Port = Port;return 1;}
+
+    //Sending and reading
+    std::string WriteCoils();
     
 };   

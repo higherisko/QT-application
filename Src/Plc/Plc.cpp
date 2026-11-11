@@ -28,3 +28,7 @@ int Plc::AddCylinder(Cylinder &Cyll)
     return 0;
 }
 
+std::string Plc::WriteCoils()
+{
+    
+}

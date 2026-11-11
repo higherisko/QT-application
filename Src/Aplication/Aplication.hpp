@@ -5,6 +5,9 @@
 #include <QFile>
 #include <QDir>
 #include <QMessageBox>
+#include <QDir>
+#include <QCoreApplication>
+
 
 #include "mainwindow.hpp"
 #include "PlcTags.hpp"
@@ -23,7 +26,9 @@ private:
     QtAdapter QtAdapt;
     TcpClient tcpClient;
     nlohmann::ordered_json Config;
-    const std::string ConfigPath = "C:/Users/cpp2m/Documents/QT-application/Src/Config/Config.json";
+    std::string ConfigPath;
+
+    void setConfigPath();
 public:
     Aplication();
     void ConnectSignals();
