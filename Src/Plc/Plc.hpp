@@ -39,6 +39,6 @@ public:
     uint16_t SetPort(const std::string Port){Comn.Port = Port;return 1;}
 
     //Sending and reading
-    std::string WriteCoils();
+    std::string WriteCoils(const std::vector<bool> Data,const std::vector<uint16_t> Adrresses);
     
 };   
