@@ -6,6 +6,10 @@
 class Memory
 {
 private:
+    uint16_t RegistersStart;
+    uint16_t RegistersEnd;
+    uint16_t BoolsStart;
+    uint16_t BoolsEnd;
     uint16_t RegistersSize;
     uint16_t BoolsSize;
 
@@ -16,12 +20,15 @@ private:
     MemHandler MemoryHandl;
 
 public:
-    Memory(const uint16_t RegistersSizeInit = 1,const uint16_t BoolsSizeInit = 1);
+    Memory(const uint16_t RegistersStartInit = 1,const uint16_t RegistersEndInit = 1,const uint16_t BoolsSizeInit = 1,const uint16_t BoolsEndInit = 1);
     int MemsInit(const std::vector<uint16_t> &Data);
     int MemsAtInit(const uint16_t &Data, const uint16_t &Adress);
     int MemsBoolInit(const bool &Data,const uint16_t &Adress);
     uint16_t MemsBoolsInit(const std::vector<bool> &Data);
     int IsUsedCheckBool(const uint16_t &Adress);
+
+    uint16_t RegisterUseSet(const uint16_t &Adress);
+    uint16_t BoolUseSet(const uint16_t &Adress);
 
     std::vector<uint16_t> GetMems(const uint16_t &StartAdress, const uint16_t &Lenght);
     uint16_t GetMem1(const uint16_t &Adress);
@@ -36,7 +43,7 @@ public:
         std::cout << std::endl;
     };
 
-    void MemsSizeSet(const uint16_t SizeInit) {RegistersSize = SizeInit;
+    void MemsSizeSet(const uint16_t SizeInit) {RegistersStart = SizeInit;
                                                Registers.resize(SizeInit);
                                                IsUsedRegisters.resize(SizeInit);}
 };
