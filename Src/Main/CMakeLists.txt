@@ -14,7 +14,14 @@ set_target_properties(neviem PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set(CMAKE_INSTALL_PREFIX
+        "${CMAKE_SOURCE_DIR}/install"
+        CACHE PATH "Install path" FORCE)
+endif()
+
 include(GNUInstallDirs)
+
 install(TARGETS neviem
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}

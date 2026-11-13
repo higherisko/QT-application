@@ -11,8 +11,8 @@
 class ModbusClient 
 {
 private:
-    ModbusParser ModbusPArser;
-    ModbusHandler ModbusHNDlr;
+    static ModbusParser ModbusPArser;
+    static ModbusHandler ModbusHNDlr;
     
 public:
     ModbusClient();

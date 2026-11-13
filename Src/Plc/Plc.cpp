@@ -28,7 +28,7 @@ int Plc::AddCylinder(Cylinder &Cyll)
     return 0;
 }
 
-std::string Plc::WriteCoils()
+std::string Plc::WriteCoils(const std::vector<bool> Data,const std::vector<uint16_t> Adrresses)
 {
     
 }
