@@ -31,6 +31,7 @@ int Memory::MemsAtInit(const uint16_t &Data, const uint16_t &Adress)
         return -1;
     }
     Registers.at(Adress) = Data;
+    RegisterUseSet(Adress);
     return 1;
 }
 
@@ -56,6 +57,7 @@ int Memory::MemsBoolInit(const bool &Data,const uint16_t &Adress)
         return -1;
     }
     Bools.at(Adress) = Data;
+    BoolUseSet(Adress);
     return 1;
 }
 
@@ -74,9 +76,20 @@ int Memory::IsUsedCheckBool(const uint16_t &Adress)
 
 uint16_t Memory::RegisterUseSet(const uint16_t &Adress)
 {
-    if(Adress > RegistersStart)
+    if(Adress > RegistersSize)
         return -1;
     if(IsUsedRegisters.at(Adress) == true)
         return -2;
     IsUsedRegisters.at(Adress) = true;
+    return 0;
+}
+
+uint16_t Memory::BoolUseSet(const uint16_t &Adress)
+{
+    if(Adress > BoolsSize)
+        return -1;
+    if(IsUsedBools.at(Adress) == true)
+        return -2;
+    IsUsedBools.at(Adress) = true;
+    return 0;
 }

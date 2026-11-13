@@ -7,7 +7,21 @@ uint16_t Tags::AddCylinder(Cylinder &Cyll, const std::string &Name)
     auto IsFWD = Cyll.GetAdressIsForward();
     auto IsBWD = Cyll.GetAdressIsBackward();
 
- 
+    if(Move == IsFWD || Move == IsBWD || IsBWD == IsFWD)
+        return -4;
+
+    auto It = Cylinders.find(Name);
+    if(It != Cylinders.end())
+        return -1;
+    if(Move > Mems.BoolsSize || IsBWD > Mems.BoolsSize || IsFWD > Mems.BoolsSize)
+        return -2;
+    if(Mems.IsUsedCheckBool(Move) ||Mems.IsUsedCheckBool(IsBWD)||Mems.IsUsedCheckBool(IsFWD) )
+        return -3;
+    
+    Mems.MemsBoolInit(false,Move);
+    Mems.MemsBoolInit(false,IsBWD);
+    Mems.MemsBoolInit(false,IsFWD);
+
     return 1;
 }
 
