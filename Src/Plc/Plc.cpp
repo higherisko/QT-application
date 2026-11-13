@@ -28,7 +28,24 @@ int Plc::AddCylinder(Cylinder &Cyll)
     return 0;
 }
 
-std::string Plc::WriteCoils(const std::vector<bool> Data,const std::vector<uint16_t> Adrresses)
+std::vector<uint8_t> Plc::WriteCoils(const std::vector<bool> Data,const std::vector<uint16_t> Adrresses)
 {
+    if(Comn.Protocol == "McProtocol")
+    {
+        std::vector<uint8_t> DataToSend;
+        for(auto BOOL:Data)
+        {
+            if(BOOL)
+            {
+                DataToSend.push_back(0x10);
+            }
+            else
+            {
+                DataToSend.push_back(0x00);
+            }
+        }
+        // std::vector<uint8_t> ReturnValue = MCProtocol::write["B"](DataToSend,)
+
+    }
     
 }

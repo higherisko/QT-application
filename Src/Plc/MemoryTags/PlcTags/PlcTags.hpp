@@ -8,12 +8,11 @@
 class Booleans
 {
 public:
-   Booleans(const uint16_t AdressByteInit = -1, const uint16_t AdressBitInit = -1)
-       : AdressBit{AdressBitInit}, AdressByte{AdressByteInit} {}
-   uint16_t AdressByte;
-   uint16_t AdressBit;
+   Booleans( const uint16_t AdressBitInit = -1)
+       : Adress{AdressBitInit} {}
+   uint16_t Adress;
    bool Value;
-   Booleans(const Booleans &Lhs):AdressByte{Lhs.AdressByte},AdressBit{Lhs.AdressBit},Value{Lhs.Value}{}
+   Booleans(const Booleans &Lhs):Adress{Lhs.Adress}{}
 };
 
 class Cylinder
@@ -25,25 +24,22 @@ private:
    Booleans IsBackward;
 
 public:
-   Cylinder(const uint16_t AdrresInit = -1, const uint16_t AdressBitInit = -1);
+   Cylinder(const uint16_t AdrresInit = -1);
    Cylinder(const Cylinder &Cyll):IsBackward{Cyll.IsBackward},IsForward{Cyll.IsForward},Move{Cyll.Move}{}
    
-   void SetMoveAdress(const uint16_t AdressTemp, const uint16_t AdressBitTemp)
+   void SetMoveAdress(const uint16_t AdressTemp)
    {
-      Move.AdressByte = AdressTemp;
-      Move.AdressBit = AdressBitTemp;
+      Move.Adress = AdressTemp;
    }
    void UpgradeMoveValue(const bool Data) { Move.Value = Data; }
    void SetIsForwardAdress(const uint16_t AdressTemp, const uint16_t AdressBitTemp)
    {
-      IsForward.AdressByte = AdressTemp;
-      IsForward.AdressBit = AdressBitTemp;
+      IsForward.Adress = AdressTemp;
    }
    void UpgradeIsForwardValue(const bool Data) { IsForward.Value = Data; }
    void SetIsBackawardAdress(const uint16_t AdressTemp, const uint16_t AdressBitTemp)
    {
-      IsBackward.AdressByte = AdressTemp;
-      IsBackward.AdressBit = AdressBitTemp;
+      IsBackward.Adress = AdressTemp;
    }
    void UpgradeIsBackwardValue(const bool Data) { IsBackward.Value = Data; }
 
@@ -51,9 +47,9 @@ public:
    bool GetIsForwardValue() { return IsForward.Value; }
    bool GetIsBackwardValue() { return IsBackward.Value; }
 
-   std::vector<uint16_t> GetAdressMove();
-   std::vector<uint16_t> GetAdressIsForward();
-   std::vector<uint16_t> GetAdressIsBackward();
+   uint16_t GetAdressMove();
+   uint16_t GetAdressIsForward();
+   uint16_t GetAdressIsBackward();
 
    std::vector<uint8_t> WriteMove(const bool Value);
 };

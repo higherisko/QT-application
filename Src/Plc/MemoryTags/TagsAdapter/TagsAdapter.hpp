@@ -25,4 +25,6 @@ public:
    // Function for memoryregisters
    int InitRegisterSize(const uint16_t &SizeInit);
    int InitAllRegisters(const std::vector<uint16_t> &Data);
+
+   
 };
