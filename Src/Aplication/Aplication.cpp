@@ -8,7 +8,7 @@ Aplication::Aplication()
     ConnectSignals();
     AppConfig();
 
-    w.Debug(ConfigPath.c_str());
+    // w.Debug(ConfigPath.c_str());
     // Loading of qss styles for using
 }
 
