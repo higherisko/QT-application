@@ -5,11 +5,14 @@
     "Plcs": {
         "Siemens": {
             "Ip": "192.168.0.1",
-            "Port": "100"
+            "Port": "100",
+            "Protocol": ""
         },
         "Mitshubishi": {
             "Ip": "192.168.1.10",
-            "Port": "2000"
+            "Port": "2000",
+            "Protocol": ""
+                
         }
     }
 }

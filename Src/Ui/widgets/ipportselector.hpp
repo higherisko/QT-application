@@ -24,7 +24,7 @@ class IpPortSelector : public QWidget
 public:
     IpPortSelector(QWidget *parent = nullptr);
     void TextsSet();
-    void SetIpGroup();
+    void SetGroups();
     void PlcSelectSet();
     QString GetCurrentPlc(){return CurrentPlc;}
 
@@ -48,8 +48,14 @@ private:
     QGroupBox *PortBox;
     QVBoxLayout *PortBoxLayout;
     //Protocol Select Setting
-    QPushButton *ProtocolSetButt;
+    QPushButton *ProtocolSetButton,*TransferSetButton;
     QComboBox *ProtocolSelect;
+    QComboBox *TransferSelect;
+    QVBoxLayout *ProtocolAndTransferMainLayout;
+    QHBoxLayout *ProtocolLayout;
+    QHBoxLayout *TransferLayout;
+    QGroupBox *ProtocolAndTransferBox;
+    
     //All needed settings for QScrollArea
     QScrollArea *AllPlcs;
     QWidget *PlcsContainer;

@@ -9,7 +9,7 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
     setLayout(mainLayout);
     TextsSet();
-    SetIpGroup();
+    SetGroups();
     PlcSelectSet();
     mainLayout->addWidget(AllPlcs);
 
@@ -18,6 +18,7 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
 
     mainLayout->addWidget(IpBox);
     mainLayout->addWidget(PortBox);
+    mainLayout->addWidget(ProtocolAndTransferBox);
     updateIp();
     updatePort();
     AllInstantConection();
@@ -61,20 +62,44 @@ void IpPortSelector::TextsSet()
 {
 }
 
-void IpPortSelector::SetIpGroup()
+void IpPortSelector::SetGroups()
 {
+    // Protocol and transfer layer set
+    ProtocolAndTransferMainLayout = new QVBoxLayout(this);
+    ProtocolLayout = new QHBoxLayout(this);
+    ProtocolAndTransferBox = new QGroupBox("Transfer settings", this);
+    TransferLayout = new QHBoxLayout(this);
+
+    ProtocolSetButton = new QPushButton("ChangeProtocol", this);
+    TransferSetButton = new QPushButton("ChangeTransfer", this);
+    ProtocolSelect = new QComboBox(this);
+    TransferSelect = new QComboBox(this);
+    ProtocolSelect->addItem("Modbus");
+    ProtocolSelect->addItem("McProtocol");
+    TransferSelect->addItem("TCP");
+    TransferSelect->addItem("UDP");
+
+    ProtocolLayout->addWidget(ProtocolSelect);
+    ProtocolLayout->addWidget(ProtocolSetButton);
+    TransferLayout->addWidget(TransferSelect);
+    TransferLayout->addWidget(TransferSetButton);
+
+    ProtocolAndTransferMainLayout->addLayout(ProtocolLayout);
+    ProtocolAndTransferMainLayout->addLayout(TransferLayout);
+
+    ProtocolAndTransferBox->setLayout(ProtocolAndTransferMainLayout);
+    // Port set
+    ChangePortButton = new QPushButton("Change Port", this);
+    PortBox = new QGroupBox("Port", this);
+    PortBoxLayout = new QVBoxLayout(this);
+    PortBoxLayout->addWidget(ChangePortButton);
+    PortBox->setLayout(PortBoxLayout);
+    // Ip Set
     ChangeIpButton = new QPushButton("Change IP", this);
     IpBox = new QGroupBox("Ip", this);
     IpBoxLayout = new QHBoxLayout(this);
     IpVBoxLayout = new QVBoxLayout(this);
-
-    ChangePortButton = new QPushButton("Change Port", this);
-    PortBox = new QGroupBox("Port", this);
-    PortBoxLayout = new QVBoxLayout(this);
-
-    PortBoxLayout->addWidget(ChangePortButton);
     IpBox->setLayout(IpVBoxLayout);
-    PortBox->setLayout(PortBoxLayout);
     IpVBoxLayout->addLayout(IpBoxLayout);
     IpVBoxLayout->addWidget(ChangeIpButton);
 }
