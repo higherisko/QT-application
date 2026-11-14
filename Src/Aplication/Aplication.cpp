@@ -79,8 +79,8 @@ void Aplication::GetPlcAdressSlot(QString Name)
 void Aplication::TcpClientConnectSlot(bool Button)
 {
     std::string IpString, PortString;
-    IpString = Plcs.GetPlcAdress(w.GetipPortSelector()->GetPlcSelect()->currentText().toStdString());
-    PortString = Plcs.GetPlcPort(w.GetipPortSelector()->GetPlcSelect()->currentText().toStdString());
+    // IpString = Plcs.GetPlcAdress(w.GetipPortSelector()->GetPlcSelect()->currentText().toStdString());
+    // PortString = Plcs.GetPlcPort(w.GetipPortSelector()->GetPlcSelect()->currentText().toStdString());
     QString IP = IpString.c_str();
     QString Port = PortString.c_str();
     QMetaObject::Connection Connectio = connect(this, Aplication::TcpClientConnectToSignal, &tcpClient, &TcpClient::Connect);

@@ -26,7 +26,6 @@ public:
     void TextsSet();
     void SetIpGroup();
     void PlcSelectSet();
-    QComboBox* GetPlcSelect(){return PlcSelect;}
     QString GetCurrentPlc(){return CurrentPlc;}
 
 private:
@@ -48,12 +47,18 @@ private:
     QVBoxLayout *IpVBoxLayout;
     QGroupBox *PortBox;
     QVBoxLayout *PortBoxLayout;
-    QComboBox *PlcSelect;
+    //Protocol Select Setting
+    QPushButton *ProtocolSetButt;
+    QComboBox *ProtocolSelect;
     //All needed settings for QScrollArea
     QScrollArea *AllPlcs;
     QWidget *PlcsContainer;
     QVBoxLayout *PlcsLayot;
 
+    //Setting page funstions
+    void StyleSet();
+    void LinesCreate();
+    void AllInstantConection();
 
 private slots:
     void updateIp();
@@ -63,6 +68,7 @@ public slots:
     void PlcChangeDetect(int Index);
     void PlcDisplayIpSlot(QString ip);
     void PlcDisplayPortSlot(QString port);
+    void ProtocolSelectDetect(const QString Protocol);
 signals:
     void ipChanged(QString value);
     void portChanged(QString value);

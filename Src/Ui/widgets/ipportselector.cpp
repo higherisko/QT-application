@@ -12,58 +12,15 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
     SetIpGroup();
     PlcSelectSet();
     mainLayout->addWidget(AllPlcs);
-    int i = 0;
 
-    QFile file("C:/Users/cpp2m/Documents/QT-application/Src/Ui/Styles/PlcsButton.qss");
-    if (file.open(QFile::ReadOnly | QFile::Text))
-    {
-        Style = file.readAll();
-        PlcsContainer->setStyleSheet(Style);
-        file.close();
-    }
-    for (auto &line : lines)
-    {
-        line = new QLineEdit(this);
-        line->setPlaceholderText("0");
-        line->setFrame(false);
-        line->setMaxLength(5);
-
-        QFontMetrics fm(line->font());
-        line->setFixedWidth(fm.horizontalAdvance("00000") + 20);
-
-        if (i > 3)
-        {
-            line->setPlaceholderText("00000");
-            PortBoxLayout->addWidget(line);
-            break;
-        }
-        else
-        {
-            IpBoxLayout->addWidget(line);
-        }
-
-        // QObject::connect(line, &QLineEdit::textChanged, this, &IpPortSelector::updateIp);
-        if (i < 3)
-        {
-            dots[i] = new QLabel(".", this);
-            IpBoxLayout->addWidget(dots[i]);
-        }
-
-        i++;
-    }
-    PortBoxLayout->addWidget(ChangePortButton);
-    IpBox->setLayout(IpVBoxLayout);
-    PortBox->setLayout(PortBoxLayout);
-    IpVBoxLayout->addLayout(IpBoxLayout);
-    IpVBoxLayout->addWidget(ChangeIpButton);
+    StyleSet();
+    LinesCreate();
 
     mainLayout->addWidget(IpBox);
     mainLayout->addWidget(PortBox);
     updateIp();
     updatePort();
-    // connect(PlcSelect, &QComboBox::currentIndexChanged, this, &IpPortSelector::PlcChangeDetect);
-    QObject::connect(ChangeIpButton, &QPushButton::clicked, this, &IpPortSelector::updateIp);
-    QObject::connect(ChangePortButton, &QPushButton::clicked, this, &IpPortSelector::updatePort);
+    AllInstantConection();
 }
 
 void IpPortSelector::updateIp()
@@ -114,11 +71,17 @@ void IpPortSelector::SetIpGroup()
     ChangePortButton = new QPushButton("Change Port", this);
     PortBox = new QGroupBox("Port", this);
     PortBoxLayout = new QVBoxLayout(this);
+
+    PortBoxLayout->addWidget(ChangePortButton);
+    IpBox->setLayout(IpVBoxLayout);
+    PortBox->setLayout(PortBoxLayout);
+    IpVBoxLayout->addLayout(IpBoxLayout);
+    IpVBoxLayout->addWidget(ChangeIpButton);
 }
 
 void IpPortSelector::PlcSelectSet()
 {
-    PlcSelect = new QComboBox;
+    ProtocolSelect = new QComboBox;
 
     PlcsContainer = new QWidget(this);
     PlcsLayot = new QVBoxLayout(this);
@@ -190,4 +153,61 @@ void IpPortSelector::PlcDisplayIpSlot(QString ip)
 void IpPortSelector::PlcDisplayPortSlot(QString port)
 {
     lines[4]->setText(port);
+}
+
+void IpPortSelector::StyleSet()
+{
+    QFile file("C:/Users/cpp2m/Documents/QT-application/Src/Ui/Styles/PlcsButton.qss");
+    if (file.open(QFile::ReadOnly | QFile::Text))
+    {
+        Style = file.readAll();
+        PlcsContainer->setStyleSheet(Style);
+        file.close();
+    }
+}
+
+void IpPortSelector::LinesCreate()
+{
+    int i = 0;
+    for (auto &line : lines)
+    {
+        line = new QLineEdit(this);
+        line->setPlaceholderText("0");
+        line->setFrame(false);
+        line->setMaxLength(5);
+
+        QFontMetrics fm(line->font());
+        line->setFixedWidth(fm.horizontalAdvance("00000") + 20);
+
+        if (i > 3)
+        {
+            line->setPlaceholderText("00000");
+            PortBoxLayout->addWidget(line);
+            break;
+        }
+        else
+        {
+            IpBoxLayout->addWidget(line);
+        }
+
+        // QObject::connect(line, &QLineEdit::textChanged, this, &IpPortSelector::updateIp);
+        if (i < 3)
+        {
+            dots[i] = new QLabel(".", this);
+            IpBoxLayout->addWidget(dots[i]);
+        }
+
+        i++;
+    }
+}
+
+void IpPortSelector::AllInstantConection()
+{
+    // connect(ProtocolSelect, &QComboBox::currentIndexChanged, this, &IpPortSelector::PlcChangeDetect);
+    QObject::connect(ChangeIpButton, &QPushButton::clicked, this, &IpPortSelector::updateIp);
+    QObject::connect(ChangePortButton, &QPushButton::clicked, this, &IpPortSelector::updatePort);
+}
+
+void IpPortSelector::ProtocolSelectDetect(const QString Protocol)
+{
 }
