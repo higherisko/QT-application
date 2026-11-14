@@ -6,3 +6,7 @@ QPushButton[active=true]
 {
     background-color: #3C6156;
 }
+QWidget
+{
+    background-color: #2D5A87;
+}

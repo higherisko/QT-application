@@ -182,13 +182,7 @@ void IpPortSelector::PlcDisplayPortSlot(QString port)
 
 void IpPortSelector::StyleSet()
 {
-    QFile file("C:/Users/cpp2m/Documents/QT-application/Src/Ui/Styles/PlcsButton.qss");
-    if (file.open(QFile::ReadOnly | QFile::Text))
-    {
-        Style = file.readAll();
-        PlcsContainer->setStyleSheet(Style);
-        file.close();
-    }
+    PlcsContainer->setStyleSheet(Style);
 }
 
 void IpPortSelector::LinesCreate()

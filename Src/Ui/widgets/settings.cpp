@@ -2,6 +2,7 @@
 
 Settings::Settings(QWidget *parent) : QWidget(parent) {
     setWindowTitle("Settings");
+    
 
     mainLayout = new QVBoxLayout;
     setLayout(mainLayout);

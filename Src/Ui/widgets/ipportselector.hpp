@@ -16,6 +16,8 @@
 #include <QFile>
 #include <QApplication>
 
+#include "Style.hpp"
+
 
 class IpPortSelector : public QWidget
 {
