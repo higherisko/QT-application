@@ -3,7 +3,6 @@
 MainWindow::MainWindow(QWidget *parent)
 {
     resize(300, 200);
-
     setupWidgets();
     setupMenus();
     setupActions();
@@ -23,7 +22,6 @@ void MainWindow::setupWidgets()
     ipPortSelector = new IpPortSelector(settings);
     settings->addWidget(ipPortSelector);
     
-
     addPlcWidget = new addPlc(settings);
     settings->addWidget(addPlcWidget);
 
@@ -50,7 +48,8 @@ void MainWindow::setupActions()
 
     settingsAction = menuBar()->addAction(tr("Settings"));
     QObject::connect(settingsAction, &QAction::triggered, settings, &Settings::show);
-    settings->resize(1000,600);
+    settings->resize(1000, 600);
+    settings->setStyleSheet(ActualStyle);
 
     creditsAction = menuBar()->addAction(tr("Credits"));
     QObject::connect(creditsAction, &QAction::triggered, credits, &QWidget::show);

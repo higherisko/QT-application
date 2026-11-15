@@ -2,14 +2,12 @@
 // Constructor
 Aplication::Aplication()
 {
-
+    
     w.show();
     setConfigPath();
     ConnectSignals();
     AppConfig();
-
-    // w.Debug(ConfigPath.c_str());
-    // Loading of qss styles for using
+    w.setStyleSheet(ActualStyle);
 }
 
 // Connects and settings
@@ -124,7 +122,7 @@ void Aplication::setConfigPath()
 {
     QDir Dir(QApplication::applicationDirPath());
     QString Root = "QT-application";
-    while(Root != Dir.dirName())
+    while (Root != Dir.dirName())
     {
         Dir.cdUp();
     }

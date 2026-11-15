@@ -2,16 +2,19 @@
 
 Settings::Settings(QWidget *parent) : QWidget(parent) {
     setWindowTitle("Settings");
-    
+    setObjectName("settingsWindow");
 
     mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
     area = new QScrollArea(this);
     area->setWidgetResizable(true);
+    area->setObjectName("SettingsScroll");
+    area->viewport()->setObjectName("SettingsWievPort");
     mainLayout->addWidget(area);
 
     container = new QWidget(area);
+    container->setObjectName("SettingsConteiner");
     area->setWidget(container);
 
     cLayout = new QVBoxLayout;

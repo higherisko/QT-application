@@ -18,8 +18,6 @@ add_library(MainWindow
         widgets/addplc.cpp
 )
 
-add_subdirectory(Styles)
-
 target_include_directories(MainWindow
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}

@@ -1,0 +1,49 @@
+QPushButton
+{
+    background-color: #516179;
+    color: #E8EEF8;
+    
+}
+QPushButton[active=true]
+{
+    background-color: #3C6156;
+    color: #E8EEF8;
+}
+QPushButton::hover
+{
+    background-color: #3F4D63;
+    color: #E8EEF8;
+}
+QPushButton[active=true]::hover
+{
+    background-color: #2E4D43;
+    color: #E8EEF8;
+}
+QMainWindow
+{
+    background-color: #0B1220;
+}
+QMenu
+{
+    background-color: #182438;
+    color: #E8EEF8;
+    border: 1px solid #2A3952;
+}
+QMenu::item:selected
+{
+    background-color: #263A56;
+}
+QGroupBox
+{
+    background-color: #263A56;
+    color: #E8EEF8;
+}
+
+QWidget#SettingsWievPort,
+QWidget#SettingsConteiner,
+QWidget#settingsWindow
+{
+    background-color: #0B1220;
+    color: #0B1220;
+}
+

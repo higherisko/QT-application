@@ -7,6 +7,8 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
     AllPlcs = new QScrollArea(this);
     mainLayout = new QHBoxLayout;
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
+    this->setObjectName("IpPortSelector");
+
     setLayout(mainLayout);
     TextsSet();
     SetGroups();
@@ -182,7 +184,7 @@ void IpPortSelector::PlcDisplayPortSlot(QString port)
 
 void IpPortSelector::StyleSet()
 {
-    PlcsContainer->setStyleSheet(SettingsStyle);
+    this->setStyleSheet(ActualStyle);
 }
 
 void IpPortSelector::LinesCreate()
