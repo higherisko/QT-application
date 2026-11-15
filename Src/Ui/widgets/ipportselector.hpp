@@ -32,9 +32,7 @@ public:
 
 private:
     QHBoxLayout *mainLayout;
-
-    //Stirng for all styles from qss
-    QString Style;
+    
     //Buttons in QScrollArea AddPlcs when adding new plc
     QHash<QString,QPushButton*> PlcsButtonMap;
     QString CurrentPlc;

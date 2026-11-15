@@ -51,7 +51,6 @@ void MainWindow::setupActions()
     settingsAction = menuBar()->addAction(tr("Settings"));
     QObject::connect(settingsAction, &QAction::triggered, settings, &Settings::show);
     settings->resize(1000,600);
-    settings->setPropery(Style);
 
     creditsAction = menuBar()->addAction(tr("Credits"));
     QObject::connect(creditsAction, &QAction::triggered, credits, &QWidget::show);

@@ -182,7 +182,7 @@ void IpPortSelector::PlcDisplayPortSlot(QString port)
 
 void IpPortSelector::StyleSet()
 {
-    PlcsContainer->setStyleSheet(Style);
+    PlcsContainer->setStyleSheet(SettingsStyle);
 }
 
 void IpPortSelector::LinesCreate()

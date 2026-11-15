@@ -2,17 +2,25 @@
 
 #include <QFile>
 #include <QString>
+#include <QDir>
+#include <QApplication>
 
-class Style
+class Styles
 {
 public:
-    static QString Style;
+    QString SettingsStyle;
     void StylePath()
     {
-        QFile file("C:/Users/cpp2m/Documents/QT-application/Src/Ui/Styles/PlcsButton.qss");
+        QDir FindPath(QApplication::applicationDirPath());
+        while (FindPath.dirName() != "QT-application")
+        {
+            FindPath.cdUp();
+        }
+        QString Path = FindPath.filePath("Src/Ui/Styles/SettingsButton.qss");
+        QFile file(Path);
         if (file.open(QFile::ReadOnly | QFile::Text))
         {
-            Style = file.readAll();
+            SettingsStyle = file.readAll();
             file.close();
         }
     }
