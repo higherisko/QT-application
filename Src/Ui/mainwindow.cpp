@@ -37,8 +37,8 @@ void MainWindow::setupMenus()
     fileMenu = new QMenu("File", this);
     menuBar()->addMenu(fileMenu);
 
-    // settingsMenu = new QMenu("Settings", this);
-    // menuBar()->addMenu(settingsMenu);
+    SettingsMenu= new QMenu("Settings", this);
+    menuBar()->addMenu(SettingsMenu);
 }
 
 void MainWindow::setupActions()
@@ -46,8 +46,9 @@ void MainWindow::setupActions()
     quitAction = fileMenu->addAction(QIcon::fromTheme(QIcon::ThemeIcon::ProcessStop), tr("Quit"), tr("Ctrl + Q"));
     QObject::connect(quitAction, &QAction::triggered, this, &QWidget::close);
 
-    settingsAction = menuBar()->addAction(tr("Settings"));
-    QObject::connect(settingsAction, &QAction::triggered, settings, &Settings::show);
+    settingsPlcAction = SettingsMenu->addAction(tr("Plc Settings"));
+
+    QObject::connect(settingsPlcAction, &QAction::triggered, settings, &Settings::show);
     settings->resize(1000, 600);
     settings->setStyleSheet(ActualStyle);
 

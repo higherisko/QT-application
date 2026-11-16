@@ -2,12 +2,20 @@ QPushButton
 {
     background-color: #516179;
     color: #E8EEF8;
-    
+    border: 3px solid #3F4D63;
+    border-radius: 5px;
+    min-width: 100px;
+    min-height: 20px;
 }
 QPushButton[active=true]
 {
     background-color: #3C6156;
     color: #E8EEF8;
+    border: 3px solid #2E4D43;
+    border-radius: 5px;
+    background-radius: 5px;
+    min-width: 100px;
+    min-height: 20px;
 }
 QPushButton::hover
 {
@@ -23,6 +31,17 @@ QMainWindow
 {
     background-color: #0B1220;
 }
+QMenuBar
+{
+    background-color: #182438;
+    color: #E8EEF8;
+    border: 1px solid #2A3952;
+    spacing: 0px;
+}
+QMenuBar::item
+{
+    padding: 2px 6px;
+}
 QMenu
 {
     background-color: #182438;
@@ -37,6 +56,18 @@ QGroupBox
 {
     background-color: #263A56;
     color: #E8EEF8;
+    border: 3px solid #3F4D63;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+QGroupBox::title
+{
+    background-color: #3F4D63;
+    color: #E8EEF8;
+    subcontrol-origin: margin;
+    subcontrol-position: top mid;
+    padding: 0px;
 }
 
 QWidget#SettingsWievPort,
@@ -46,4 +77,27 @@ QWidget#settingsWindow
     background-color: #0B1220;
     color: #0B1220;
 }
-
+QScrollArea#SettingsScroll
+{
+    border: none
+}
+QScrollArea#PlcsScroll
+{
+    background-color: #3F4D63;
+    color: #E8EEF8;
+    border-radius: 5px;
+}
+QWidget#PlcsBox
+{
+    background-color: #263A56;
+    color: #E8EEF8;
+}
+QGroupBox#IpBox QLineEdit,
+QGroupBox#PortBox QLineEdit
+{
+    background-color: #182438;
+    color: #E8EEF8;
+    min-width: 40px;
+    border: 2px solid #2A374A;
+    border-radius: 3px;
+}

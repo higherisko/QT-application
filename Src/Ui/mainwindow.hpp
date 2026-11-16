@@ -44,9 +44,11 @@ private:
     QMenu *fileMenu;
     QAction *quitAction;
     QAction *creditsAction;
+    QAction *SettingsShow;
 
     // QMenu *settingsMenu;
-    QAction *settingsAction;
+    QMenu *SettingsMenu;
+    QAction *settingsPlcAction;
 
     Credits *credits;
 

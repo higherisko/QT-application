@@ -94,6 +94,7 @@ void IpPortSelector::SetGroups()
     ChangePortButton = new QPushButton("Change Port", this);
     PortBox = new QGroupBox("Port", this);
     PortBoxLayout = new QVBoxLayout(this);
+    PortBox->setObjectName("PortBox");
     PortBoxLayout->addWidget(ChangePortButton);
     PortBox->setLayout(PortBoxLayout);
     // Ip Set
@@ -101,6 +102,7 @@ void IpPortSelector::SetGroups()
     IpBox = new QGroupBox("Ip", this);
     IpBoxLayout = new QHBoxLayout(this);
     IpVBoxLayout = new QVBoxLayout(this);
+    IpBox->setObjectName("IpBox");
     IpBox->setLayout(IpVBoxLayout);
     IpVBoxLayout->addLayout(IpBoxLayout);
     IpVBoxLayout->addWidget(ChangeIpButton);
@@ -114,10 +116,12 @@ void IpPortSelector::PlcSelectSet()
     PlcsLayot = new QVBoxLayout(this);
     PlcsContainer->setLayout(PlcsLayot);
     PlcsContainer->resize(100, 50);
+    PlcsContainer->setObjectName("PlcsBox");
 
     AllPlcs->setWidget(PlcsContainer);
     AllPlcs->setWidgetResizable(true);
     AllPlcs->setMinimumSize(200, 100);
+    AllPlcs->setObjectName("PlcsScroll");
     QLabel *PlcsText = new QLabel("All Plcs");
     PlcsLayot->addWidget(PlcsText, 0, Qt::AlignTop | Qt::AlignCenter);
 }
