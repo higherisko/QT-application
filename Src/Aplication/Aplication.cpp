@@ -16,10 +16,11 @@ void Aplication::ConnectSignals()
     QObject::connect(w.GetaddPlc(), &addPlc::AddPlcSignal, this, &Aplication::AddPlc);
     QObject::connect(&w, &MainWindow::ipChanged, this, &Aplication::IpChangeSlot);
     QObject::connect(&w, &MainWindow::portChanged, this, &Aplication::PortChangeSlot);
-    QObject::connect(w.GetipPortSelector(), &IpPortSelector::PlcChangedSignal, this, &Aplication::GetPlcAdressSlot);
+    QObject::connect(w.GetaddPlc(), &addPlc::PlcChangedSignal, this, &Aplication::GetPlcAdressSlot);
 
     QObject::connect(w.getConnectButton(), &QPushButton::clicked, this, &Aplication::TcpClientConnectSlot);
-    QObject::connect(w.GetipPortSelector(),&IpPortSelector::ProtocolChangeSignal,this,Aplication::ProtocolChangeDetect);
+    QObject::connect(w.GetipPortSelector(),&IpPortSelector::ProtocolChangeSignal,this,&Aplication::ProtocolChangeDetect);
+    QObject::connect(w.GetipPortSelector(),&IpPortSelector::TransferChangeSignal,this,&Aplication::TransferChangeDetect);
 }
 
 // Slots Declaration
@@ -180,3 +181,4 @@ void Aplication::TransferChangeDetect(const QString Transfer)
     std::ofstream Write(ConfigPath);
     Write << Config.dump(4);
 }
+

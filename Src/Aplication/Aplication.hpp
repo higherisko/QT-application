@@ -42,6 +42,7 @@ signals:
     void TcpClientConnectToSignal(QString Ip,QString Port);
 public slots:
     void AddPlc(QString Name);
+    // void RemovePlc(QString Name);
     void IpChangeSlot(QString Value);
     void PortChangeSlot(QString Value);
 
