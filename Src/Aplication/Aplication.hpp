@@ -47,4 +47,7 @@ public slots:
 
     void TcpClientConnectSlot(bool Button);
     void GetPlcAdressSlot(QString Name);
+
+    void ProtocolChangeDetect(const QString Protocol);
+    void TransferChangeDetect(const QString Transfer);
 };

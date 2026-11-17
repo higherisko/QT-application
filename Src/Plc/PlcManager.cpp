@@ -75,7 +75,7 @@ uint16_t PlcManager::IpAdrresSetting(const std::string Ip, const std::string Nam
     std::string Flag = Find(Name);
     if (Flag == "Plc not found.")
         return -1;
-    for(auto &plc:Plcs)
+    for (auto &plc : Plcs)
     {
         // if(plc.second.GetIp() == Ip)
         //     return -2;
@@ -89,11 +89,28 @@ uint16_t PlcManager::PortSetting(const std::string Port, const std::string Name)
     std::string Flag = Find(Name);
     if (Flag == "Plc not found.")
         return -1;
-    for(auto &plc:Plcs)
+    for (auto &plc : Plcs)
     {
         // if(plc.second.GetIp() == Ip)
         //     return -2;
     }
     Plcs.at(Name).SetPort(Port);
+    return 1;
+}
+uint16_t PlcManager::ProtocolSetting(const std::string Protocol, const std::string Name)
+{
+    std::string Flag = Find(Name);
+    if (Flag == "Plc not found.")
+        return -1;
+    Plcs.at(Name).SetProtocol(Protocol);
+    return 1;
+}
+
+uint16_t PlcManager::TransferSetting(const std::string Transfer, const std::string Name)
+{
+        std::string Flag = Find(Name);
+    if (Flag == "Plc not found.")
+        return -1;
+    Plcs.at(Name).SetTransfer(Transfer);
     return 1;
 }

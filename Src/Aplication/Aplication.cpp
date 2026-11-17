@@ -2,7 +2,7 @@
 // Constructor
 Aplication::Aplication()
 {
-    
+
     w.show();
     setConfigPath();
     ConnectSignals();
@@ -38,15 +38,27 @@ void Aplication::AddPlc(QString Name)
 
 void Aplication::IpChangeSlot(QString Value)
 {
-    Plcs.IpAdrresSetting(Value.toStdString(), w.GetipPortSelector()->GetCurrentPlc().toStdString());
-    Config["Plcs"][w.GetipPortSelector()->GetCurrentPlc().toStdString()]["Ip"] = Value.toStdString();
+    uint16_t Flag = Plcs.IpAdrresSetting(Value.toStdString(), w.GetipPortSelector()->GetCurrentPlc().toStdString());
+    if (Flag < 0)
+    {
+        QLabel *FlagMassage = new QLabel;
+        FlagMassage->setText("Protocol Not Changed");
+        return;
+    }
     std::ofstream Write(ConfigPath);
     Write << Config.dump(4);
+    Config["Plcs"][w.GetipPortSelector()->GetCurrentPlc().toStdString()]["Ip"] = Value.toStdString();
 }
 
 void Aplication::PortChangeSlot(QString Value)
 {
-    Plcs.PortSetting(Value.toStdString(), w.GetipPortSelector()->GetCurrentPlc().toStdString());
+    uint16_t Flag = Plcs.PortSetting(Value.toStdString(), w.GetipPortSelector()->GetCurrentPlc().toStdString());
+    if (Flag < 0)
+    {
+        QLabel *FlagMassage = new QLabel;
+        FlagMassage->setText("Protocol Not Changed");
+        return;
+    }
     Config["Plcs"][w.GetipPortSelector()->GetCurrentPlc().toStdString()]["Port"] = Value.toStdString();
     std::ofstream Write(ConfigPath);
     Write << Config.dump(4);
@@ -111,6 +123,8 @@ void Aplication::PlcConfig(const nlohmann::json Plc)
         Plcs.AddPlc(It.key());
         Plcs.IpAdrresSetting(It.value()["Ip"], It.key());
         Plcs.PortSetting(It.value()["Port"], It.key());
+        Plcs.ProtocolSetting(It.value()["Protocol"],It.key());
+        Plcs.TransferSetting(It.value()["Transfer"],It.key());
         QMetaObject::Connection PlcAddedConection = connect(this, &Aplication::PlcAdded, w.GetaddPlc(), &addPlc::PlcAdded);
         std::string Key = It.key();
         emit PlcAdded(Key.c_str());
@@ -127,4 +141,29 @@ void Aplication::setConfigPath()
         Dir.cdUp();
     }
     ConfigPath = Dir.filePath("Src/Config/Config.json").toStdString();
+}
+
+void Aplication::ProtocolChangeDetect(const QString Protocol)
+{
+    uint16_t Flag = Plcs.ProtocolSetting(Protocol.toStdString(), w.GetipPortSelector()->GetCurrentPlc().toStdString());
+
+    if (Flag < 0)
+    {
+        QLabel *FlagMassage = new QLabel;
+        FlagMassage->setText("Protocol Not Changed");
+        return;
+    }
+    Config["Plcs"][w.GetipPortSelector()->GetCurrentPlc().toStdString()]["Protocol"] = Protocol.toStdString();
+}
+
+void Aplication::TransferChangeDetect(const QString Transfer)
+{
+    uint16_t Flag = Plcs.TransferSetting(Transfer.toStdString(), w.GetipPortSelector()->GetCurrentPlc().toStdString());
+    if (Flag < 0)
+    {
+        QLabel *FlagMassage = new QLabel;
+        FlagMassage->setText("Protocol Not Changed");
+        return;
+    }
+    Config["Plcs"][w.GetipPortSelector()->GetCurrentPlc().toStdString()]["Transfer"] = Transfer.toStdString();
 }

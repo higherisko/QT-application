@@ -74,10 +74,15 @@ public slots:
     void PlcChangeDetect(int Index);
     void PlcDisplayIpSlot(QString ip);
     void PlcDisplayPortSlot(QString port);
-    void ProtocolSelectDetect(const QString Protocol);
+
+    void ProtocolSelectDetect(const bool clicked);
+    void TransferSelectDetect(const bool clicked);
 signals:
     void ipChanged(QString value);
     void portChanged(QString value);
     void PlcChangedSignal(QString Name);
+
+    void ProtocolChangeSignal(const QString Portocol);
+    void TransferChangeSignal(const QString Transfer);
     
 };

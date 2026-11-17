@@ -16,4 +16,6 @@ class PlcManager
         std::string GetPlcPort(const std::string Name);
         uint16_t IpAdrresSetting(const std::string Ip,const std::string Name);
         uint16_t PortSetting(const std::string Port,const std::string Name);
+        uint16_t ProtocolSetting(const std::string Protocol,const std::string Name);
+        uint16_t TransferSetting(const std::string Transfer,const std::string Name);
 };

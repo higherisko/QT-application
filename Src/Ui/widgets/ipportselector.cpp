@@ -231,8 +231,16 @@ void IpPortSelector::AllInstantConection()
     // connect(ProtocolSelect, &QComboBox::currentIndexChanged, this, &IpPortSelector::PlcChangeDetect);
     QObject::connect(ChangeIpButton, &QPushButton::clicked, this, &IpPortSelector::updateIp);
     QObject::connect(ChangePortButton, &QPushButton::clicked, this, &IpPortSelector::updatePort);
+    QObject::connect(ProtocolSetButton, &QPushButton::clicked, this, &IpPortSelector::ProtocolSelectDetect);
+    QObject::connect(TransferSetButton, &QPushButton::clicked, this, &IpPortSelector::TransferSelectDetect);
 }
 
-void IpPortSelector::ProtocolSelectDetect(const QString Protocol)
+void IpPortSelector::ProtocolSelectDetect(const bool Clicked)
 {
+    emit(ProtocolChangeSignal(ProtocolSelect->currentText()));
+}
+
+void IpPortSelector::TransferSelectDetect(const bool Clicked)
+{
+    emit(TransferChangeSignal(TransferSelect->currentText()));
 }
