@@ -19,6 +19,7 @@ void Aplication::ConnectSignals()
     QObject::connect(w.GetipPortSelector(), &IpPortSelector::PlcChangedSignal, this, &Aplication::GetPlcAdressSlot);
 
     QObject::connect(w.getConnectButton(), &QPushButton::clicked, this, &Aplication::TcpClientConnectSlot);
+    QObject::connect(w.GetipPortSelector(),&IpPortSelector::ProtocolChangeSignal,this,Aplication::ProtocolChangeDetect);
 }
 
 // Slots Declaration
@@ -118,18 +119,28 @@ void Aplication::PlcConfig(const nlohmann::json Plc)
 {
     if (!Config.contains("Plcs"))
         return;
+    if(Config.contains("Plcs") && Config["Plcs"].is_object())
+    {
     for (auto It = Config["Plcs"].begin(); It != Config["Plcs"].end(); ++It)
     {
+        if(It.value().is_object())
+        {
         Plcs.AddPlc(It.key());
-        Plcs.IpAdrresSetting(It.value()["Ip"], It.key());
-        Plcs.PortSetting(It.value()["Port"], It.key());
-        Plcs.ProtocolSetting(It.value()["Protocol"],It.key());
-        Plcs.TransferSetting(It.value()["Transfer"],It.key());
+        if(It.value().contains("Ip"))
+            Plcs.IpAdrresSetting(It.value()["Ip"], It.key());
+        if(It.value().contains("Port"))
+            Plcs.PortSetting(It.value()["Port"], It.key());
+        if(It.value().contains("Protocol"))
+            Plcs.ProtocolSetting(It.value()["Protocol"],It.key());
+        if(It.value().contains("Transfer"))
+            Plcs.TransferSetting(It.value()["Transfer"],It.key());
         QMetaObject::Connection PlcAddedConection = connect(this, &Aplication::PlcAdded, w.GetaddPlc(), &addPlc::PlcAdded);
         std::string Key = It.key();
         emit PlcAdded(Key.c_str());
         disconnect(PlcAddedConection);
+        }
     }
+}
 };
 
 void Aplication::setConfigPath()
@@ -149,11 +160,11 @@ void Aplication::ProtocolChangeDetect(const QString Protocol)
 
     if (Flag < 0)
     {
-        QLabel *FlagMassage = new QLabel;
-        FlagMassage->setText("Protocol Not Changed");
         return;
     }
     Config["Plcs"][w.GetipPortSelector()->GetCurrentPlc().toStdString()]["Protocol"] = Protocol.toStdString();
+    std::ofstream Write(ConfigPath);
+    Write << Config.dump(4);
 }
 
 void Aplication::TransferChangeDetect(const QString Transfer)
@@ -166,4 +177,6 @@ void Aplication::TransferChangeDetect(const QString Transfer)
         return;
     }
     Config["Plcs"][w.GetipPortSelector()->GetCurrentPlc().toStdString()]["Transfer"] = Transfer.toStdString();
+    std::ofstream Write(ConfigPath);
+    Write << Config.dump(4);
 }

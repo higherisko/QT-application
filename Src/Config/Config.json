@@ -6,16 +6,17 @@
         "Siemens": {
             "Ip": "192.168.0.1",
             "Port": "100",
-            "Protocol": ""
+            "Protocol": "Modbus"
         },
         "Mitshubishi": {
             "Ip": "192.168.1.10",
             "Port": "2000",
-            "Protocol": ""
+            "Protocol": "McProtocol"
         },
         "": {
             "Ip": "0.0.0.0",
-            "Port": "0"
+            "Port": "0",
+            "Protocol": "Modbus"
         }
     }
 }

@@ -110,8 +110,6 @@ void IpPortSelector::SetGroups()
 
 void IpPortSelector::PlcSelectSet()
 {
-    ProtocolSelect = new QComboBox;
-
     PlcsContainer = new QWidget(this);
     PlcsLayot = new QVBoxLayout(this);
     PlcsContainer->setLayout(PlcsLayot);
@@ -238,6 +236,9 @@ void IpPortSelector::AllInstantConection()
 void IpPortSelector::ProtocolSelectDetect(const bool Clicked)
 {
     emit(ProtocolChangeSignal(ProtocolSelect->currentText()));
+    QLabel *Debug = new QLabel;
+    Debug->setText(ProtocolSelect->currentText());
+    mainLayout->addWidget(Debug);
 }
 
 void IpPortSelector::TransferSelectDetect(const bool Clicked)
