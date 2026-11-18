@@ -19,8 +19,8 @@
 
 #include "widgets/credits.hpp"
 #include "widgets/settings.hpp"
-#include "widgets/ipportselector.hpp"
-#include "widgets/addplc.hpp"
+#include "widgets/PLcNetworkingSettings.hpp"
+#include "widgets/PlcSettings.hpp"
 
 class MainWindow : public QMainWindow
 {

@@ -55,11 +55,6 @@ private:
     QHBoxLayout *ProtocolLayout;
     QHBoxLayout *TransferLayout;
     QGroupBox *ProtocolAndTransferBox;
-    
-    //All needed settings for QScrollArea
-    QScrollArea *AllPlcs;
-    QWidget *PlcsContainer;
-    QVBoxLayout *PlcsLayot;
 
     //Setting page funstions
     void StyleSet();
@@ -70,8 +65,6 @@ private slots:
     void updateIp();
     void updatePort();
 public slots:
-    void PlcSelectAddSlot(QString Name);
-    void PlcChangeDetect(int Index);
     void PlcDisplayIpSlot(QString ip);
     void PlcDisplayPortSlot(QString port);
 

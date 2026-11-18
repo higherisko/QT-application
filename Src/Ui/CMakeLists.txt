@@ -11,11 +11,11 @@ add_library(MainWindow
         widgets/credits.hpp
         widgets/credits.cpp
 
-        widgets/ipportselector.hpp
-        widgets/ipportselector.cpp
+        widgets/PLcNetworkingSettings.hpp
+        widgets/PLcNetworkingSettings.cpp
 
-        widgets/addplc.hpp
-        widgets/addplc.cpp
+        widgets/PlcSettings.hpp
+        widgets/PlcSettings.cpp
 )
 
 target_include_directories(MainWindow

@@ -1,4 +1,4 @@
-#include "addplc.hpp"
+#include "PlcSettings.hpp"
 
 addPlc::addPlc(QWidget *parent)
 {
