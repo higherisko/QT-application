@@ -47,9 +47,9 @@ public:
    bool GetIsForwardValue() { return IsForward.Value; }
    bool GetIsBackwardValue() { return IsBackward.Value; }
 
-   uint16_t Out_GetAdressMove();
-   uint16_t In_GetAdressIsForward();
-   uint16_t In_GetAdressIsBackward();
+   uint16_t GetAdressMove();
+   uint16_t GetAdressIsForward();
+   uint16_t GetAdressIsBackward();
 
    std::vector<uint8_t> WriteMove(const bool Value);
 };

@@ -5,19 +5,19 @@ Cylinder::Cylinder(const uint16_t AdressInit)
 {
 }
 
-uint16_t Cylinder::Out_GetAdressMove()
+uint16_t Cylinder::GetAdressMove()
 
 {
     return Move.Adress;
 }
 
-uint16_t Cylinder::In_GetAdressIsForward()
+uint16_t Cylinder::GetAdressIsForward()
 
 {
     return IsForward.Adress;
 }
 
-uint16_t Cylinder::In_GetAdressIsBackward()
+uint16_t Cylinder::GetAdressIsBackward()
 
 {
     return IsBackward.Adress;

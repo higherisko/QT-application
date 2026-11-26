@@ -3,9 +3,9 @@
 // Cylinder
 uint16_t Tags::AddCylinder(Cylinder &Cyll, const std::string &Name)
 {
-    auto Move = Cyll.Out_GetAdressMove();
-    auto IsFWD = Cyll.In_GetAdressIsForward();
-    auto IsBWD = Cyll.In_GetAdressIsBackward();
+    auto Move = Cyll.GetAdressMove();
+    auto IsFWD = Cyll.GetAdressIsForward();
+    auto IsBWD = Cyll.GetAdressIsBackward();
 
     if (Move == IsFWD || Move == IsBWD || IsBWD == IsFWD)
         return -4;

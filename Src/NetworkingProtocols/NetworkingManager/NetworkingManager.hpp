@@ -19,5 +19,5 @@ public:
 signals:
     std::string SendToPlcSignal(const QVector<qint8> SendBuff);
 public slots:
-    std::string SendToPlc(Plc &PlcData);
+    std::string SendToPlc(Plc &PlcData,std::string Operation_Name);
 };
