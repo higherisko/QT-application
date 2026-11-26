@@ -18,4 +18,9 @@ class PlcManager
         uint16_t PortSetting(const std::string Port,const std::string Name);
         uint16_t ProtocolSetting(const std::string Protocol,const std::string Name);
         uint16_t TransferSetting(const std::string Transfer,const std::string Name);
+
+        std::string GetIp(const std::string &Name){return Plcs.at(Name).GetIp();}
+        std::string GetPort(const std::string &Name){return Plcs.at(Name).GetPort();}
+        std::string GetProtocol(const std::string &Name){return Plcs.at(Name).GetProtocol();}
+        std::string GetTransfer(const std::string &Name){return Plcs.at(Name).GetTransfer();}
 };

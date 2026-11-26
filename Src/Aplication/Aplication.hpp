@@ -13,9 +13,9 @@
 #include "PlcTags.hpp"
 #include "PlcManager.hpp"
 #include "QtToCpp.hpp"
-#include "TcpClient.hpp"
 #include <nlohmann/json.hpp>
 #include <fstream>
+#include "NetworkingManager.hpp"
 class Aplication:public QObject
 
 {

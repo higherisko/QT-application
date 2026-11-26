@@ -33,7 +33,7 @@ void Aplication::AddPlc(QString Name)
     if (Flag != "Plc already exist !!")
     {
         std::ofstream Write(ConfigPath);
-        Config["Plcs"][Name.toStdString()] = {{"Ip", "0.0.0.0"}, {"Port", "0"}};
+        Config["Plcs"][Name.toStdString()] = {{"Ip", "0.0.0.0"}, {"Port", "0"},{"Protocol",""},{"Transfer",""}};
         Write << Config.dump(4);
     }
 }

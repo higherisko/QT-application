@@ -1,2 +1,3 @@
 add_subdirectory(Modbus)
 add_subdirectory(McProtocol)
+add_subdirectory(NetworkingManager)
