@@ -49,3 +49,15 @@ std::vector<uint8_t> Plc::WriteCoils(const std::vector<bool> Data,const std::vec
     }
     
 }
+
+Cylinder Plc::GetCyllInfo(const std::string Name)
+{
+    auto It = TaGS.GetCyllinders().find(Name);
+    if(It == TaGS.GetCyllinders().end())
+    {
+        Cylinder None(0);
+        return None;
+    }
+    return TaGS.GetCyllinders().at(Name);
+
+}

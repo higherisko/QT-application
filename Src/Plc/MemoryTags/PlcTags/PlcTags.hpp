@@ -32,12 +32,12 @@ public:
       Move.Adress = AdressTemp;
    }
    void UpgradeMoveValue(const bool Data) { Move.Value = Data; }
-   void SetIsForwardAdress(const uint16_t AdressTemp, const uint16_t AdressBitTemp)
+   void SetIsForwardAdress(const uint16_t AdressTemp)
    {
       IsForward.Adress = AdressTemp;
    }
    void UpgradeIsForwardValue(const bool Data) { IsForward.Value = Data; }
-   void SetIsBackawardAdress(const uint16_t AdressTemp, const uint16_t AdressBitTemp)
+   void SetIsBackawardAdress(const uint16_t AdressTemp)
    {
       IsBackward.Adress = AdressTemp;
    }
@@ -47,9 +47,9 @@ public:
    bool GetIsForwardValue() { return IsForward.Value; }
    bool GetIsBackwardValue() { return IsBackward.Value; }
 
-   uint16_t GetAdressMove();
-   uint16_t GetAdressIsForward();
-   uint16_t GetAdressIsBackward();
+   uint16_t Out_GetAdressMove();
+   uint16_t In_GetAdressIsForward();
+   uint16_t In_GetAdressIsBackward();
 
    std::vector<uint8_t> WriteMove(const bool Value);
 };

@@ -3,24 +3,24 @@
 // Cylinder
 uint16_t Tags::AddCylinder(Cylinder &Cyll, const std::string &Name)
 {
-    auto Move = Cyll.GetAdressMove();
-    auto IsFWD = Cyll.GetAdressIsForward();
-    auto IsBWD = Cyll.GetAdressIsBackward();
+    auto Move = Cyll.Out_GetAdressMove();
+    auto IsFWD = Cyll.In_GetAdressIsForward();
+    auto IsBWD = Cyll.In_GetAdressIsBackward();
 
-    if(Move == IsFWD || Move == IsBWD || IsBWD == IsFWD)
+    if (Move == IsFWD || Move == IsBWD || IsBWD == IsFWD)
         return -4;
 
     auto It = Cylinders.find(Name);
-    if(It != Cylinders.end())
+    if (It != Cylinders.end())
         return -1;
-    if(Move > Mems.BoolsSize || IsBWD > Mems.BoolsSize || IsFWD > Mems.BoolsSize)
+    if (Move > Mems.BoolsSize || IsBWD > Mems.BoolsSize || IsFWD > Mems.BoolsSize)
         return -2;
-    if(Mems.IsUsedCheckBool(Move) ||Mems.IsUsedCheckBool(IsBWD)||Mems.IsUsedCheckBool(IsFWD) )
+    if (Mems.IsUsedCheckBool(Move) || Mems.IsUsedCheckBool(IsBWD) || Mems.IsUsedCheckBool(IsFWD))
         return -3;
-    
-    Mems.MemsBoolInit(false,Move);
-    Mems.MemsBoolInit(false,IsBWD);
-    Mems.MemsBoolInit(false,IsFWD);
+
+    Mems.MemsBoolInit(false, Move);
+    Mems.MemsBoolInit(false, IsBWD);
+    Mems.MemsBoolInit(false, IsFWD);
 
     return 1;
 }
@@ -31,7 +31,7 @@ int Tags::CylinderForward(const std::string &CyllName)
     if (it != Cylinders.end())
     {
         Cylinders[CyllName].UpgradeMoveValue(true);
-        // Mems.MemsBoolInit(true, Cylinders[CyllName].GetAdressMove().at(0), Cylinders[CyllName].GetAdressMove().at(1));
+        // Mems.MemsBoolInit(true, Cylinders[CyllName].Out_GetAdressMove().at(0), Cylinders[CyllName].Out_GetAdressMove().at(1));
         return 1;
     }
     else
@@ -44,43 +44,31 @@ int Tags::CylinderBackward(const std::string &CyllName)
     if (it != Cylinders.end())
     {
         Cylinders[CyllName].UpgradeMoveValue(false);
-        // Mems.MemsBoolInit(false, Cylinders[CyllName].GetAdressMove().at(0), Cylinders[CyllName].GetAdressMove().at(1));
+        // Mems.MemsBoolInit(false, Cylinders[CyllName].Out_GetAdressMove().at(0), Cylinders[CyllName].Out_GetAdressMove().at(1));
         return 1;
     }
     else
         return -1;
 }
 
-int Tags::SetCylindersSensors(const std::string &CyllName, const uint16_t &SensorCount, const std::vector<uint16_t> &SensorsByteAndBit)
+int Tags::SetCylindersSensors(const std::string &CyllName, const uint16_t &SensorCount, const uint16_t &Sensors_Move_ADress, const uint16_t &Sensor_FWD_Adress, const uint16_t &Sensor_BWD_Adress)
 {
     auto it = Cylinders.find(CyllName);
-    // if (it != Cylinders.end())
-    // {
-    //     if (Mems.IsUsedCheckBool(SensorsByteAndBit.at(0), SensorsByteAndBit.at(1)) == 1)
-    //     {
-    //         Cylinders[CyllName].SetIsForwardAdress(SensorsByteAndBit.at(0), SensorsByteAndBit.at(1));
-    //         Mems.UseUpgradeBool(SensorsByteAndBit.at(0), SensorsByteAndBit.at(1));
-    //     }
-    //     else
-    //         return -1;
-    //     if (SensorCount == 2)
-    //     {
-    //         if (Mems.IsUsedCheckBool(SensorsByteAndBit.at(2), SensorsByteAndBit.at(3)) == 1)
-    //         {
-    //             Cylinders.at(CyllName).SetIsBackawardAdress(SensorsByteAndBit.at(2), SensorsByteAndBit.at(3));
-    //             Mems.UseUpgradeBool(SensorsByteAndBit.at(2), SensorsByteAndBit.at(3));
-    //             return 2;
-    //         }
-    //         else
-    //         {
-    //             Mems.UseEraseBool(SensorsByteAndBit.at(0), SensorsByteAndBit.at(1));
-    //             return -2;
-    //         }
-    //     }
-    //     else
-    //         return 1;
-    // }
-    return 0;
+    if (it != Cylinders.end())
+    {
+        if (Mems.IsUsedCheckBool(Sensors_Move_ADress) < 0)
+            return -1;
+        if (Mems.IsUsedCheckBool(Sensor_FWD_Adress) < 0)
+            return -2;
+        if(Mems.IsUsedCheckBool(Sensor_BWD_Adress) < 0)
+            return -3;
+
+        Cylinders.at(CyllName).SetIsBackawardAdress(Sensor_FWD_Adress);
+        Cylinders[CyllName].SetIsForwardAdress(Sensors_Move_ADress);
+        Cylinders[CyllName].SetMoveAdress(Sensors_Move_ADress);
+    }
+
+return 0;
 }
 
 // Memory

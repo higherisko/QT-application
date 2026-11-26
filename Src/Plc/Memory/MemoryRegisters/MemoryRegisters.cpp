@@ -86,10 +86,12 @@ uint16_t Memory::RegisterUseSet(const uint16_t &Adress)
 
 uint16_t Memory::BoolUseSet(const uint16_t &Adress)
 {
+    if(Adress == -1)
+        return 0;
     if(Adress > BoolsSize)
         return -1;
     if(IsUsedBools.at(Adress) == true)
         return -2;
     IsUsedBools.at(Adress) = true;
-    return 0;
+    return 1;
 }

@@ -5,18 +5,19 @@
 #include "ModbusClient.h"
 #include "PlcManager.hpp"
 #include <QObject>
+#include <QVector>
 
-class NetworkingManager:public QObject
+class NetworkingManager : public QObject
 {
     Q_OBJECT
-    private:
-        TcpClient Tcp_Client;
-    public:
+private:
+    TcpClient Tcp_Client;
+    MCProtocol McProtocol_Manager;
+    ModbusClient Modbus_Manager;
 
-    signals:
-        std::string SendToPlcSignal(const Plc &PlcData,const std::vector<uint8_t> &DataToSend);
-    slots:
-        std::string SendToPlc(const Plc &PlcData,const std::vector<uint8_t> &DataToSend);
-
-
+public:
+signals:
+    std::string SendToPlcSignal(const QVector<qint8> SendBuff);
+public slots:
+    std::string SendToPlc(Plc &PlcData);
 };

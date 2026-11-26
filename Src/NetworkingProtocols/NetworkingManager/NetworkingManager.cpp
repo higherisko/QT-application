@@ -1,6 +1,6 @@
 #include "NetworkingManager.hpp"
 
-void NetworkingManager::SendToPlc(const Plc &PlcData, const std::vector<uint8_t> &DataToSend)
+std::string NetworkingManager::SendToPlc(Plc &PlcData)
 {
     if (PlcData.GetIp() == "")
         return "Ip is not Set!";
@@ -9,6 +9,15 @@ void NetworkingManager::SendToPlc(const Plc &PlcData, const std::vector<uint8_t>
     if (PlcData.GetProtocol() == "")
         if (PlcData.GetTransfer() == "TCP")
         {
-            Tcp_Client.Send(DataToSend);
+
         }
+    if(PlcData.GetProtocol() == "McProtocol")
+    {
+        std::vector<uint8_t> SendFrame;
+        if (PlcData.GetTransfer() == "TCP")
+        {
+
+        }
+    }
+    return "Sended";
 }

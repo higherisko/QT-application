@@ -41,6 +41,8 @@ public:
     uint16_t SetPort(const std::string Port){Comn.Port = Port;return 1;}
     uint16_t SetProtocol(const std::string Protocol){Comn.Protocol = Protocol;return 1;}
     uint16_t SetTransfer(const std::string Transfer){Comn.TransportLayer = Transfer;return 1;}
+
+    Cylinder GetCyllInfo(const std::string Name);
     
 
 
