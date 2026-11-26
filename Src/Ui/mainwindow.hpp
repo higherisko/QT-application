@@ -30,8 +30,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
 
     QPushButton *getConnectButton();
-    NetworkSetting *GetipPortSelector(){return ipPortSelector;}
-    addPlc *GetaddPlc(){return addPlcWidget;}
+    NetworkSetting *GetipPortSelector(){return settings->ReturnipPortSelector();}
+    addPlc *GetaddPlc(){return settings->ReturnaddPlcWidget();}
     void Debug(QString debug);
     QVBoxLayout* ReturnmainLayout(){return mainLayout;}
 signals:
@@ -53,8 +53,6 @@ private:
     Credits *credits;
 
     Settings *settings;
-    NetworkSetting *ipPortSelector;
-    addPlc *addPlcWidget;
 
     void setupWidgets();
     void setupMenus();

@@ -1,12 +1,24 @@
 #include "settings.hpp"
 
-Settings::Settings(QWidget *parent) : QWidget(parent) {
+Settings::Settings(QWidget *parent) : QWidget(parent)
+{
     setWindowTitle("Settings");
     setObjectName("settingsWindow");
 
     mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
 
+    SettingWidgets();
+}
+
+void Settings::addWidget(QWidget *widget)
+{
+    cLayout->addWidget(widget, 0, Qt::AlignHCenter);
+    adjustSize();
+}
+
+void Settings::SettingWidgets()
+{
     area = new QScrollArea(this);
     area->setWidgetResizable(true);
     area->setObjectName("SettingsScroll");
@@ -19,10 +31,10 @@ Settings::Settings(QWidget *parent) : QWidget(parent) {
 
     cLayout = new QVBoxLayout;
     container->setLayout(cLayout);
-}
 
-void Settings::addWidget(QWidget *widget) {
-    cLayout->addWidget(widget, 0, Qt::AlignHCenter);
-    adjustSize();
-    // setFixedSize(size());
+    ipPortSelector = new NetworkSetting(this);
+    this->addWidget(ipPortSelector);
+
+    addPlcWidget = new addPlc(this);
+    this->addWidget(addPlcWidget);
 }

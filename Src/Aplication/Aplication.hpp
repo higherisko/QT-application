@@ -24,7 +24,6 @@ private:
     MainWindow w;
     PlcManager Plcs;
     QtAdapter QtAdapt;
-    TcpClient tcpClient;
     nlohmann::ordered_json Config;
     std::string ConfigPath;
 
@@ -39,7 +38,7 @@ signals:
     void SendPlcAdressSignal(QString Name);
     void SendPlcPortSignal(QString Name);
 
-    void TcpClientConnectToSignal(QString Ip,QString Port);
+    void NetowrkingManagerSending(QString Ip,QString Port);
 public slots:
     void AddPlc(QString Name);
     // void RemovePlc(QString Name);

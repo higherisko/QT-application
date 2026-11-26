@@ -19,15 +19,12 @@ void MainWindow::setupWidgets()
 
     settings = new Settings;
 
-    addPlcWidget = new addPlc(settings);
-    settings->addWidget(addPlcWidget);
+    // ipPortSelector = new NetworkSetting(settings);
+    // settings->addWidget(ipPortSelector);
 
-    ipPortSelector = new NetworkSetting(settings);
-    settings->addWidget(ipPortSelector);
-
-    QObject::connect(ipPortSelector, &NetworkSetting::ipChanged, this, &MainWindow::IpChangeSlot);
-    QObject::connect(ipPortSelector, &NetworkSetting::portChanged, this, &MainWindow::PortChangeSlot);
-    QObject::connect(addPlcWidget, &addPlc::PlcNameToIpSelectMenu, addPlcWidget, &addPlc::PlcSelectAddSlot);
+    QObject::connect(settings->ReturnipPortSelector(), &NetworkSetting::ipChanged, this, &MainWindow::IpChangeSlot);
+    QObject::connect(settings->ReturnipPortSelector(), &NetworkSetting::portChanged, this, &MainWindow::PortChangeSlot);
+    QObject::connect(settings->ReturnaddPlcWidget(), &addPlc::PlcNameToIpSelectMenu,settings->ReturnaddPlcWidget(), &addPlc::PlcSelectAddSlot);
 
     credits = new Credits;
 }
