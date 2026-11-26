@@ -19,12 +19,12 @@
 #include "Style.hpp"
 
 
-class IpPortSelector : public QWidget
+class NetworkSetting : public QWidget
 {
     Q_OBJECT
 
 public:
-    IpPortSelector(QWidget *parent = nullptr);
+    NetworkSetting(QWidget *parent = nullptr);
     void TextsSet();
     void SetGroups();
     void PlcSelectSet();

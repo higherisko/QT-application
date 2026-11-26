@@ -1,12 +1,12 @@
 #include "PLcNetworkingSettings.hpp"
 
-IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
+NetworkSetting::NetworkSetting(QWidget *parent) : QWidget(parent)
 {
 
     // Setting all widgets
     mainLayout = new QHBoxLayout;
     mainLayout->setSizeConstraint(QLayout::SetFixedSize);
-    this->setObjectName("IpPortSelector");
+    this->setObjectName("NetworkSetting");
 
     setLayout(mainLayout);
     TextsSet();
@@ -23,7 +23,7 @@ IpPortSelector::IpPortSelector(QWidget *parent) : QWidget(parent)
     AllInstantConection();
 }
 
-void IpPortSelector::updateIp()
+void NetworkSetting::updateIp()
 {
     QString result;
     int i = 0;
@@ -45,7 +45,7 @@ void IpPortSelector::updateIp()
     emit ipChanged(result);
 }
 
-void IpPortSelector::updatePort()
+void NetworkSetting::updatePort()
 {
     for (QChar chr : lines[4]->text())
         if (chr.isLetter())
@@ -57,11 +57,11 @@ void IpPortSelector::updatePort()
     emit portChanged(lines[4]->text());
 }
 
-void IpPortSelector::TextsSet()
+void NetworkSetting::TextsSet()
 {
 }
 
-void IpPortSelector::SetGroups()
+void NetworkSetting::SetGroups()
 {
     // Protocol and transfer layer set
     ProtocolAndTransferMainLayout = new QVBoxLayout(this);
@@ -105,7 +105,7 @@ void IpPortSelector::SetGroups()
     IpVBoxLayout->addWidget(ChangeIpButton);
 }
 
-void IpPortSelector::PlcDisplayIpSlot(QString ip)
+void NetworkSetting::PlcDisplayIpSlot(QString ip)
 {
     auto It = ip.begin();
     QString Temp;
@@ -125,17 +125,17 @@ void IpPortSelector::PlcDisplayIpSlot(QString ip)
     }
 }
 
-void IpPortSelector::PlcDisplayPortSlot(QString port)
+void NetworkSetting::PlcDisplayPortSlot(QString port)
 {
     lines[4]->setText(port);
 }
 
-void IpPortSelector::StyleSet()
+void NetworkSetting::StyleSet()
 {
     this->setStyleSheet(ActualStyle);
 }
 
-void IpPortSelector::LinesCreate()
+void NetworkSetting::LinesCreate()
 {
     int i = 0;
     for (auto &line : lines)
@@ -159,7 +159,7 @@ void IpPortSelector::LinesCreate()
             IpBoxLayout->addWidget(line);
         }
 
-        // QObject::connect(line, &QLineEdit::textChanged, this, &IpPortSelector::updateIp);
+        // QObject::connect(line, &QLineEdit::textChanged, this, &NetworkSetting::updateIp);
         if (i < 3)
         {
             dots[i] = new QLabel(".", this);
@@ -170,16 +170,16 @@ void IpPortSelector::LinesCreate()
     }
 }
 
-void IpPortSelector::AllInstantConection()
+void NetworkSetting::AllInstantConection()
 {
-    // connect(ProtocolSelect, &QComboBox::currentIndexChanged, this, &IpPortSelector::PlcChangeDetect);
-    QObject::connect(ChangeIpButton, &QPushButton::clicked, this, &IpPortSelector::updateIp);
-    QObject::connect(ChangePortButton, &QPushButton::clicked, this, &IpPortSelector::updatePort);
-    QObject::connect(ProtocolSetButton, &QPushButton::clicked, this, &IpPortSelector::ProtocolSelectDetect);
-    QObject::connect(TransferSetButton, &QPushButton::clicked, this, &IpPortSelector::TransferSelectDetect);
+    // connect(ProtocolSelect, &QComboBox::currentIndexChanged, this, &NetworkSetting::PlcChangeDetect);
+    QObject::connect(ChangeIpButton, &QPushButton::clicked, this, &NetworkSetting::updateIp);
+    QObject::connect(ChangePortButton, &QPushButton::clicked, this, &NetworkSetting::updatePort);
+    QObject::connect(ProtocolSetButton, &QPushButton::clicked, this, &NetworkSetting::ProtocolSelectDetect);
+    QObject::connect(TransferSetButton, &QPushButton::clicked, this, &NetworkSetting::TransferSelectDetect);
 }
 
-void IpPortSelector::ProtocolSelectDetect(const bool Clicked)
+void NetworkSetting::ProtocolSelectDetect(const bool Clicked)
 {
     emit(ProtocolChangeSignal(ProtocolSelect->currentText()));
     QLabel *Debug = new QLabel;
@@ -187,7 +187,7 @@ void IpPortSelector::ProtocolSelectDetect(const bool Clicked)
     mainLayout->addWidget(Debug);
 }
 
-void IpPortSelector::TransferSelectDetect(const bool Clicked)
+void NetworkSetting::TransferSelectDetect(const bool Clicked)
 {
     emit(TransferChangeSignal(TransferSelect->currentText()));
 }

@@ -30,7 +30,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
 
     QPushButton *getConnectButton();
-    IpPortSelector *GetipPortSelector(){return ipPortSelector;}
+    NetworkSetting *GetipPortSelector(){return ipPortSelector;}
     addPlc *GetaddPlc(){return addPlcWidget;}
     void Debug(QString debug);
     QVBoxLayout* ReturnmainLayout(){return mainLayout;}
@@ -53,7 +53,7 @@ private:
     Credits *credits;
 
     Settings *settings;
-    IpPortSelector *ipPortSelector;
+    NetworkSetting *ipPortSelector;
     addPlc *addPlcWidget;
 
     void setupWidgets();

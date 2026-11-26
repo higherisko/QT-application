@@ -42,7 +42,7 @@ void addPlc::PlcAdded(QString Name)
     if (Name != "Plc already exist !!")
     {
         statusLabel->setText("Plc " + Name + " was succesufully added.");
-        // This signal is connected with PlcSelectAddSlot in IpPortSelector
+        // This signal is connected with PlcSelectAddSlot in NetworkSetting
         emit PlcNameToIpSelectMenu(Name);
     }
     else

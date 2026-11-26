@@ -19,8 +19,8 @@ void Aplication::ConnectSignals()
     QObject::connect(w.GetaddPlc(), &addPlc::PlcChangedSignal, this, &Aplication::GetPlcAdressSlot);
 
     QObject::connect(w.getConnectButton(), &QPushButton::clicked, this, &Aplication::TcpClientConnectSlot);
-    QObject::connect(w.GetipPortSelector(),&IpPortSelector::ProtocolChangeSignal,this,&Aplication::ProtocolChangeDetect);
-    QObject::connect(w.GetipPortSelector(),&IpPortSelector::TransferChangeSignal,this,&Aplication::TransferChangeDetect);
+    QObject::connect(w.GetipPortSelector(),&NetworkSetting::ProtocolChangeSignal,this,&Aplication::ProtocolChangeDetect);
+    QObject::connect(w.GetipPortSelector(),&NetworkSetting::TransferChangeSignal,this,&Aplication::TransferChangeDetect);
 }
 
 // Slots Declaration
@@ -72,8 +72,8 @@ void Aplication::GetPlcAdressSlot(QString Name)
     std::string portFlag = Plcs.GetPlcPort(Name.toStdString());
     QMetaObject::Connection SendIp;
     QMetaObject::Connection SendPort;
-    SendIp = connect(this, &Aplication::SendPlcAdressSignal, w.GetipPortSelector(), &IpPortSelector::PlcDisplayIpSlot);
-    SendPort = connect(this, &Aplication::SendPlcPortSignal, w.GetipPortSelector(), &IpPortSelector::PlcDisplayPortSlot);
+    SendIp = connect(this, &Aplication::SendPlcAdressSignal, w.GetipPortSelector(), &NetworkSetting::PlcDisplayIpSlot);
+    SendPort = connect(this, &Aplication::SendPlcPortSignal, w.GetipPortSelector(), &NetworkSetting::PlcDisplayPortSlot);
     if (ipFlag == "Plc not found.")
     {
         emit(SendPlcAdressSignal(""));

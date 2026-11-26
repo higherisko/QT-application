@@ -4,7 +4,7 @@
 #include <QScrollArea>
 #include <QGridLayout>
 #include "PlcSettings.hpp"
-
+#include "PLcNetworkingSettings.hpp"
 class Settings : public QWidget {
     Q_OBJECT
 
@@ -13,7 +13,7 @@ public:
     void addWidget(QWidget *widget);
 
 private:
-    IpPortSelector *ipPortSelector;
+    NetworkSetting *ipPortSelector;
 
     QVBoxLayout *mainLayout;
 
