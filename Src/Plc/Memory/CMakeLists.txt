@@ -1,2 +1,0 @@
-add_subdirectory(MemoryHandler)
-add_subdirectory(MemoryRegisters)

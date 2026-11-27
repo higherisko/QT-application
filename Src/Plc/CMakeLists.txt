@@ -1,4 +1,4 @@
-add_subdirectory(Memory)
+
 add_subdirectory(MemoryTags)
 
 add_library(Plc

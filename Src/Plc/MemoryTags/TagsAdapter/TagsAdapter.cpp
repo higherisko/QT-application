@@ -1,28 +1,31 @@
 #include "TagsAdapter.hpp"
 
 // Cylinder
-uint16_t Tags::AddCylinder(Cylinder &Cyll, const std::string &Name)
+std::string Tags::AddCylinder(Cylinder &Cyll, const std::string &Name)
 {
     auto Move = Cyll.GetAdressMove();
     auto IsFWD = Cyll.GetAdressIsForward();
     auto IsBWD = Cyll.GetAdressIsBackward();
 
     if (Move == IsFWD || Move == IsBWD || IsBWD == IsFWD)
-        return -4;
+        return "Input adresses are same!";
 
     auto It = Cylinders.find(Name);
     if (It != Cylinders.end())
-        return -1;
-    if (Move > Mems.BoolsSize || IsBWD > Mems.BoolsSize || IsFWD > Mems.BoolsSize)
-        return -2;
-    if (Mems.IsUsedCheckBool(Move) || Mems.IsUsedCheckBool(IsBWD) || Mems.IsUsedCheckBool(IsFWD))
-        return -3;
+        return "Cylinder with " + Name + " Alerady exists!";
+    for (auto &Adress : AdressUsed)
+    {
+        if (Adress == Cyll.GetAdressIsBackward())
+            return "Adress for Backward already used!";
+        if (Adress == Cyll.GetAdressIsForward())
+            return "Adress for Forward already used!";
+        if (Adress == Cyll.GetAdressMove())
+            return "Adress for Move already used!";
+    }
 
-    Mems.MemsBoolInit(false, Move);
-    Mems.MemsBoolInit(false, IsBWD);
-    Mems.MemsBoolInit(false, IsFWD);
+    Cylinders.try_emplace(Name);
 
-    return 1;
+    return "Cylinder added";
 }
 
 int Tags::CylinderForward(const std::string &CyllName)
@@ -51,35 +54,27 @@ int Tags::CylinderBackward(const std::string &CyllName)
         return -1;
 }
 
-int Tags::SetCylindersSensors(const std::string &CyllName, const uint16_t &SensorCount, const uint16_t &Sensors_Move_ADress, const uint16_t &Sensor_FWD_Adress, const uint16_t &Sensor_BWD_Adress)
+std::string Tags::SetCylindersSensors(const std::string &CyllName, const uint16_t &SensorCount, const uint16_t &Sensors_Move_ADress, const uint16_t &Sensor_FWD_Adress, const uint16_t &Sensor_BWD_Adress)
 {
     auto it = Cylinders.find(CyllName);
     if (it != Cylinders.end())
     {
-        if (Mems.IsUsedCheckBool(Sensors_Move_ADress) < 0)
-            return -1;
-        if (Mems.IsUsedCheckBool(Sensor_FWD_Adress) < 0)
-            return -2;
-        if(Mems.IsUsedCheckBool(Sensor_BWD_Adress) < 0)
-            return -3;
+        for (auto &Adress : AdressUsed)
+        {
+            if (Adress == Sensor_BWD_Adress)
+                return "Adress for Backward already used!";
+            if (Adress == Sensor_FWD_Adress)
+                return "Adress for Forward already used!";
+            if (Adress == Sensors_Move_ADress)
+                return "Adress for Move already used!";
+        }
 
         Cylinders.at(CyllName).SetIsBackawardAdress(Sensor_FWD_Adress);
         Cylinders[CyllName].SetIsForwardAdress(Sensors_Move_ADress);
         Cylinders[CyllName].SetMoveAdress(Sensors_Move_ADress);
     }
 
-return 0;
+    return "Cylinder not found!";
 }
 
-// Memory
-int Tags::InitAllRegisters(const std::vector<uint16_t> &Data)
-{
-    Mems.MemsInit(Data);
-    return 0;
-}
 
-int Tags::InitRegisterSize(const uint16_t &SizeInit)
-{
-    Mems.MemsSizeSet(SizeInit);
-    return 0;
-}
