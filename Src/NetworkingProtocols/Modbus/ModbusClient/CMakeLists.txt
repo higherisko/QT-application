@@ -6,5 +6,4 @@ target_include_directories(ModbusClient PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(ModbusClient PUBLIC CONVERTER 
                                           MODBUSPARSER 
                                           MODBUSHANDLER 
-                                          MemoryRegisters
                                           QtToCpp)
